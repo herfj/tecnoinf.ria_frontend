@@ -1,0 +1,45 @@
+.project-list {
+    display: grid;
+    grid-template-areas: "col-l col-c col-r";
+}
+
+.project-list .col-l {
+    grid-area: col-l;
+    padding-right: 15px;
+}
+.project-list .col-c {
+    grid-area: col-c;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.project-list .col-r {
+    grid-area: col-r;
+    padding-left: 15px;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .project-list {
+        grid-template-areas:
+                "col-l"
+        "col-c"
+        "col-r";
+    }
+
+    .project-list .col-l {
+        grid-area: col-l;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .project-list .col-c {
+        grid-area: col-c;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .project-list .col-r {
+        grid-area: col-r;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+}
