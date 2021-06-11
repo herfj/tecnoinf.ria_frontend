@@ -1,0 +1,38 @@
+.btn {
+    background: #ededed;
+    color: #FF8585;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    height: 45px;
+
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    opacity: 1;
+    transition: opacity 300ms ease;
+
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.primary{
+    background: #FF8585;
+    color: #ebebeb;
+}
+
+.secondary {
+    background: #CF4040;
+    color: #ebebeb;
+}
+
+.touched {
+    opacity: 0.5;
+}
+

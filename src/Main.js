@@ -11,6 +11,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({});
 
+const home = ()=>(
+    <Home/>
+)
+
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -20,15 +24,13 @@ class Main extends Component {
     }
 
     render() {
-        const home = ()=>(
-            <Home/>
-        )
+
         return (
             <div>
                 <Navbar/>
                 <Switch>
                     <Route path="/home" component={home}/>
-
+                    <Route path="/tomas" component={home}/>
                     <Redirect to="/home"/>
                 </Switch>
             </div>

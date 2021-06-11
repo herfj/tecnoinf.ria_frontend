@@ -3,28 +3,40 @@ import {ProjectCard} from "../card/Card";
 import './index.css'
 import {chunkify} from "../../helpers/chunkify";
 
-const ProjectList = ({})=>{
-    const list = chunkify([
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-    ], 3, true);
-    return(
+const List = ({list}) => {
+    const listChunkified = chunkify(list, 3, true);
+    return (
         <div className={'project-list'}>
             <div className={'col-l'}>
-                {list[0]}
+                {listChunkified[0]}
             </div>
             <div className={'col-c'}>
-                {list[1]}
+                {listChunkified[1]}
             </div>
             <div className={'col-r'}>
-                {list[2]}
+                {listChunkified[2]}
             </div>
-       </div>
+        </div>
+    )
+}
+
+const ProjectList = ({}) => {
+
+    const list =[
+        <ProjectCard/>,
+        <ProjectCard/>,
+        <ProjectCard/>,
+        <ProjectCard/>,
+        <ProjectCard/>,
+        <ProjectCard/>,
+        <ProjectCard/>,
+    ]
+
+    return (
+        <List
+            list={list}
+        />
+
     )
 }
 

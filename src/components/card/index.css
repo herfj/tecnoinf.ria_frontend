@@ -1,7 +1,15 @@
 
-.project-card{
+.card{
+    display: grid;
+    grid-template-areas:
+    "card-img"
+    "card-body"
+    "card-footer";
+
+    grid-template-rows: 250px 100px 50px;
+
     width: auto;
-    height: 350px;
+    height: 420px;
     background: #EBEBEB;
     border: 1px solid #000000;
     box-sizing: border-box;
@@ -10,11 +18,46 @@
     padding: 10px;
 }
 
-.project-card-img {
+.card-img {
+    grid-area: card-img;
     background: aliceblue no-repeat center center ;
     width: 100%;
     height: 250px;
     border: 1px solid #FF8585;
     box-sizing: border-box;
     border-radius: 10px;
+}
+
+.card-body {
+    grid-area: card-body;
+    width: 100%;
+
+    display: grid;
+    grid-template-areas:
+    "card-body-main card-bosy-slide";
+    grid-template-columns: auto 50px;
+}
+.card-body-main  {
+    grid-area: card-body-main;
+}
+
+.card-body-slide {
+    display: flex;
+    align-content: flex-start;
+    justify-content: flex-start;
+    grid-area: card-body-slide;
+    color: #CF4040;
+}
+
+.card-footer {
+    grid-area: card-footer;
+    width: 100%;
+}
+
+.card h3 {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.card p {
+
 }

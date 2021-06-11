@@ -1,9 +1,81 @@
 navbar {
-    display: block;
-    width: 100%;
-    height: 70px;
+    display: grid;
+    grid-template-areas: "logo routes nv-btn";
+    grid-template-columns: 190px auto 150px;
+    min-height: 70px;
     background: #FF8585;
     border: 1px solid #000000;
     box-sizing: border-box;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px;
+}
+
+navbar .logo {
+    grid-area: logo;
+
+    min-height: 70px;
+    display: flex;
+    align-content: center;
+}
+
+
+
+navbar .navbar-l-btn {
+    min-height: 70px;
+    grid-area: nv-btn;
+
+    display: flex;
+    align-self: center;
+    align-content: center;
+
+    margin-left: auto;
+    margin-right: 15px;
+
+    justify-content: flex-end;
+    justify-self: flex-end;
+}
+
+
+navbar .routes {
+    grid-area: routes;
+
+    display: flex;
+    align-self: center;
+    align-content: center;
+
+    margin-left: 20px;
+    /*height: 50px;*/
+
+}
+
+navbar .routes .btn {
+    margin-right: 10px;
+}
+
+navbar h1 {
+    margin-left: 20px;
+    align-self: center;
+}
+
+@media only screen and (max-width: 800px) {
+    navbar {
+        grid-template-areas: "logo  nv-btn"
+        "routes routes";
+        grid-template-columns: 190px auto;
+    }
+
+    navbar .routes {
+
+        flex-direction: column;
+
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 15px;
+        /*height: 50px;*/
+
+    }
+
+    navbar .routes .btn {
+        margin-right: 0px;
+        margin-bottom: 7px;
+    }
 }
