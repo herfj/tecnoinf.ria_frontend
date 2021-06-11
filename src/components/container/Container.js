@@ -2,10 +2,12 @@ import React, {Component} from "react";
 import Searchbar from '../searchbar/Searchbar'
 import './index.css'
 
-const Container =({children})=>(
+const Container =({children,searchbar=true,...props})=>(
     <main>
-        <Searchbar/>
-        <div className='container'>
+        {
+            searchbar && <Searchbar/>
+        }
+        <div className='container' {...props}>
             {children}
         </div>
     </main>

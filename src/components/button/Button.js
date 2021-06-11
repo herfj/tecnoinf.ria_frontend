@@ -1,9 +1,9 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 import {Link} from 'react-router-dom';
 import './index.css';
 
 
-const Button = ({type = '', children,style={}, ...props}) => {
+const Button = ({type = '', children, style = {}, ...props}) => {
     const [touched, setTouched] = useState(false)
 
     const toggleTouched = () => {
@@ -31,7 +31,7 @@ const Button = ({type = '', children,style={}, ...props}) => {
     )
 }
 
-const ButtonLink = ({to, children, style={}, ...props}) => {
+const ButtonLink = ({to, children, style = {}, ...props}) => {
     return (
         <Link
             to={to}
@@ -46,4 +46,32 @@ const ButtonLink = ({to, children, style={}, ...props}) => {
     )
 }
 
-export {Button, ButtonLink};
+const SelectButton = ({list,callback,...props}) => {
+
+    const [value, setValue] = useState(list[0])
+
+    useEffect(()=>{
+        callback(value)
+    },[value])
+
+    return (
+        <Button
+            {...props}
+        >
+            <select>
+                {
+                    list.map((op) => {
+                        return (
+                            <option onClick={() =>{
+                                setValue(op)
+                            }}>{op}</option>
+                        )
+                    })
+                }
+            </select>
+        </Button>
+
+    )
+}
+
+export {Button, ButtonLink, SelectButton};

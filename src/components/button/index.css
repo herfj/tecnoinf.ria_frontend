@@ -36,3 +36,8 @@ a {
     opacity: 0.5;
 }
 
+.btn select{
+    background: transparent;
+    outline: none;
+    border: 0px;
+}

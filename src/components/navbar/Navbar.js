@@ -5,7 +5,6 @@ import {useWindowSize} from "../../helpers/useWindowSize";
 import './index.css'
 
 const Routes = ({extraButtons = null, isMobil=false}) => {
-
     const style = !isMobil ? {
         width: '120px'
     }:{}
@@ -13,13 +12,7 @@ const Routes = ({extraButtons = null, isMobil=false}) => {
         <div className={'routes'}>
             <ButtonLink
                 style={style}
-                to='/home'
-            >
-                Home
-            </ButtonLink>
-            <ButtonLink
-                style={style}
-                to='/tomas'
+                to='/explorer'
             >
                 Explorar
             </ButtonLink>
@@ -36,6 +29,7 @@ const Navbar = ({}) => {
         <navbar>
             <Link
                 className={'logo'}
+                to={'/home'}
                 style={{
                     textDecoration: 'none',
                 }}
@@ -55,6 +49,16 @@ const Navbar = ({}) => {
                                     }}
                                 >
                                     Login
+                                </Button>
+                                 <Button
+                                    type={'secondary'}
+                                    style={{
+                                        alignSelf: 'center',
+                                        marginLeft: 10,
+                                        width: 120,
+                                    }}
+                                >
+                                     Registarte
                                 </Button>
                             </div>
                         </>
@@ -86,7 +90,7 @@ const Navbar = ({}) => {
                                                 <>
                                                     <ButtonLink
                                                         to={'/'}
-                                                        type={'primary'}
+                                                        type={'secondary'}
                                                         style={{
                                                             marginTop: 7,
                                                         }}

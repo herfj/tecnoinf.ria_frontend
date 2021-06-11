@@ -21,14 +21,17 @@ const ProjectCard = ({}) => {
                 <div className={'card-body-main'}>
                     <h3>Hola</h3>
                     <p>
-                        asfdasdfdsfaadfsfdasdfsaadfsfdsasdfafdsa
+                        asfdasdfdsfaadfsfdasdf
                     </p>
                 </div>
                 <div className={'card-body-slide'}>
-                        <p>
-                            <span style={{marginRight: 5}}>400</span><span className="far fa-thumbs-up"></span>
-                        </p>
-                    </div>
+                    <p>
+                        <span style={{marginRight: 5}}>400</span><span className="far fa-thumbs-up"></span>
+                    </p>
+                    <p>
+                        <span style={{marginRight: 5}}>400</span><span className="far fa-eye"></span>
+                    </p>
+                </div>
 
             </div>
             <div
