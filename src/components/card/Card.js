@@ -25,13 +25,11 @@ const ProjectCard = ({}) => {
                     </p>
                 </div>
                 <div className={'card-body-slide'}>
-                    <span>
-                        <span style={{marginRight: 5}}>
-                            400
-                        </span>
-                        <i className="far fa-thumbs-up"></i>
-                    </span>
-                </div>
+                        <p>
+                            <span style={{marginRight: 5}}>400</span><span className="far fa-thumbs-up"></span>
+                        </p>
+                    </div>
+
             </div>
             <div
                 className={'card-footer'}
