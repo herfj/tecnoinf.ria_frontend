@@ -18,18 +18,36 @@
     padding-left: 15px;
 }
 
+.list-u {
+    display: grid;
+    grid-template-areas: "col-l col-c col-r";
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.list-u .col-l {
+    grid-area: col-l;
+    padding-right: 15px;
+}
+.list-u .col-c {
+    grid-area: col-c;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.list-u .col-r {
+    grid-area: col-r;
+    padding-left: 15px;
+}
+
 @media only screen and (max-width: 800px) {
     .list {
         grid-template-areas:
                 "col-l"
         "col-c"
         "col-r";
+
+        grid-template-columns: 1fr;
     }
 
-    .tag-list .list {
-        grid-template-areas:
-                "col-l col-c col-r";
-    }
 
     .list .col-l {
         grid-area: col-l;

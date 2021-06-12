@@ -3,11 +3,13 @@ import {ProjectCard} from "../card/Card";
 import './index.css'
 import {chunkify} from "../../helpers/chunkify";
 import {ButtonLink} from "../button/Button";
+import {useWindowSize} from "../../helpers/useWindowSize";
 
-const List = ({list, style, columnStyle}) => {
+const List = ({list, responsive=true, style, columnStyle}) => {
     const listChunkified = chunkify(list, 3, true);
+    const size = useWindowSize()
     return (
-        <div className={'list'} style={style}>
+        <div className={responsive ? 'list': 'list-u'} style={style}>
             <div className={'col-l'} style={columnStyle}>
                 {listChunkified[0]}
             </div>
@@ -35,6 +37,7 @@ const ProjectList = ({}) => {
 
     return (
         <List
+            listType={'project'}
             list={list}
         />
 
@@ -55,8 +58,8 @@ const TagList = ({style, columnStyle}) => {
     ]
 
     return (
-        <div className={'tag-list'}>
             <List
+                responsive={false}
                 style={style}
                 columnStyle={columnStyle}
                 list={list.map((o) => (
@@ -69,8 +72,6 @@ const TagList = ({style, columnStyle}) => {
                         }}/>
                 ))}
             />
-        </div>
-
     )
 }
 
