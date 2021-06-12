@@ -95,6 +95,7 @@ const ContentTxt = ({text}) => {
         </div>
     )
 }
+
 const ContetnVideo = ({vURL}) => (
     <div className={'p-content'}>
         <video controls className={'p-vid'}>
@@ -146,6 +147,25 @@ There are many variations of passages of Lorem Ipsum available, but the`}/>
                     vURL={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}
                 />
             </Carousel>
+        </div>
+    );
+}
+
+
+const ProjectComment = ({}) => {
+    const size = useWindowSize()
+    return (
+        <div
+            className={'project-container'}
+        >
+            <h1
+                style={{
+                    marginBottom: 0
+                }}
+            >
+                Cometarios
+            </h1>
+           
         </div>
     );
 }
