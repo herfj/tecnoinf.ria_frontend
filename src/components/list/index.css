@@ -1,45 +1,50 @@
-.project-list {
+.list {
     display: grid;
     grid-template-areas: "col-l col-c col-r";
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-.project-list .col-l {
+.list .col-l {
     grid-area: col-l;
     padding-right: 15px;
 }
-.project-list .col-c {
+.list .col-c {
     grid-area: col-c;
     padding-left: 15px;
     padding-right: 15px;
 }
-.project-list .col-r {
+.list .col-r {
     grid-area: col-r;
     padding-left: 15px;
 }
 
 @media only screen and (max-width: 800px) {
-
-    .project-list {
+    .list {
         grid-template-areas:
                 "col-l"
         "col-c"
         "col-r";
     }
 
-    .project-list .col-l {
+    .tag-list .list {
+        grid-template-areas:
+                "col-l col-c col-r";
+    }
+
+    .list .col-l {
         grid-area: col-l;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 5px;
+        padding-left: 5px;
     }
-    .project-list .col-c {
+    .list .col-c {
         grid-area: col-c;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
-    .project-list .col-r {
+    .list .col-r {
         grid-area: col-r;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 5px;
+        padding-left: 5px;
     }
 
 }

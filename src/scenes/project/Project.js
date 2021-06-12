@@ -6,11 +6,13 @@ import './index.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import colors from "../../theme/colors";
 import {useWindowSize} from "../../helpers/useWindowSize";
-import {ButtonLink} from "../../components/button/Button";
+import {Button, ButtonLink} from "../../components/button/Button";
 import {TagList} from "../../components/list/List";
-import {Tag} from "reactstrap";
 
 const ProjectHeader = ({project}) => {
+    const size = useWindowSize();
+    const followStyle = size.width > 800 ? {width: '49.5%', marginRight: '0.5%', } : {marginBottom: 5}
+    const likeStyle = size.width > 800 ? {width: '49.5%', marginLeft: '0.5%'} : {}
     return (
         <div
             className={'project-container'}
@@ -35,11 +37,34 @@ const ProjectHeader = ({project}) => {
                     </div>
                     <div className="tag">
                         <h4>Tags</h4>
-                        <TagList/>
+                        <TagList
+                            columnStyle={{
+                                paddingLeft: 5,
+                                paddingRight: 5,
+                            }}
+                        />
                     </div>
                     <div className="cat">
                         <h4>Categorias</h4>
-                        <TagList/>
+                        <TagList
+                            columnStyle={{
+                                paddingLeft: 5,
+                                paddingRight: 5,
+                            }}
+                        />
+                    </div>
+                    <div className="footer">
+                        <Button type={'secondary'} style={{height: 40, ...followStyle}}>
+                            Seguir
+                            <span className="fas fa-user-plus" style={{marginLeft: 5}}></span>
+                        </Button>
+
+                        <Button type={'secondary'} style={{height: 40, ...likeStyle}}>
+                            Like
+                            <span style={{marginLeft: 5}} className="far fa-thumbs-up"></span>
+                        </Button>
+
+
                     </div>
                 </div>
 
