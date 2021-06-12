@@ -7,7 +7,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import colors from "../../theme/colors";
 import {useWindowSize} from "../../helpers/useWindowSize";
 import {Button, ButtonLink} from "../../components/button/Button";
-import {TagList} from "../../components/list/List";
+import {TagList, List, CategoryList} from "../../components/list/List";
+import {Comment, WriteComment} from "../../components/comment/Comment";
 
 const ProjectHeader = ({project}) => {
     const size = useWindowSize();
@@ -46,7 +47,7 @@ const ProjectHeader = ({project}) => {
                     </div>
                     <div className="cat">
                         <h4>Categorias</h4>
-                        <TagList
+                        <CategoryList
                             columnStyle={{
                                 paddingLeft: 5,
                                 paddingRight: 5,
@@ -151,21 +152,31 @@ There are many variations of passages of Lorem Ipsum available, but the`}/>
     );
 }
 
-
 const ProjectComment = ({}) => {
     const size = useWindowSize()
+    const list = [
+        <WriteComment/>,
+        <Comment/>,
+        <Comment/>,
+        <Comment/>,
+        <Comment/>,
+        <Comment/>,
+        <Comment/>,
+        <Comment/>,
+        <Comment/>,
+    ]
     return (
         <div
             className={'project-container'}
         >
-            <h1
-                style={{
-                    marginBottom: 0
-                }}
-            >
+            <h1>
                 Cometarios
             </h1>
-           
+           <List
+               responsive={false}
+               list={list}
+               grid={false}
+           />
         </div>
     );
 }
@@ -195,6 +206,7 @@ const Project = ({}) => {
                 project={project}
             />
             <ProjectContent/>
+            <ProjectComment/>
         </Container>
     )
 }

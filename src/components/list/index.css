@@ -48,7 +48,6 @@
         grid-template-columns: 1fr;
     }
 
-
     .list .col-l {
         grid-area: col-l;
         padding-right: 5px;

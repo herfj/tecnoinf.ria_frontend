@@ -1,0 +1,26 @@
+.user-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    border: 3px solid #FF8585;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.user-icon p{
+    align-self: center;
+    color: #FF8585;
+    font-size: 25px;
+}
+
+.user-icon img{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: 3px solid #FF8585;
+    align-self: center;
+    font-size: 25px;
+}

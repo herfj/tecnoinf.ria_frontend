@@ -2,7 +2,6 @@ import React, {Component, useEffect, useState} from "react";
 import {Link} from 'react-router-dom';
 import './index.css';
 
-
 const Button = ({type = '', children, style = {}, ...props}) => {
     const [touched, setTouched] = useState(false)
 

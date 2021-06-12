@@ -11,7 +11,7 @@
 
 .project-container h1 {
     color: #FF8585;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
@@ -98,7 +98,7 @@
         margin-bottom: 10px;
     }
     .p-content{
-        margin: 20px 10px 10px;
+        margin: 20px 0px 0px;
     }
 
     .p-data-body{
