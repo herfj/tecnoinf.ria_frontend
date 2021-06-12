@@ -1,0 +1,32 @@
+
+.project-container {
+    width: 100%;
+    background: #EBEBEB;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 40px;
+}
+
+.p-img {
+    width: 100%;
+    border: 1px solid #FF8585;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.ph-main h1 {
+    color: #FF8585;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.p-content {
+    border: 1px solid #FF8585;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border-radius: 10px;
+    margin: 40px;
+
+}
