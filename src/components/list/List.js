@@ -2,6 +2,7 @@ import React from "react";
 import {ProjectCard} from "../card/Card";
 import './index.css'
 import {chunkify} from "../../helpers/chunkify";
+import {ButtonLink} from "../button/Button";
 
 const List = ({list}) => {
     const listChunkified = chunkify(list, 3, true);
@@ -40,4 +41,25 @@ const ProjectList = ({}) => {
     )
 }
 
-export {ProjectList}
+
+const TagList = ({}) => {
+
+    const list =[
+        'tag 1',
+        'tag 2',
+        'tag 3',
+        'tag 4',
+        'tag 5',
+        'tag 6',
+        'tag 7',
+    ]
+
+    return (
+        <List
+            list={list.map((o)=>(<ButtonLink type={'outline'} to={o} children={o}/> ))}
+        />
+
+    )
+}
+
+export {ProjectList, TagList}

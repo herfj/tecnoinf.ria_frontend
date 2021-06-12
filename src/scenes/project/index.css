@@ -1,4 +1,3 @@
-
 .project-container {
     width: 100%;
     background: #EBEBEB;
@@ -9,6 +8,50 @@
     padding: 40px;
 }
 
+
+.project-container h1 {
+    color: #FF8585;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.p-data{
+    border: 1px solid #4D4D4D;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.p-data-body{
+    display: grid;
+    width: 100%;
+    box-sizing: border-box;
+    grid-template-areas: "data tag cat"
+    "footer footer footer";
+    grid-template-columns: 30% 35% 35%;
+    grid-template-rows: auto 50px;
+}
+
+.p-data-body .data {
+    grid-area: data;
+}
+
+.p-data-body .tag {
+    grid-area: tag;
+}
+
+.p-data-body .cat {
+    grid-area: cat;
+}
+
+.p-content {
+    border: 1px solid #FF8585;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin: 40px;
+}
+
 .p-img {
     width: 100%;
     border: 1px solid #FF8585;
@@ -16,17 +59,25 @@
     border-radius: 10px;
 }
 
-.ph-main h1 {
-    color: #FF8585;
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
 
-.p-content {
+.p-vid {
+    width: 100%;
     border: 1px solid #FF8585;
     box-sizing: border-box;
     border-radius: 10px;
-    border-radius: 10px;
-    margin: 40px;
+    padding: 0px;
+}
 
+.p-txt {
+    box-sizing: border-box;
+    /*height: 100%;*/
+    padding: 30px;
+
+}
+
+
+@media only screen and (max-width: 800px) {
+    .p-content{
+        margin: 20px 10px 10px;
+    }
 }

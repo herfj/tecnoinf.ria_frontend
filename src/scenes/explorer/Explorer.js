@@ -27,6 +27,7 @@ const SlideBar = ({header, list, selectedItem, callback}) => {
                                 style={{
                                     marginTop: 5
                                 }}
+                                onPress={()=>callback(o)}
                             >
                                 {o}
                             </Button>

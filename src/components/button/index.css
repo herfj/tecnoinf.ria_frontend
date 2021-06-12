@@ -32,6 +32,14 @@ a {
     color: #ebebeb;
 }
 
+.outline {
+    background: transparent;
+    border: 2px solid #4D4D4D;
+    padding: 5px 10px;
+    height: auto;
+    color: #4D4D4D;
+}
+
 .touched {
     opacity: 0.5;
 }
