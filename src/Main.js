@@ -30,6 +30,9 @@ const profile = ()=>(
     <Profile/>
 )
 
+const login = ()=>(
+    <Home/>
+)
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -48,6 +51,7 @@ class Main extends Component {
                     <Route path="/explorer" component={explorer}/>
                     <Route path="/project" component={project}/>i
                     <Route path="/profile" component={profile}/>i
+                    <Route path="/login" component={login}/>i
                     <Redirect to="/home"/>
                 </Switch>
             </div>
