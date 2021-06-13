@@ -56,7 +56,7 @@ navbar h1 {
     align-self: center;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1200px) {
     navbar {
         grid-template-areas: "logo  nv-btn"
         "routes routes";

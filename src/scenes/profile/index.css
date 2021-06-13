@@ -1,0 +1,127 @@
+.profile-container {
+    width: 100%;
+    background: #EBEBEB;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 40px;
+}
+
+.profile-container h1 {
+    color: #FF8585;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-data{
+    border: 1px solid #4D4D4D;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-data-body{
+    display: grid;
+    width: 100%;
+    box-sizing: border-box;
+    grid-template-areas: "img data extras"
+    "footer footer footer";
+    grid-template-columns: 30% 35% 35%;
+    grid-template-rows: auto 55px;
+}
+
+.profile-data-body h4 {
+    margin: 5px 0 5px 5px;
+}
+
+.profile-data-body .img {
+    grid-area: img;
+}
+
+.profile-data-body .data {
+    grid-area: data;
+    padding-left: 5px;
+}
+
+.profile-data-body .extras {
+    grid-area: extras;
+    margin-right: 10px;
+    text-align: end;
+    color: #CF4040;
+}
+
+.profile-data-body .extras p {
+    margin-bottom: 7px;
+}
+
+.profile-data-body .footer {
+    grid-area: footer;
+    margin-top: 10px;
+}
+
+.profile-content {
+    border: 1px solid #FF8585;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin: 40px;
+}
+
+.profile-img {
+    width: 100%;
+    border: 1px solid #FF8585;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+
+.profile-vid {
+    width: 100%;
+    border: 1px solid #FF8585;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+.profile-txt {
+    box-sizing: border-box;
+    /*height: 100%;*/
+    padding: 30px;
+
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .profile-container {
+        margin-top: 0px;
+        margin-bottom: 10px;
+        padding-top: 20px;
+    }
+    .profile-container h1 {
+        color: #FF8585;
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+    .profile-content{
+        margin: 20px 0px 0px;
+    }
+
+    .profile-data-body{
+        display: grid;
+        width: 100%;
+        box-sizing: border-box;
+        grid-template-areas: "img"
+        "data"
+        "extras"
+        "footer";
+        grid-template-columns: 100%;
+        grid-template-rows: auto auto auto;
+    }
+
+    .profile-data-body .extras {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+}

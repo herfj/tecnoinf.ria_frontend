@@ -24,3 +24,11 @@
     align-self: center;
     font-size: 25px;
 }
+
+.user-img{
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #FF8585;
+    align-self: center;
+    font-size: 25px;
+}

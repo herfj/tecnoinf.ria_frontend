@@ -1,22 +1,38 @@
-import React, {useState,useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import './index.css'
 
-const UserIcon = ({})=>{
-    const user= {
-        img: 'https://placekitten.com/700/700',
-        name: 'hola'
+const UserIcon = ({name = '', img = null, size = 50, rounded = true}) => {
+    if (rounded) {
+        return (
+            <div className={'user-icon'} style={{
+                height: size,
+                width: size,
+                borderRadius: size,
+            }}>
+                {
+                    img ? (
+                        <img src={img} alt={name} style={{
+                            height: size,
+                            width: size,
+                            borderRadius: size,
+                        }}/>
+                    ) : (
+                        <p className="far fa-user"></p>
+                    )
+                }
+            </div>
+        )
+    } else {
+        return (
+                <img className={'user-img'} src={img} alt={name} style={{
+                    height: 'auto',
+                    width: size,
+                }}/>
+        )
     }
-    return (
-        <div className={'user-icon'}>
-            {
-                user.img ? (
-                    <img src={user.img} alt={user.name}/>
-                ):(
-                    <p className="far fa-user"></p>
-                )
-            }
-        </div>
-    )
 }
 
-export {UserIcon}
+export
+{
+    UserIcon
+}

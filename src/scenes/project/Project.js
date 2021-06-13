@@ -12,8 +12,8 @@ import {Comment, WriteComment} from "../../components/comment/Comment";
 
 const ProjectHeader = ({project}) => {
     const size = useWindowSize();
-    const followStyle = size.width > 800 ? {width: '49.5%', marginRight: '0.5%', } : {marginBottom: 5}
-    const likeStyle = size.width > 800 ? {width: '49.5%', marginLeft: '0.5%'} : {}
+    const followStyle = size.width > 1200 ? {width: '49.5%', marginRight: '0.5%', } : {marginBottom: 5}
+    const likeStyle = size.width > 1200 ? {width: '49.5%', marginLeft: '0.5%'} : {}
     return (
         <div
             className={'project-container'}
@@ -24,10 +24,10 @@ const ProjectHeader = ({project}) => {
             <div className="p-data">
                 <div className="p-data-body">
                     <div className="data">
-                        <p>Autor: {project.author.nombre}</p>
-                        <p>Regíon: {project.author.ubicacion}</p>
-                        <p>Herramientas: {project.herramientas}</p>
-                        <p>Fecha publicación: {project.fecha}</p>
+                        <p><strong>Autor:</strong> {project.author.nombre}</p>
+                        <p><strong>Regíon:</strong> {project.author.ubicacion}</p>
+                        <p><strong>Herramientas:</strong> {project.herramientas}</p>
+                        <p><strong>Fecha publicación:</strong> {project.fecha}</p>
                         <p style={{color: colors.secondary}}>
                           <span style={{marginRight: 10,}}>
 
@@ -56,7 +56,7 @@ const ProjectHeader = ({project}) => {
                     </div>
                     <div className="footer">
                         <Button type={'secondary'} style={{height: 40, ...followStyle}}>
-                            Seguir
+                            Seguir a {project.author.nombre}
                             <span className="fas fa-user-plus" style={{marginLeft: 5}}></span>
                         </Button>
 
@@ -86,7 +86,7 @@ const ContentTxt = ({text}) => {
     const size = useWindowSize()
     return (
         <div className={'p-content'} style={{
-            maxHeight: size.width > 1000 ? '81.75%' : 300,
+            maxHeight: size.width > 1200 ? '81.75%' : 300,
             overflowY: 'scroll',
             backgroundColor: colors.neutral
         }}>
@@ -121,7 +121,7 @@ const ProjectContent = ({}) => {
             <Carousel
                 // autoPlay
                 infiniteLoop
-                centerMode={size.width > 800}
+                centerMode={size.width > 1200}
                 showThumbs={false}
             >
                 <ContentImg

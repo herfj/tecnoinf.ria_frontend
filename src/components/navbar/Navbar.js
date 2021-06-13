@@ -37,7 +37,7 @@ const Navbar = ({}) => {
                 <h1>DesignPro</h1>
             </Link>
             {
-                size.width > 800 ? (
+                size.width > 1200 ? (
                         <>
                             <Routes />
                             <div className={'navbar-l-btn'}>

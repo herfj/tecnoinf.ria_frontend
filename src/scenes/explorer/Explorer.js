@@ -13,7 +13,7 @@ const SlideBar = ({header, list, selectedItem, callback}) => {
             <div className={'slide-wrapper'}>
                 {header}
                 {
-                    size.width <= 800 &&
+                    size.width <= 1200 &&
                     <div style={{marginBottom: 10}}>
 
                         <Searchbar/>
@@ -75,7 +75,7 @@ const Explorer = ({}) => {
 
             <div className={'explorer-main'}>
                 <Container
-                    searchbar={size.width > 800}
+                    searchbar={size.width > 1200}
                 >
                     <div className={'explorer-header'}>
                         <h1>
