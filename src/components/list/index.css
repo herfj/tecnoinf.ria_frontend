@@ -39,7 +39,7 @@
 }
 
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1000px) {
     .list {
         grid-template-areas:
                 "col-l"

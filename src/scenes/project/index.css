@@ -86,7 +86,7 @@
 }
 
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1200px) {
     .project-container {
         margin-top: 0px;
         margin-bottom: 10px;
