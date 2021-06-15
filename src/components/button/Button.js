@@ -2,7 +2,7 @@ import React, {Component, useEffect, useState} from "react";
 import {Link} from 'react-router-dom';
 import './index.css';
 
-const Button = ({type = '', children, style = {}, ...props}) => {
+const Button = ({styleType = '', children, style = {}, ...props}) => {
     const [touched, setTouched] = useState(false)
 
     const toggleTouched = () => {
@@ -15,7 +15,7 @@ const Button = ({type = '', children, style = {}, ...props}) => {
         }, 150);
     }
 
-    const classBase = 'btn ' + type;
+    const classBase = 'btn ' + styleType;
     const className = touched ? classBase + ' touched' : classBase;
     return (
         <button
@@ -30,13 +30,14 @@ const Button = ({type = '', children, style = {}, ...props}) => {
     )
 }
 
-const ButtonLink = ({to, children, style = {}, ...props}) => {
+const ButtonLink = ({to, children, style = {},buttonStyle={}, ...props}) => {
     return (
         <Link
             to={to}
+            style={style}
         >
             <Button
-                style={style}
+                style={buttonStyle}
                 {...props}
             >
                 {children}

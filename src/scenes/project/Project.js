@@ -55,12 +55,12 @@ const ProjectHeader = ({project}) => {
                         />
                     </div>
                     <div className="footer">
-                        <Button type={'secondary'} style={{height: 40, ...followStyle}}>
+                        <Button styleType={'secondary'} style={{height: 40, ...followStyle}}>
                             Seguir a {project.author.nombre}
                             <span className="fas fa-user-plus" style={{marginLeft: 5}}></span>
                         </Button>
 
-                        <Button type={'secondary'} style={{height: 40, ...likeStyle}}>
+                        <Button styleType={'secondary'} style={{height: 40, ...likeStyle}}>
                             Like
                             <span style={{marginLeft: 5}} className="far fa-thumbs-up"></span>
                         </Button>

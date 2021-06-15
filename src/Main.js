@@ -7,6 +7,7 @@ import Home from './scenes/home/Home'
 import Explorer from "./scenes/explorer/Explorer";
 import Project from "./scenes/project/Project";
 import Profile from "./scenes/profile/Profile";
+import Login from "./scenes/login/Login";
 
 const mapStateToProps = (state) => {
     return {};
@@ -31,7 +32,7 @@ const profile = ()=>(
 )
 
 const login = ()=>(
-    <Home/>
+    <Login/>
 )
 class Main extends Component {
     constructor(props) {

@@ -1,9 +1,4 @@
-export const InitialFeedback = {
-	firstname: "",
-	lastname: "",
-	telnum: "",
+export const InitialLogin = {
 	email: "",
-	agree: false,
-	contactType: "Tel.",
-	message: "",
+	pass: "",
 };

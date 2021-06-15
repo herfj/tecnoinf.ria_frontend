@@ -75,7 +75,7 @@ const CategoryList = ({style, columnStyle}) => {
             list={list.map((o) => (
                 <ButtonLink
                     to={'/home'}
-                    type={'outline'}
+                    styleType={'outline'}
                     children={o}
                     style={{
                         marginBottom: 5
@@ -105,7 +105,7 @@ const TagList = ({style, columnStyle}) => {
             list={list.map((o) => (
                 <Button
                     disabled
-                    type={'outline'}
+                    styleType={'outline'}
                     children={o}
                     style={{
                         marginBottom: 5

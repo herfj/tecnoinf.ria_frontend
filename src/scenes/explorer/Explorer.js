@@ -23,7 +23,7 @@ const SlideBar = ({header, list, selectedItem, callback}) => {
                     list.map((o) => {
                         return (
                             <Button
-                                type={(0 === selectedItem) ? 'primary' : ''}
+                                styleType={(0 === selectedItem) ? 'primary' : ''}
                                 style={{
                                     marginTop: 5
                                 }}
@@ -87,7 +87,7 @@ const Explorer = ({}) => {
                             callback={(op) => {
                                 setOrderBy(op)
                             }}
-                            type={'primary'}
+                            styleType={'primary'}
                             style={{
                                 alignSelf: 'center',
                                 width: 120,

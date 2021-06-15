@@ -43,25 +43,28 @@ const Navbar = ({}) => {
                             <>
                                 <Routes/>
                                 <div className={'navbar-l-btn'}>
-                                    <Button
-                                        type={'secondary'}
+                                    <ButtonLink
+                                        to={'/login'}
+                                        styleType={'secondary'}
                                         style={{
                                             alignSelf: 'center',
                                             width: 120,
                                         }}
                                     >
                                         Login
-                                    </Button>
-                                    <Button
-                                        type={'secondary'}
+                                    </ButtonLink>
+                                    <ButtonLink
+                                        to={'/login'}
+                                        styleType={'secondary'}
                                         style={{
                                             alignSelf: 'center',
                                             marginLeft: 10,
+                                            marginRight: 15,
                                             width: 120,
                                         }}
                                     >
                                         Registarte
-                                    </Button>
+                                    </ButtonLink>
                                 </div>
                             </>
                         ) :
@@ -69,7 +72,7 @@ const Navbar = ({}) => {
                             <>
                                 <div className={'navbar-l-btn'}>
                                     <Button
-                                        type={'secondary'}
+                                        styleType={'secondary'}
                                         onClick={() => {
                                             console.log(open)
                                             setOpen(!open)
@@ -91,8 +94,8 @@ const Navbar = ({}) => {
                                                 extraButtons={(
                                                     <>
                                                         <ButtonLink
-                                                            to={'/'}
-                                                            type={'secondary'}
+                                                            to={'/login'}
+                                                            styleType={'secondary'}
                                                             style={{
                                                                 marginTop: 7,
                                                             }}
@@ -101,7 +104,7 @@ const Navbar = ({}) => {
                                                         </ButtonLink>
                                                         <ButtonLink
                                                             to={'/'}
-                                                            type={'secondary'}
+                                                            styleType={'secondary'}
                                                         >
                                                             Registarte
                                                         </ButtonLink>

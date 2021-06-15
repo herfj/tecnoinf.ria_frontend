@@ -39,7 +39,7 @@ const ProjectCard = ({}) => {
             >
                 <ButtonLink
                     to={'/project'}
-                    type={'primary'}
+                    styleType={'primary'}
                 >
                     VER MAS
                 </ButtonLink>
