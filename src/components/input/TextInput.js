@@ -29,13 +29,43 @@ const EmailInput = ({style}) => {
                         show="touched"
                         messages={{
                             required: "Requerido",
-                            validEmail: "Email invalido",
+                            validEmail: " Email invalido",
                         }}
                     />
 
         </>
     )
 }
+const PwdInput = ({style}) => {
+    return(
+        <>
+
+            <Control.text
+                model=".pass"
+                id="pass"
+                name="pass"
+                type="password"
+                placeholder="Contraseña"
+                className="pwd-input"
+                style={style}
+                validators={{
+                    required,
+                    validEmail,
+                }}
+            />
+            <Errors
+                className="text-danger"
+                model=".pass"
+                show="touched"
+                messages={{
+                    required: "Requerido",
+
+                }}
+            />
+
+        </>
+    )
+}
 
 
-export {EmailInput}
+export {EmailInput, PwdInput}

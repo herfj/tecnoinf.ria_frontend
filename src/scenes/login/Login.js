@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './index.css'
 import {Button} from "../../components/button/Button";
-import {EmailInput} from "../../components/input/TextInput";
+import {EmailInput, PwdInput} from "../../components/input/TextInput";
 import {Form, actions} from "react-redux-form";
 
 const Login = ({}) => {
@@ -35,6 +35,7 @@ const Login = ({}) => {
                         onSubmit={(values) => handleSubmit(values)}
                     >
                         <EmailInput/>
+                        <PwdInput style={{marginTop:10}}/>
                         {/*<EmailInput style={{marginTop: 10}}/>*/}
                         <Button
                             styleType={'primary'}
