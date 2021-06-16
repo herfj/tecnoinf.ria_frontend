@@ -36,7 +36,6 @@ const Login = ({}) => {
                     >
                         <EmailInput/>
                         <PwdInput style={{marginTop:10}}/>
-                        {/*<EmailInput style={{marginTop: 10}}/>*/}
                         <Button
                             styleType={'primary'}
                             type="submit"

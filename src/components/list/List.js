@@ -4,6 +4,7 @@ import './index.css'
 import {chunkify} from "../../helpers/chunkify";
 import {Button, ButtonLink} from "../button/Button";
 import {useWindowSize} from "../../helpers/useWindowSize";
+import {Message as Mess, Message} from "../message/Message";
 
 const List = ({list, responsive = true, style, columnStyle, grid = true}) => {
     const listChunkified = chunkify(list, 3, true);
@@ -54,7 +55,6 @@ const ProjectList = ({}) => {
 
     )
 }
-
 
 
 const CategoryList = ({style, columnStyle}) => {
@@ -115,4 +115,17 @@ const TagList = ({style, columnStyle}) => {
     )
 }
 
-export {ProjectList, TagList, List, CategoryList}
+const MessList = ({list,style, columnStyle}) => {
+
+    return (
+        <List
+            responsive={false}
+            grid={false}
+            style={style}
+            columnStyle={columnStyle}
+            list={list}
+        />
+    )
+}
+
+export {ProjectList, TagList, List, CategoryList, MessList}

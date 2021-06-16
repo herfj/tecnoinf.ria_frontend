@@ -17,7 +17,7 @@ const ProfileHeader = ({user}) => {
     const likeStyle = size.width > 1200 ? {width: '49.5%', marginLeft: '0.5%'} : {}
     return (
         <div
-            className={'profile-container'}
+            className={'neutral-container'}
         >
             <h1>
                 {user.name}
@@ -92,7 +92,7 @@ const ProfileComment = ({}) => {
     ]
     return (
         <div
-            className={'profile-container'}
+            className={'neutral-container'}
         >
             <h1>
                 Cometarios

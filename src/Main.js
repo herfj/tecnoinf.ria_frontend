@@ -8,6 +8,7 @@ import Explorer from "./scenes/explorer/Explorer";
 import Project from "./scenes/project/Project";
 import Profile from "./scenes/profile/Profile";
 import Login from "./scenes/login/Login";
+import Message from "./scenes/message/Message";
 
 const mapStateToProps = (state) => {
     return {};
@@ -34,6 +35,11 @@ const profile = ()=>(
 const login = ()=>(
     <Login/>
 )
+
+const message = ()=>(
+    <Message/>
+)
+
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -52,6 +58,7 @@ class Main extends Component {
                     <Route path="/explorer" component={explorer}/>
                     <Route path="/project" component={project}/>i
                     <Route path="/profile" component={profile}/>i
+                    <Route path="/message" component={message}/>i
                     <Route path="/login" component={login}/>i
                     <Redirect to="/home"/>
                 </Switch>

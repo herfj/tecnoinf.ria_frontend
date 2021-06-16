@@ -16,7 +16,7 @@ const ProjectHeader = ({project}) => {
     const likeStyle = size.width > 1200 ? {width: '49.5%', marginLeft: '0.5%'} : {}
     return (
         <div
-            className={'project-container'}
+            className={'neutral-container'}
         >
             <h1>
                 {project.title}
@@ -109,7 +109,7 @@ const ProjectContent = ({}) => {
     const size = useWindowSize()
     return (
         <div
-            className={'project-container'}
+            className={'neutral-container'}
         >
             <h1
                 style={{
@@ -167,7 +167,7 @@ const ProjectComment = ({}) => {
     ]
     return (
         <div
-            className={'project-container'}
+            className={'neutral-container'}
         >
             <h1>
                 Cometarios

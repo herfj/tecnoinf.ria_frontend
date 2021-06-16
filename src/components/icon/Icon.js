@@ -4,7 +4,7 @@ import './index.css'
 const UserIcon = ({name = '', img = null, size = 50, rounded = true}) => {
     if (rounded) {
         return (
-            <div className={'user-icon'} style={{
+            <div className={'icon'} style={{
                 height: size,
                 width: size,
                 borderRadius: size,
@@ -24,15 +24,34 @@ const UserIcon = ({name = '', img = null, size = 50, rounded = true}) => {
         )
     } else {
         return (
-                <img className={'user-img'} src={img} alt={name} style={{
-                    height: 'auto',
-                    width: size,
-                }}/>
+            <img className={'user-img'} src={img} alt={name} style={{
+                height: 'auto',
+                width: size,
+            }}/>
         )
     }
 }
 
+const MessIcon = ({open = false, size,}) => {
+    return (
+        <div className={'icon'} style={{
+            height: size,
+            width: size,
+            borderRadius: 10,
+        }}>
+            {
+                open ? (
+                    <p className="far fa-envelope-open"></p>
+                ) : (
+                    <p className="far fa-envelope"></p>
+                )
+            }
+        </div>
+    )
+}
+
 export
 {
-    UserIcon
+    UserIcon,
+    MessIcon
 }
