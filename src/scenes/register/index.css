@@ -1,0 +1,38 @@
+.pink-b{
+    background: #FF8585;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 50vh;
+}
+.pink-b h1 {
+    margin-top: 11px;
+    margin-left: 20px;
+}
+
+.login-wrapper{
+    width: 470px;
+    min-height: 400px;
+    margin-top: -200px;
+    align-self: center;
+    padding: 20px 20px 25px;
+
+    background: #EBEBEB;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.login-wrapper h1{
+    margin-top: 18px;
+    margin-bottom: 20px;
+    font-size: 3em;
+    color: #FF8585;
+}
+.firstline{
+    display: grid;
+    grid-template-areas: "logo  nv-btn";
+    grid-template-columns: 85% 15%;
+    min-height: 70px;
+}
