@@ -2,32 +2,37 @@ import React, {Component, useState} from "react";
 import Container from "../../components/container/Container";
 import {CategoryList, ProjectList, TagList, MessList} from "../../components/list/List";
 import colors from "../../theme/colors";
-import {ButtonLink} from "../../components/button/Button";
+import {ButtonLink, Button} from "../../components/button/Button";
 import './index.css'
-import {MessageItem,ShowMessage} from "../../components/message/Message";
+import {MessageItem, ShowMessage} from "../../components/message/Message";
 import {useWindowSize} from "../../helpers/useWindowSize";
 
 const Messages = ({}) => {
     const size = useWindowSize()
 
     const [active, setActive] = useState("Recibidos")
-    const recibidos = ()=>(<MessList list={[
+    const recibidos = () => (<MessList list={[
         <MessageItem
+            to={'/messages/1'}
             mess={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque a egestas quam, quis consequat augue. Etiam at fringilla nulla. In hac habitasse platea dictumst. Mauris vitae augue eu eros'}
             open={true}
         />,
         <MessageItem
+            to={'/messages/2'}
             mess={'holaj asdf asdf'}
         />
     ]}/>)
-    const enviados = ()=>(<MessList list={[
+    const enviados = () => (<MessList list={[
         <MessageItem
+            to={'/messages/1'}
             mess={'holaj asdf asdf'}
         />,
         <MessageItem
+            to={'/messages/1'}
             mess={'holaj asdf asdf'}
         />,
         <MessageItem
+            to={'/messages/1'}
             mess={'holaj asdf asdf'}
         />
     ]}/>)
@@ -92,27 +97,32 @@ const Messages = ({}) => {
 }
 
 const Message = ({id}) => {
-
-    return(
+    return (
         <Container
             searchbar={false}
         >
             <div className={'neutral-container'}>
+
                 <ShowMessage
+                    sendByMe={false}
                     subject={'Asunto muy importante'}
                     date={'02/03/2021'}
                     mess={'HOla tomi adfsdfas ddafsdfas dfsadfdfsafdas dfasdfas adfs'}
+                    backButton={(
+                        <ButtonLink
+                            to={'/messages'}
+                            style={{width: 160, height: 45}}
+                            buttonStyle={{width: 160, height: 45}}
+                            styleType={'outline'}
+                        >
+                            <span class="fas fa-chevron-left" style={{marginRight: 5}}></span>
+                            Volver al listado
+                        </ButtonLink>)}
                 />
-                <ButtonLink
-                    to={'/messages'}
-                    style={{width: 150}}
-                    buttonStyle={{width: 150}}
-                    styleType={'outline'}
-                >
-                    Volver al listado
-                </ButtonLink>
+
             </div>
         </Container>
     )
 }
-export {Messages,Message};
+
+export {Messages, Message};

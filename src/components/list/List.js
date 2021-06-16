@@ -56,7 +56,6 @@ const ProjectList = ({}) => {
     )
 }
 
-
 const CategoryList = ({style, columnStyle}) => {
 
     const list = [
@@ -79,7 +78,9 @@ const CategoryList = ({style, columnStyle}) => {
                     children={o}
                     style={{
                         marginBottom: 5
-                    }}/>
+                    }}
+                    buttonStyle={{marginBottom:5}}
+                />
             ))}
         />
     )

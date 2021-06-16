@@ -68,8 +68,6 @@ const ProjectHeader = ({project}) => {
 
                     </div>
                 </div>
-
-
             </div>
             <img className={'p-img'} src={project.portada} alt=""/>
         </div>
