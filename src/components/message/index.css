@@ -1,4 +1,4 @@
-.message{
+.message-item{
     display: grid;
     grid-template-areas: 'icon mess';
     grid-template-columns: 80px auto;
@@ -12,10 +12,34 @@
     margin-bottom: 10px;
     padding: 20px;
 }
+
 .m-icon {
     gird-area: icon;
 }
 
 .m-mess{
     grid-area: mess;
+}
+
+.show-message{
+    width: 100%;
+    background: #EBEBEB;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+.sm-subject {
+    margin-bottom: 5px;
+}
+
+.sm-data{
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.sm-text {
+    margin-bottom: 15px;
 }

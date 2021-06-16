@@ -2,33 +2,32 @@ import React, {Component, useState} from "react";
 import Container from "../../components/container/Container";
 import {CategoryList, ProjectList, TagList, MessList} from "../../components/list/List";
 import colors from "../../theme/colors";
-import {Button} from "../../components/button/Button";
+import {ButtonLink} from "../../components/button/Button";
 import './index.css'
-import {Message as Mess} from "../../components/message/Message";
+import {MessageItem,ShowMessage} from "../../components/message/Message";
 import {useWindowSize} from "../../helpers/useWindowSize";
 
-
-const Message = ({}) => {
+const Messages = ({}) => {
     const size = useWindowSize()
 
     const [active, setActive] = useState("Recibidos")
     const recibidos = ()=>(<MessList list={[
-        <Mess
+        <MessageItem
             mess={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque a egestas quam, quis consequat augue. Etiam at fringilla nulla. In hac habitasse platea dictumst. Mauris vitae augue eu eros'}
             open={true}
         />,
-        <Mess
+        <MessageItem
             mess={'holaj asdf asdf'}
         />
     ]}/>)
     const enviados = ()=>(<MessList list={[
-        <Mess
+        <MessageItem
             mess={'holaj asdf asdf'}
         />,
-        <Mess
+        <MessageItem
             mess={'holaj asdf asdf'}
         />,
-        <Mess
+        <MessageItem
             mess={'holaj asdf asdf'}
         />
     ]}/>)
@@ -92,4 +91,28 @@ const Message = ({}) => {
     )
 }
 
-export default Message;
+const Message = ({id}) => {
+
+    return(
+        <Container
+            searchbar={false}
+        >
+            <div className={'neutral-container'}>
+                <ShowMessage
+                    subject={'Asunto muy importante'}
+                    date={'02/03/2021'}
+                    mess={'HOla tomi adfsdfas ddafsdfas dfsadfdfsafdas dfasdfas adfs'}
+                />
+                <ButtonLink
+                    to={'/messages'}
+                    style={{width: 150}}
+                    buttonStyle={{width: 150}}
+                    styleType={'outline'}
+                >
+                    Volver al listado
+                </ButtonLink>
+            </div>
+        </Container>
+    )
+}
+export {Messages,Message};
