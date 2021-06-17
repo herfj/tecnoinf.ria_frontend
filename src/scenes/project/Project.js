@@ -9,6 +9,7 @@ import {useWindowSize} from "../../helpers/useWindowSize";
 import {Button, ButtonLink} from "../../components/button/Button";
 import {TagList, List, CategoryList} from "../../components/list/List";
 import {Comment, WriteComment} from "../../components/comment/Comment";
+import {Link} from "react-router-dom";
 
 const ProjectHeader = ({project}) => {
     const size = useWindowSize();
@@ -24,7 +25,7 @@ const ProjectHeader = ({project}) => {
             <div className="p-data">
                 <div className="p-data-body">
                     <div className="data">
-                        <p><strong>Autor:</strong> {project.author.nombre}</p>
+                        <p><strong>Autor:</strong> <Link to={'/profile'}>{project.author.nombre}</Link></p>
                         <p><strong>Regíon:</strong> {project.author.ubicacion}</p>
                         <p><strong>Herramientas:</strong> {project.herramientas}</p>
                         <p><strong>Fecha publicación:</strong> {project.fecha}</p>
