@@ -11,9 +11,9 @@
     margin-left: 20px;
 }
 
-.login-wrapper{
-    width: 470px;
-    min-height: 400px;
+.register-wrapper{
+    width: 600px;
+    min-height: 500px;
     margin-top: -200px;
     align-self: center;
     padding: 20px 20px 25px;
@@ -24,15 +24,21 @@
     border-radius: 10px;
 }
 
-.login-wrapper h1{
+.register-wrapper h1{
     margin-top: 18px;
     margin-bottom: 20px;
     font-size: 3em;
     color: #FF8585;
 }
-.firstline{
-    display: grid;
-    grid-template-areas: "logo  nv-btn";
-    grid-template-columns: 85% 15%;
-    min-height: 70px;
+.register-content{
+    margin-top: 3%;
+    display: flex;
+    width: 100%;
+    overflow:auto;
+}
+.content-left{
+    width: 48%;
+}
+.content-der{
+    width: 48%;
 }

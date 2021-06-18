@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import './index.css'
-import {Button} from "../../components/button/Button";
+import {Button, ButtonLink} from "../../components/button/Button";
 import {EmailInput, PwdInput} from "../../components/input/TextInput";
 import {Form, actions} from "react-redux-form";
+import {Link} from "react-router-dom";
 
 const Login = ({}) => {
 
@@ -25,7 +26,15 @@ const Login = ({}) => {
     return (
         <>
             <div className={'pink-b'}>
-                <h1>DesignPro</h1>
+                <Link
+                    className={''}
+                    to={'/home'}
+                    style={{
+                        textDecoration: 'none',
+                    }}
+                >
+                    <h1>DesignPro</h1>
+                </Link>
             </div>
             <div style={{display: 'flex', justifyContent: 'center'}}>
                 <div className={'login-wrapper'}>
@@ -40,17 +49,18 @@ const Login = ({}) => {
                         <Button
                             styleType={'primary'}
                             type="submit"
-                            style={{marginTop: 20}}
+                            style={{marginTop: 20, marginBottom:10}}
                         >
                             Ingresar
                         </Button>
 
                     </Form>
-                    <Button
-                        style={{marginTop: 10}}
+                    <ButtonLink
+                        to={"/register"}
+
                     >
                         Registrarme
-                    </Button>
+                    </ButtonLink>
                 </div>
             </div>
         </>

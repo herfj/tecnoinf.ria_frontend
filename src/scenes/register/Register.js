@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import './index.css'
 import {Button, ButtonLink} from "../../components/button/Button";
-import {EmailInput, PwdInput} from "../../components/input/TextInput";
+import {EmailInput, PwdInput, TextInput, DateInput, NameInput, SurnameInput,Selectcountry} from "../../components/input/TextInput";
 import {Form, actions} from "react-redux-form";
+import {Link} from "react-router-dom";
 
 const Register = ({}) => {
 
@@ -25,48 +26,47 @@ const Register = ({}) => {
     return (
         <>
             <div className={'pink-b'}>
-                <div className={'firstline'}>
+                <Link
+                    className={''}
+                    to={'/home'}
+                    style={{
+                        textDecoration: 'none',
+                    }}
+                >
                     <h1>DesignPro</h1>
-
-                        <ButtonLink
-                            to={'/home'}
-                            styleType={'secondary'}
-                            style={{
-                                alignSelf: 'center',
-                                width: 120,
-                            }}
-                        >
-                            Volver
-                        </ButtonLink>
-
-
-                </div>
-
+                </Link>
             </div>
             <div style={{display: 'flex', justifyContent: 'center'}}>
-                <div className={'login-wrapper'}>
-                    <h1>Login</h1>
+                <div className={'register-wrapper'}>
+                    <h1>Crear cuenta</h1>
                     <Form
                         model="login"
                         onSubmit={(values) => handleSubmit(values)}
-                    >
+                        >
                         <EmailInput/>
-                        <PwdInput style={{marginTop:10}}/>
+                        <div className={"register-content"}>
+                            <div className={"content-left"}>
+                                <NameInput/>
+                            </div>
+                            <div className={"content-der"}
+                                 style={{marginLeft:"4%"}}>
+                                <SurnameInput/>
+                            </div>
+                        </div>
+                        <PwdInput style={{marginTop:12}}/>
+                        <DateInput style={{marginTop:12}}/>
+                        <Selectcountry style={{marginTop:12}}/>
                         {/*<EmailInput style={{marginTop: 10}}/>*/}
                         <Button
                             styleType={'primary'}
                             type="submit"
                             style={{marginTop: 20}}
                         >
-                            Ingresar
+                            Registrarme
                         </Button>
 
                     </Form>
-                    <Button
-                        style={{marginTop: 10}}
-                    >
-                        Registrarme
-                    </Button>
+
                 </div>
             </div>
         </>
