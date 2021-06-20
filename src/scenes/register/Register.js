@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import './index.css'
 import {Button, ButtonLink} from "../../components/button/Button";
-import {EmailInput, PwdInput} from "../../components/input/Input";
+import {EmailInput, PwdInput, Input, DateInput, NameInput, SurnameInput,SelectCountry} from "../../components/input/Input";
 import {Form, actions} from "react-redux-form";
 import {Link} from "react-router-dom";
 
-const Login = ({}) => {
+const Register = ({}) => {
 
     const handleSubmit = (values) => {
         console.log("Current State is: " + JSON.stringify(values));
@@ -27,39 +27,49 @@ const Login = ({}) => {
         <>
             <div className={'pink-b'}>
                 <Link
+                    className={''}
                     to={'/home'}
+                    style={{
+                        textDecoration: 'none',
+                    }}
                 >
                     <h1>DesignPro</h1>
                 </Link>
             </div>
             <div style={{display: 'flex', justifyContent: 'center'}}>
-                <div className={'login-wrapper'}>
-                    <h1>Login</h1>
+                <div className={'register-wrapper'}>
+                    <h1>Crear cuenta</h1>
                     <Form
-                        model="login"
+                        model="register"
                         onSubmit={(values) => handleSubmit(values)}
-                    >
+                        >
                         <EmailInput/>
-                        <PwdInput style={{marginTop:10}}/>
+                        <div className={"register-content"}>
+                            <div className={"content-left"}>
+                                <NameInput/>
+                            </div>
+                            <div className={"content-der"}
+                                 style={{marginLeft:"4%"}}>
+                                <SurnameInput/>
+                            </div>
+                        </div>
+                        <PwdInput style={{marginTop:12}}/>
+                        <DateInput style={{marginTop:12}}/>
+                        <SelectCountry style={{marginTop:12}}/>
                         <Button
                             styleType={'primary'}
                             type="submit"
-                            style={{marginTop: 20, marginBottom:10}}
+                            style={{marginTop: 20}}
                         >
-                            Ingresar
+                            Registrarme
                         </Button>
 
                     </Form>
-                    <ButtonLink
-                        to={"/register"}
 
-                    >
-                        Registrarme
-                    </ButtonLink>
                 </div>
             </div>
         </>
     )
 }
 
-export default Login;
+export default Register;

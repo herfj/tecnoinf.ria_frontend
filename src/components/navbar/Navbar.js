@@ -26,7 +26,7 @@ const Navbar = ({}) => {
     const size = useWindowSize()
     const location = useLocation();
 
-    if ('/login' != location.pathname) {
+    if ('/login' != location.pathname &&  '/register' != location.pathname) {
         return (
             <navbar>
                 <Link
@@ -54,7 +54,7 @@ const Navbar = ({}) => {
                                         Login
                                     </ButtonLink>
                                     <ButtonLink
-                                        to={'/login'}
+                                        to={'/register'}
                                         styleType={'secondary'}
                                         style={{
                                             alignSelf: 'center',
@@ -103,7 +103,7 @@ const Navbar = ({}) => {
                                                             Login
                                                         </ButtonLink>
                                                         <ButtonLink
-                                                            to={'/'}
+                                                            to={'/register'}
                                                             styleType={'secondary'}
                                                         >
                                                             Registarte

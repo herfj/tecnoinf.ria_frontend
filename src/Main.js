@@ -8,6 +8,7 @@ import Project from "./scenes/project/Project";
 import Profile from "./scenes/profile/Profile";
 import Login from "./scenes/login/Login";
 import {Messages,Message} from "./scenes/message/Message";
+import Register from "./scenes/register/Register";
 
 
 const home = ()=>(
@@ -38,6 +39,9 @@ const message = ({match})=>(
     <Message id={match.params.messId}/>
 )
 
+const register = () =>(
+    <Register/>
+)
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -55,6 +59,7 @@ class Main extends Component {
                     <Route exact path="/messages" component={messages}/>
                     <Route path="/messages/:messId" component={message}/>
                     <Route path="/login" component={login}/>i
+                    <Route path="/register" component={register}/>i
                     <Redirect to="/home"/>
                 </Switch>
             </div>
