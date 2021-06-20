@@ -3,6 +3,7 @@ import './index.css'
 import {Button} from "../../components/button/Button";
 import {EmailInput, PwdInput} from "../../components/input/TextInput";
 import {Form, actions} from "react-redux-form";
+import {Link} from "react-router-dom";
 
 const Login = ({}) => {
 
@@ -25,7 +26,9 @@ const Login = ({}) => {
     return (
         <>
             <div className={'pink-b'}>
-                <h1>DesignPro</h1>
+                <Link to={'/'}>
+                    <h1>DesignPro</h1>
+                </Link>
             </div>
             <div style={{display: 'flex', justifyContent: 'center'}}>
                 <div className={'login-wrapper'}>
