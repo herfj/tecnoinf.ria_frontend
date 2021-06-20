@@ -25,12 +25,7 @@ import { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { actions as appActions } from 'modules/app.module'
-import { actions as propertiesActions } from 'modules/property.module'
-import { actions as locationsActions } from 'modules/location.module'
-import { actions as ownersActions } from 'modules/owner.module'
-import { actions as buildingsActions } from 'modules/building.module'
-import { actions as clientsActions } from 'modules/client.module'
+import { actions as appActions } from '../modules/app.module'
 
 class Connector extends Component {
   render() {
@@ -44,11 +39,6 @@ const mapStateToProps = (state) => ({ state })
 const mapDispatchToProps = (dispatch) => {
   const actionList = [
     { label: 'app', value: appActions },
-    { label: 'properties', value: propertiesActions },
-    { label: 'locations', value: locationsActions },
-    { label: 'owners', value: ownersActions},
-    { label: 'buildings', value: buildingsActions},
-    { label: 'clients', value: clientsActions},
   ]
 
   return {

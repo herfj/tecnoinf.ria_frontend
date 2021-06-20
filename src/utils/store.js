@@ -3,12 +3,9 @@ import {
 } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import app from 'modules/app.module'
-import properties from 'modules/property.module'
-import locations from 'modules/location.module'
-import owners from 'modules/owner.module'
-import buildings from 'modules/building.module'
-import clients from 'modules/client.module'
+import app from '../modules/app.module'
+import {createForms} from "react-redux-form";
+import {InitialLogin} from "../modules/forms";
 
 const analytics = () => (next) => (action) => {
   window.dataLayer = window.dataLayer || []
@@ -24,11 +21,7 @@ const analytics = () => (next) => (action) => {
 const configureStore = (initialState = {}) => {
   const reducers = combineReducers({
     app,
-    properties,
-    locations,
-    owners,
-    buildings,
-    clients,
+    ...createForms({ login: InitialLogin }),
   })
 
   // Middleware and store enhancers
