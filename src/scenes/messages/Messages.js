@@ -4,7 +4,7 @@ import {CategoryList, ProjectList, TagList, MessList} from "../../components/lis
 import colors from "../../theme/colors";
 import {ButtonLink, Button} from "../../components/button/Button";
 import './index.css'
-import {MessageItem, ShowMessage} from "../../components/message/Message";
+import {MessageItem, ShowMessage, WriteMessage} from "../../components/message/Message";
 import {useWindowSize} from "../../helpers/useWindowSize";
 
 const Messages = ({}) => {
@@ -22,6 +22,7 @@ const Messages = ({}) => {
             mess={'holaj asdf asdf'}
         />
     ]}/>)
+
     const enviados = () => (<MessList list={[
         <MessageItem
             to={'/messages/1'}
@@ -44,9 +45,26 @@ const Messages = ({}) => {
             <div
                 className={'neutral-container'}
             >
+                <div style={{
+                    display: 'flex',
+                    flexDirection: size.width > 1200 ? 'row' : 'column',
+                    justifyContent: 'space-between',
+                    alignContent: 'center'
+                }}>
+
                 <h1>
                     Mensajes
                 </h1>
+                <ButtonLink
+                    style={{alignSelf: 'center', width: size.width > 1200 ? 200 : '100%', height: 40}}
+                    buttonStyle={{alignSelf: 'center', width: size.width > 1200 ? 200 : '100%', height: 40}}
+                    to={'/messages/new'}
+                    styleType={'primary'}
+                >
+                    Redactar un mensaje
+                </ButtonLink>
+
+                </div>
                 {
                     size.width > 1200 ? (
                         <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -125,4 +143,27 @@ const Message = ({id}) => {
     )
 }
 
-export {Messages, Message};
+const NewMessage = () => {
+    return (
+        <Container
+            searchbar={false}
+        >
+            <div className={'neutral-container'}>
+                <WriteMessage
+                    backButton={(
+                        <ButtonLink
+                            to={'/messages'}
+                            style={{width: 160, height: 45}}
+                            buttonStyle={{width: 160, height: 45}}
+                            styleType={'outline'}
+                        >
+                            <span class="fas fa-chevron-left" style={{marginRight: 5}}></span>
+                            Volver al listado
+                        </ButtonLink>)}
+                />
+            </div>
+        </Container>
+    )
+}
+
+export {Message, Messages, NewMessage};

@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import './index.css'
 import {Button, ButtonLink} from "../../components/button/Button";
-import {EmailInput, PwdInput, Input, DateInput, NameInput, SurnameInput,SelectCountry} from "../../components/input/Input";
+import {EmailInput, PwdInput,  DateInput, NameInput, SurnameInput} from "../../components/forms/TextInput";
+import {SelectCountry} from "../../components/forms/Select";
 import {Form, actions} from "react-redux-form";
 import {Link} from "react-router-dom";
 
@@ -19,7 +20,7 @@ const Register = ({}) => {
         //     values.email,
         //     values.agree,
         //     values.contactType,
-        //     values.message
+        //     values.messages
         // );
     }
 
