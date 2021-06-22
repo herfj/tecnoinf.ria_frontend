@@ -124,7 +124,7 @@ const ProjectContent = ({}) => {
                 showThumbs={false}
             >
                 <ContentImg
-                    imgURL={'http://lorempixel.com/output/cats-q-c-640-480-1.jpg'}
+                    imgURL={'https://placekitten.com/1200/800'}
                 />
                 <ContentImg
                     imgURL={'https://placekitten.com/1200/800'}

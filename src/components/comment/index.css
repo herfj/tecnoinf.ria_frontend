@@ -22,18 +22,3 @@
     grid-area: mess;
 }
 
-textarea{
-    width: 100%;
-    resize: vertical;
-    outline: none;
-    background: #EBEBEB;
-    font-family: "Poppins", sans-serif;
-    color: #4D4D4D;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 15px;
-    font-size: 16px;
-}

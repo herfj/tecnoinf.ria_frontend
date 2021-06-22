@@ -7,7 +7,7 @@ import Explorer from "./scenes/explorer/Explorer";
 import Project from "./scenes/project/Project";
 import Profile from "./scenes/profile/Profile";
 import Login from "./scenes/login/Login";
-import {Messages,Message} from "./scenes/message/Message";
+import {Message,Messages, NewMessage} from "./scenes/messages/Messages";
 import Register from "./scenes/register/Register";
 import EditUser from "./scenes/edituser/EditUser";
 
@@ -40,6 +40,10 @@ const message = ({match})=>(
     <Message id={match.params.messId}/>
 )
 
+const newMessage = ()=>(
+    <NewMessage />
+)
+
 const register = () =>(
     <Register/>
 )
@@ -58,6 +62,7 @@ class Main extends Component {
                     <Route path="/project" component={project}/>i
                     <Route path="/profile" component={profile}/>i
                     <Route exact path="/messages" component={messages}/>
+                    <Route path="/messages/new" component={newMessage}/>
                     <Route path="/messages/:messId" component={message}/>
                     <Route path="/login" component={login}/>i
                     <Route path="/register" component={register}/>i

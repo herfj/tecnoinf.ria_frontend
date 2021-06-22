@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './index.css'
 import {Button, ButtonLink} from "../../components/button/Button";
-import {EmailInput, PwdInput} from "../../components/input/Input";
+import {EmailInput, PwdInput} from "../../components/forms/TextInput";
 import {Form, actions} from "react-redux-form";
 import {Link} from "react-router-dom";
 
@@ -19,7 +19,7 @@ const Login = ({}) => {
         //     values.email,
         //     values.agree,
         //     values.contactType,
-        //     values.message
+        //     values.messages
         // );
     }
 

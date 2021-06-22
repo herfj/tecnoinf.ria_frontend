@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from "react";
 import './index.css'
 import {Button, ButtonLink} from "../../components/button/Button";
-import {EmailInput, PwdInput, Input, DateInput, NameInput, SurnameInput,SelectCountry} from "../../components/input/Input";
-import {Form, actions} from "react-redux-form";
 
+import {EmailInput, PwdInput, DateInput, NameInput, SurnameInput} from "../../components/forms/TextInput";
+import {Form, actions} from "react-redux-form";
+import {SelectCountry} from "../../components/forms/Select";
 import {Link} from "react-router-dom";
+import {required} from "../../helpers/formValidator";
+import {TextInput} from "../../components/forms/TextInput";
 
 const EditUser = ({}) => {
 
@@ -49,18 +52,66 @@ const EditUser = ({}) => {
                                         <SurnameInput/>
                                     </div>
                                 </div>
-                                <Input place={'Profesion'} style={{marginTop:12}} name={"prof"}/>
-                                <Input place={'Empresa'} style={{marginTop:12}} name={"empresa"}/>
+                                <TextInput
+                                    model=".prof"
+                                    id="prof"
+                                    name="prof"
+                                    style={{marginTop:12}}
+                                    placeholder="Profesion"
+                                    validators={{
+
+                                    }}
+                                    messages={{
+
+                                    }}
+                                />
+                                <TextInput
+                                    model=".empresa"
+                                    id="empresa"
+                                    name="esmpresa"
+                                    style={{marginTop:12}}
+                                    placeholder="Empresa"
+                                    validators={{
+
+                                    }}
+                                    messages={{
+
+                                    }}
+                                />
+
                                 <div className={"register-content"}>
                                     <div className={"content-left"}>
                                         <SelectCountry value={"Uruguay"}/>
                                     </div>
                                     <div className={"content-der"}
                                          style={{marginLeft:"4%"}}>
-                                        <Input place={'Ciudad'} name={"city"}/>
+                                        <TextInput
+                                            model=".city"
+                                            id="city"
+                                            name="city"
+                                            placeholder="Ciudad"
+                                            validators={{
+
+                                            }}
+                                            messages={{
+
+                                            }}
+                                        />
                                     </div>
                                 </div>
-                                <Input place={'URL'} style={{marginTop:12}}  name={"url"}/>
+                                <TextInput
+                                    model=".url"
+                                    id="url"
+                                    name="url"
+                                    style={{marginTop:12}}
+                                    placeholder="URL"
+                                    validators={{
+
+                                    }}
+                                    messages={{
+
+                                    }}
+                                />
                                 <Button
                                     styleType={'primary'}
                                     type="submit"

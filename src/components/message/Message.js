@@ -2,7 +2,12 @@ import React, {useState, useEffect} from "react";
 import {MessIcon} from "../icon/Icon";
 import './index.css'
 import {Link} from "react-router-dom";
-import{Button} from "../button/Button";
+import {Button} from "../button/Button";
+import {TextInput} from "../forms/TextInput";
+import {SelectCountry} from "../forms/Select";
+import {Control, LocalForm, Errors} from "react-redux-form";
+import {required} from "../../helpers/formValidator";
+import TextArea from "../forms/TextArea";
 
 const MessageItem = ({mess, open, to}) => {
     mess = mess.length > 60 ? mess.substring(0, 65) + '...' : mess
@@ -26,7 +31,6 @@ const MessageItem = ({mess, open, to}) => {
     )
 }
 
-
 const ShowMessage = ({subject, mess, date, sendByMe = false, backButton}) => {
 
     if (sendByMe) {
@@ -41,6 +45,9 @@ const ShowMessage = ({subject, mess, date, sendByMe = false, backButton}) => {
             </>
         )
     } else {
+        const handleSubmit = (values) => {
+
+        }
         return (
             <>
                 <h2 className={'sm-subject'}>{subject}</h2>
@@ -49,21 +56,73 @@ const ShowMessage = ({subject, mess, date, sendByMe = false, backButton}) => {
                     <p className={'sm-text'}>{mess}</p>
                 </div>
                 <p><strong>Responder:</strong></p>
-                <textarea></textarea>
-                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                <LocalForm
+                    onSubmit={(values) => handleSubmit(values)}
+                >
+                    <textarea></textarea>
 
-                     {backButton}
-                    <Button
-                        styleType={'primary'}
-                        style={{
-                            width: 180
-                        }}
-                    >Enviar respuesta</Button>
-                </div>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
+                        {backButton}
+                        <Button
+                            styleType={'primary'}
+                            style={{
+                                width: 180
+                            }}
+                        >Enviar respuesta</Button>
+                    </div>
+                </LocalForm>
             </>
         )
     }
 }
 
+const WriteMessage = ({backButton}) => {
+    const handleSubmit = (values) => {
 
-export {MessageItem, ShowMessage}
+    }
+    return (
+        <LocalForm
+            onSubmit={(values) => handleSubmit(values)}
+        >
+            <p><strong>Para:</strong></p>
+            <SelectCountry/>
+
+            <p><strong>Asunto:</strong></p>
+            <TextInput
+                model=".subject"
+                id="subject"
+                name="subject"
+                placeholder="Asunto"
+                validators={{
+                    required,
+                }}
+                messages={{
+                    required: "Asunto Requerido",
+                }}
+            />
+            <p><strong>Mensaje:</strong></p>
+            <TextArea
+                model=".message"
+                id="message"
+                name="message"
+                placeholder="Mensaje"
+                validators={{
+                    required,
+                }}
+                messages={{
+                    required: "Mensaje Requerido",
+                }}
+            />
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
+                    {backButton}
+                <Button
+                    styleType={'primary'}
+                    style={{
+                        width: 180
+                    }}
+                >Enviar mensaje</Button>
+            </div>
+        </LocalForm>
+    )
+}
+export {MessageItem, ShowMessage, WriteMessage}
