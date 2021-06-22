@@ -9,6 +9,7 @@ import Profile from "./scenes/profile/Profile";
 import Login from "./scenes/login/Login";
 import {Messages,Message} from "./scenes/message/Message";
 import Register from "./scenes/register/Register";
+import EditUser from "./scenes/edituser/EditUser";
 
 
 const home = ()=>(
@@ -60,6 +61,7 @@ class Main extends Component {
                     <Route path="/messages/:messId" component={message}/>
                     <Route path="/login" component={login}/>i
                     <Route path="/register" component={register}/>i
+                    <Route path="/edituser" component={EditUser}/>i
                     <Redirect to="/home"/>
                 </Switch>
             </div>

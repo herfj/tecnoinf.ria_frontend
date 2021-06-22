@@ -40,7 +40,7 @@ const EmailInput = ({style}) => {
         </>
     )
 }
-const NameInput = ({style}) => {
+const NameInput = ({style, value}) => {
     return(
         <>
 
@@ -51,6 +51,7 @@ const NameInput = ({style}) => {
                 placeholder="Nombre"
                 className="text-input"
                 style={style}
+
                 validators={{
                     required,
                 }}
@@ -67,7 +68,7 @@ const NameInput = ({style}) => {
         </>
     )
 }
-const SurnameInput = ({style}) => {
+const SurnameInput = ({style, value}) => {
     return(
         <>
 
@@ -77,6 +78,7 @@ const SurnameInput = ({style}) => {
                 name="surname"
                 placeholder="Apellido"
                 className="text-input"
+
                 style={style}
                 validators={{
                     required,
@@ -94,30 +96,47 @@ const SurnameInput = ({style}) => {
         </>
     )
 }
-const Input = ({style}) => {
+const FileInput = ({place ,style, name, value}) => {
     return(
         <>
 
             <Control.text
-                model=".text"
-                id="text"
-                name="text"
-                placeholder=""
+                model={"."+name}
+                id={name}
+                name={name}
+                placeholder={place}
+                type='file'
                 className="text-input"
                 style={style}
-                validators={{
-                    required,
-                    validEmail,
-                }}
+
             />
             <Errors
                 className="text-danger"
-                model=".email"
+                model={"."+name}
                 show="touched"
-                messages={{
-                    required: "Requerido",
-                    validEmail: " Email invalido",
-                }}
+            />
+
+        </>
+    )
+}
+const Input = ({place ,style, name, value}) => {
+    return(
+        <>
+
+            <Control.text
+                model={"."+name}
+                id={name}
+                name={name}
+                placeholder={place}
+                type="password"
+                className="text-input"
+                style={style}
+
+            />
+            <Errors
+                className="text-danger"
+                model={"."+name}
+                show="touched"
             />
 
         </>
@@ -180,7 +199,7 @@ const DateInput = ({style}) => {
         </>
     )
 }
-const SelectCountry = ({style}) => {
+const SelectCountry = ({style, value}) => {
     return(
         <>
 
@@ -196,7 +215,7 @@ const SelectCountry = ({style}) => {
                     required,
                 }}
                 >
-                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="" disabled selected>{value? value : 'Seleccione un pais'}</option>
                 {country_list.map((c)=>(<option value={c}>{c}</option>))}
             </Control.select>
             <Errors
