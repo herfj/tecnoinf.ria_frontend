@@ -1,31 +1,34 @@
 import React, {useState, useEffect} from "react";
 import './index.css'
 
-const UserIcon = ({name = '', img = null, size = 50, rounded = true}) => {
+const UserIcon = ({ height='auto', name = '', img = null, size = 50, rounded = true}) => {
     if (rounded) {
         return (
-            <div className={'icon'} style={{
-                height: size,
-                width: size,
-                borderRadius: size,
-            }}>
+        <>
+
                 {
                     img ? (
-                        <img src={img} alt={name} style={{
+                        <img className={'user-img'} src={img} alt={name} style={{
                             height: size,
                             width: size,
                             borderRadius: size,
                         }}/>
                     ) : (
+                        <div className={'icon'} style={{
+                            height: size,
+                            width: size,
+                            borderRadius: size,
+                        }}>
                         <p className="far fa-user"></p>
+                        </div>
                     )
                 }
-            </div>
+        </>
         )
     } else {
         return (
             <img className={'user-img'} src={img} alt={name} style={{
-                height: 'auto',
+                height: height,
                 width: size,
             }}/>
         )

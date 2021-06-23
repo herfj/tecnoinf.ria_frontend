@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Searchbar from '../searchbar/Searchbar'
 import './index.css'
 
-const Container =({children,searchbar=true,...props})=>(
+const Container =({style, children,searchbar=true,...props})=>(
     <main>
         {
             searchbar && <Searchbar/>

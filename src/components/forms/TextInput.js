@@ -41,6 +41,24 @@ const TextInput = ({
         </>
     )
 }
+const Checkbox = ({style, value}) =>{
+    return (
+        <>
+            <Control.text
+                model={"."+value}
+                id={'category'+value}
+                name={'category'+value}
+                value={value}
+                type='checkbox'
+                className="text-input"
+
+
+            />
+            <label style={style} htmlFor={value}>{value}</label>
+        </>
+    )
+}
+
 const FileInput = ({place ,style, name, value}) => {
     return(
         <>
@@ -174,4 +192,4 @@ const DateInput = ({style}) => {
     )
 }
 
-export {EmailInput, PwdInput, TextInput, DateInput, NameInput, SurnameInput, FileInput}
+export {EmailInput,Checkbox, PwdInput, TextInput, DateInput, NameInput, SurnameInput, FileInput}
