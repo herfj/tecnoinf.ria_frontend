@@ -25,10 +25,20 @@
     font-size: 25px;
 }
 
-.user-img{
-    height: 50px;
-    border-radius: 10px;
-    border: 1px solid #FF8585;
-    align-self: center;
-    font-size: 25px;
+
+.user-img {
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #FF8585;
 }
+
+.user-img img {
+    width: auto;
+    height: 100%;
+    margin-left: -50px;
+}
+

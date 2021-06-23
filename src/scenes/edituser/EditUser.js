@@ -50,7 +50,7 @@ const EditUser = ({user}) => {
                                         img={user.img}
                                         name={user.name}
                                         size={'70%'}
-                                        height={'70%'}
+                                        height={'auto'}
                                         rounded={true}
                                     /></div>
                                 <div style={{marginTop:'10%', display:"flex",justifyContent:"center"}}>

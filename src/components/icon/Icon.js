@@ -9,9 +9,9 @@ const UserIcon = ({ height='auto', name = '', img = null, size = 50, rounded = t
                 {
                     img ? (
                         <img className={'user-img'} src={img} alt={name} style={{
-                            height: size,
-                            width: size,
-                            borderRadius: size,
+                            // height: size,
+                            // width: size,
+                            // borderRadius: size,
                         }}/>
                     ) : (
                         <div className={'icon'} style={{
