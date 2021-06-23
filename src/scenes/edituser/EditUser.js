@@ -44,7 +44,7 @@ const EditUser = ({user}) => {
                     <div className={'edit-wrapper'}>
 
                         <div style={{display:"flex",justifyContent:"center",alignContent:"center"}} className={'image-edit'}>
-                            <div style={{display:"block"}}>
+                            <div style={{display:"flex", flexDirection: 'column', alignSelf: 'center'}}>
                                 <div style={{ display:"flex",justifyContent:"center"}}>
                                     <UserIcon
                                         img={user.img}
