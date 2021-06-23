@@ -97,23 +97,35 @@ const CreateProject = ({user}) => {
                             }}
                         />
                         <h4>Categorias:</h4>
+                        <div>
+                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
+                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
+                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
+                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
+                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
+                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
+                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
+                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
+                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
 
-                        <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                        <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                        <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                        <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                        <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                        <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                        <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                        <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                        <Checkbox style={{marginRight:'3%'}} value={"insta"} />
+                        </div>
 
+
+
+                        <ButtonLink
+                            styleType={'secondary'}
+                            type="button"
+                            to={'/home'}
+                            buttonStyle={{width: '45%',marginTop: 20, marginRight:'10%'}}
+                        >
+                            Volver
+                        </ButtonLink>
                         <Button
                             styleType={'primary'}
                             type="submit"
-                            style={{marginTop: 20}}
+                            style={{width: '45%',marginTop: 20}}
                         >
-                            Editar perfil
+                           Crear Proyecto
                         </Button>
                     </div>
 
