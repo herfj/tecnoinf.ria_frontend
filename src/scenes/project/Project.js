@@ -11,20 +11,68 @@ import {TagList, List, CategoryList} from "../../components/list/List";
 import {Comment, WriteComment} from "../../components/comment/Comment";
 import {Link} from "react-router-dom";
 
-// const ProjectHeader = ({project}) => {
-//
-//     return (
-//         <div
-//             className={'neutral-container'}
-//         >
-//             <h1>
-//                 {project.title}
-//             </h1>
-//
-//             {/*<img className={'p-img'} src={project.portada} alt=""/>*/}
-//         </div>
-//     )
-// }
+const ProjectInfo = ({project}) => {
+    const size = useWindowSize();
+    const followStyle = size.width > 1200 ? {width: '49.5%', marginRight: '0.5%',} : {marginBottom: 5}
+    const likeStyle = size.width > 1200 ? {width: '49.5%', marginLeft: '0.5%'} : {}
+    return (
+        <div
+            className={'neutral-container'}
+        >
+            <h2>Información general</h2>
+            <div className="p-data">
+                <div className="p-data-body">
+                    <div className="data">
+                        <p><strong>Autor:</strong> <Link to={'/profile'}>{project.author.nombre}</Link></p>
+                        <p><strong>Regíon:</strong> {project.author.ubicacion}</p>
+                        <p><strong>Herramientas:</strong> {project.herramientas}</p>
+                        <p><strong>Fecha publicación:</strong> {project.fecha}</p>
+                        <p style={{color: colors.secondary}}>
+                          <span style={{marginRight: 10,}}>
+
+                        <span style={{marginRight: 5}}>400</span><span className="far fa-thumbs-up"></span>
+                          </span>
+                            <span style={{marginRight: 5}}>400</span><span className="far fa-eye"></span>
+                        </p>
+                    </div>
+                    <div className="tag">
+                    </div>
+                    <div className="cat">
+                        <h4>Categorias</h4>
+                        <CategoryList
+                            columnStyle={{
+                                paddingLeft: 5,
+                                paddingRight: 5,
+                            }}
+                        />
+                    </div>
+                    <div className="footer">
+                        <Button styleType={'secondary'} style={{height: 40, ...followStyle}}>
+                            Seguir a {project.author.nombre}
+                            <span className="fas fa-user-plus" style={{marginLeft: 5}}></span>
+                        </Button>
+
+                        <Button styleType={'secondary'} style={{height: 40, ...likeStyle}}>
+                            Like
+                            <span style={{marginLeft: 5}} className="far fa-thumbs-up"></span>
+                        </Button>
+
+
+                    </div>
+                </div>
+            </div>
+            <h4>Tags</h4>
+            <TagList
+                columnStyle={{
+                    paddingLeft: 5,
+                    paddingRight: 5,
+                }}
+            />
+
+        </div>
+
+    )
+}
 
 const ContentImg = ({imgURL, alt}) => (
     <div className={'p-content'}>
@@ -149,71 +197,14 @@ const Project = ({}) => {
 
     }
 
-    const size = useWindowSize();
-    const followStyle = size.width > 1200 ? {width: '49.5%', marginRight: '0.5%',} : {marginBottom: 5}
-    const likeStyle = size.width > 1200 ? {width: '49.5%', marginLeft: '0.5%'} : {}
     return (
         <Container
             searchbar={false}
         >
-            {/*<ProjectHeader*/}
-            {/*    project={project}*/}
-            {/*/>*/}
             <ProjectContent/>
-            <div
-                className={'neutral-container'}
-            >
-                <h2>Información general</h2>
-                <div className="p-data">
-                    <div className="p-data-body">
-                        <div className="data">
-                            <p><strong>Autor:</strong> <Link to={'/profile'}>{project.author.nombre}</Link></p>
-                            <p><strong>Regíon:</strong> {project.author.ubicacion}</p>
-                            <p><strong>Herramientas:</strong> {project.herramientas}</p>
-                            <p><strong>Fecha publicación:</strong> {project.fecha}</p>
-                            <p style={{color: colors.secondary}}>
-                          <span style={{marginRight: 10,}}>
-
-                        <span style={{marginRight: 5}}>400</span><span className="far fa-thumbs-up"></span>
-                          </span>
-                                <span style={{marginRight: 5}}>400</span><span className="far fa-eye"></span>
-                            </p>
-                        </div>
-                        <div className="tag">
-                        </div>
-                        <div className="cat">
-                            <h4>Categorias</h4>
-                            <CategoryList
-                                columnStyle={{
-                                    paddingLeft: 5,
-                                    paddingRight: 5,
-                                }}
-                            />
-                        </div>
-                        <div className="footer">
-                            <Button styleType={'secondary'} style={{height: 40, ...followStyle}}>
-                                Seguir a {project.author.nombre}
-                                <span className="fas fa-user-plus" style={{marginLeft: 5}}></span>
-                            </Button>
-
-                            <Button styleType={'secondary'} style={{height: 40, ...likeStyle}}>
-                                Like
-                                <span style={{marginLeft: 5}} className="far fa-thumbs-up"></span>
-                            </Button>
-
-
-                        </div>
-                    </div>
-                </div>
-                <h4>Tags</h4>
-                <TagList
-                    columnStyle={{
-                        paddingLeft: 5,
-                        paddingRight: 5,
-                    }}
-                />
-
-            </div>
+            <ProjectInfo
+                project={project}
+            />
             <ProjectComment/>
         </Container>
     )
