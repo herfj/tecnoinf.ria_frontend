@@ -64,5 +64,8 @@ export default {
     login(data) {
       return axios.post(API_URL + '/api/v1/auth/sign_in', data)
     },
+      signout(data) {
+      return axios.post(API_URL + '/api/v1/auth/sign_out', data)
+    },
   },
 }

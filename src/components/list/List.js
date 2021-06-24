@@ -99,20 +99,17 @@ const TagList = ({style, columnStyle}) => {
     ]
 
     return (
-        <List
-            responsive={false}
-            style={style}
-            columnStyle={columnStyle}
-            list={list.map((o) => (
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+            {list.map((o) => (
                 <Button
                     disabled
                     styleType={'outline'}
                     children={o}
                     style={{
-                        marginBottom: 5
+                        marginRight: 5
                     }}/>
             ))}
-        />
+        </div>
     )
 }
 

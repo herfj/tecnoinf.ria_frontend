@@ -3,7 +3,7 @@ import {MessIcon} from "../icon/Icon";
 import './index.css'
 import {Link} from "react-router-dom";
 import {Button} from "../button/Button";
-import {TextInput} from "../forms/TextInput";
+import {EmailInput, TextInput} from "../forms/TextInput";
 import {SelectCountry} from "../forms/Select";
 import {Control, LocalForm, Errors} from "react-redux-form";
 import {required} from "../../helpers/formValidator";
@@ -59,8 +59,8 @@ const ShowMessage = ({subject, mess, date, sendByMe = false, backButton}) => {
                 <LocalForm
                     onSubmit={(values) => handleSubmit(values)}
                 >
-                    <textarea></textarea>
 
+                    <TextArea></TextArea>
                     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
                         {backButton}
                         <Button
@@ -85,8 +85,8 @@ const WriteMessage = ({backButton}) => {
             onSubmit={(values) => handleSubmit(values)}
         >
             <p><strong>Para:</strong></p>
-            <SelectCountry/>
-
+            {/*<SelectCountry/>*/}
+            <EmailInput/>
             <p><strong>Asunto:</strong></p>
             <TextInput
                 model=".subject"
@@ -125,4 +125,5 @@ const WriteMessage = ({backButton}) => {
         </LocalForm>
     )
 }
+
 export {MessageItem, ShowMessage, WriteMessage}

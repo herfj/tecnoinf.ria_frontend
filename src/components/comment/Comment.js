@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import './index.css'
 import {UserIcon} from "../icon/Icon";
 import {Button} from "../button/Button";
+import TextArea from "../forms/TextArea";
 
 const Comment = ({}) => {
     return (
@@ -36,8 +37,8 @@ const WriteComment = ({}) => {
             </div>
             <div className={'c-mess'}>
                 <strong style={{marginBottom: 10}}>Comentario: </strong>
-                <textarea placeholder={'Escriba aquí su comentario...'} rows={4}>
-                </textarea>
+
+                <TextArea></TextArea>
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Button
                         type={'primary'}

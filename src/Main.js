@@ -7,7 +7,7 @@ import Explorer from "./scenes/explorer/Explorer";
 import Project from "./scenes/project/Project";
 import Profile from "./scenes/profile/Profile";
 import Login from "./scenes/login/Login";
-import {Message,Messages, NewMessage} from "./scenes/messages/Messages";
+import {Message,Messages,NewMessage} from "./scenes/messages/Messages";
 import Register from "./scenes/register/Register";
 import EditUser from "./scenes/edituser/EditUser";
 import CreateProject from "./scenes/project/CreateProject";
