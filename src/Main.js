@@ -10,7 +10,7 @@ import Login from "./scenes/login/Login";
 import {Message,Messages,NewMessage} from "./scenes/messages/Messages";
 import Register from "./scenes/register/Register";
 import EditUser from "./scenes/edituser/EditUser";
-import CreateProject from "./scenes/project/CreateProject";
+import CreateProject from "./scenes/createProject/CreateProject";
 
 const home = ()=>(
     <Home/>
@@ -84,7 +84,7 @@ class Main extends Component {
                     <Route path="/messages/new" component={newMessage}/>
                     <Route path="/messages/:messId" component={message}/>
                     <Route path="/login" component={login}/>i
-                    <Route path="/createproject" component={createProject}/>i
+                    <Route path="/create_project" component={createProject}/>i
                     <Route path="/register" component={register}/>i
                     <Route path="/edituser/:userId" component={editUser}/>i
                     <Redirect to="/home"/>

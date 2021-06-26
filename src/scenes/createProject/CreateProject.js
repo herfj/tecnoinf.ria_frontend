@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import './index.css'
+import '../project/index.css'
 import {Button, ButtonLink} from "../../components/button/Button";
 
 import {EmailInput, PwdInput, DateInput, NameInput, SurnameInput ,Checkbox, FileInput} from "../../components/forms/TextInput";
@@ -113,10 +113,10 @@ const CreateProject = ({user}) => {
 
 
                         <ButtonLink
-                            styleType={'secondary'}
+                            styleType={'outline'}
                             type="button"
                             to={'/home'}
-                            buttonStyle={{width: '45%',marginTop: 20, marginRight:'10%'}}
+                            buttonStyle={{width: '45%',height:45,marginTop: 20, marginRight:'10%'}}
                         >
                             Volver
                         </ButtonLink>
