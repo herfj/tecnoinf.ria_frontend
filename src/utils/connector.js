@@ -39,6 +39,7 @@ const mapStateToProps = (state) => ({ state })
 const mapDispatchToProps = (dispatch) => {
   const actionList = [
     { label: 'app', value: appActions },
+
   ]
 
   return {

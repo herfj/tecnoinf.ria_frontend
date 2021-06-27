@@ -4,12 +4,27 @@ import {Button, ButtonLink} from "../../components/button/Button";
 import {EmailInput, PwdInput} from "../../components/forms/TextInput";
 import {Form, actions} from "react-redux-form";
 import {Link} from "react-router-dom";
+import Connector from "../../utils/connector";
+import { useHistory } from "react-router-dom";
 
-const Login = ({}) => {
+const Login = ({actions, loggedUser, actionResponse}) => {
+    const history = useHistory();
+
+useEffect(()=>{
+        if (actionResponse.isError){
+            alert('hijo de tu puta madre pone las cosas bien');
+        }
+
+    },[actionResponse.isError]);
+useEffect(()=>{
+    if (loggedUser){
+        history.push("/home");
+    }
+},[loggedUser])
 
     const handleSubmit = (values) => {
         console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
+        actions.app.authenticate(values.email,values.pwd);
         //this.props.resetFeedbackForm();
         // event.preventDefault();
         // this.props.postFeedback(
@@ -62,4 +77,12 @@ const Login = ({}) => {
     )
 }
 
-export default Login;
+export default (props) => (
+    <Connector>
+        {({ actions, state: { app } }) => {
+            return (
+                <Login actions={actions}  {...app} {...props} />
+            )
+        }}
+    </Connector>
+)

@@ -7,13 +7,21 @@ import {responseErrors} from '../helpers/handleErrors'
 
 const LOGGED_IN = 'LOGGED_IN'
 const LOADING = 'LOADING'
+const ACTION_RESPONSE = 'ACTION_RESPONSE'
 
+const initialActionResponse = {
+    isError: false,
+    title: '',
+    message: '',
+    backToHome: false,
+}
 
 const initialState = {
     checked: false,
     loggedIn: false,
     isLoading: false,
-    user: null,
+    loggedUser: null,
+    actionResponse: initialActionResponse,
 }
 
 // ------------------------------------
@@ -31,6 +39,10 @@ export const authenticate = (email, pass) => {
             type: LOADING,
             isLoading: true,
         })
+        dispatch({
+            type: ACTION_RESPONSE,
+            actionResponse: initialActionResponse,
+        })
         services.auth.login(data)
             .then(async (response) => {
 
@@ -38,12 +50,13 @@ export const authenticate = (email, pass) => {
                     type: LOGGED_IN,
                     loggedIn: true,
                     checked: true,
-                    user: response.data.data,
+                    loggedUser: response.data,
                 })
                 dispatch({
                     type: LOADING,
                     isLoading: false,
                 })
+
             })
             .catch((error) => {
                 error.message = responseErrors(error)
@@ -51,7 +64,15 @@ export const authenticate = (email, pass) => {
                     type: LOADING,
                     isLoading: false,
                 })
-
+                dispatch({
+                    type: ACTION_RESPONSE,
+                    actionResponse: {
+                        isError: true,
+                        title: '',
+                        message: error.message,
+                        backToHome: false,
+                    },
+                })
             })
     }
 }
@@ -72,15 +93,19 @@ export const actions = {
 // ------------------------------------
 
 const ACTION_HANDLERS = {
-    [LOGGED_IN]: (state, {loggedIn, checked, user}) => ({
+    [LOGGED_IN]: (state, {loggedIn, checked, loggedUser}) => ({
         ...state,
         loggedIn,
         checked,
-        user,
+        loggedUser,
     }),
     [LOADING]: (state, {isLoading}) => ({
         ...state,
         isLoading,
+    }),
+    [ACTION_RESPONSE]: (state, {actionResponse}) => ({
+        ...state,
+        actionResponse,
     }),
 }
 
