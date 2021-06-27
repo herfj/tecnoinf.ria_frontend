@@ -1,0 +1,26 @@
+.page-index{
+    background: whitesmoke;
+    align-self: center;
+    display: grid;
+    width: 100%;
+    box-sizing: border-box;
+    grid-template-areas: "img texto delete";
+    grid-template-columns: 25% 67% 5%;
+    border-radius: 10px;
+}
+.page-image{
+    grid-area: img;
+}
+.page-text{
+    margin-left: 2%;
+    grid-area: texto;
+}
+.page-delete{
+    grid-area: delete;
+}
+.page-img{
+    width: 100%;
+    border: 1px solid #FF8585;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
