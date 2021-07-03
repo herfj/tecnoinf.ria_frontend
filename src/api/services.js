@@ -1,6 +1,10 @@
 import axiosHttp from 'axios'
 import { API_URL } from '../config/api_config'
 
+const headers = {
+  'Content-Type': 'application/json'
+}
+
 const axios = axiosHttp.create({ timeout: 30000 })
 
 const buildPaginationData = (path, paginationData) => {
@@ -24,14 +28,15 @@ const buildPaginationData = (path, paginationData) => {
 export default {
   auth: {
     login(data) {
-      return axios.get(API_URL + '/users/'+data.email, data)
+      console.log('coso a mandar', data)
+      return axios.post(API_URL + '/api/usuarios/Log',data, {
+        headers: headers
+      })
     },
     signUp(data) {
         console.log('coso a mandar', data)
       return axios.post(API_URL + '/api/usuarios/CreateUsuario', data,{
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: headers
       })
     },
     sign_out(data) {

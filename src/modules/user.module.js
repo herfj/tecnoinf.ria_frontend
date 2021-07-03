@@ -28,12 +28,11 @@ export const authenticate = (email, pass) => {
         })
         services.auth.login(data)
             .then(async (response) => {
-
                 dispatch({
                     type: LOGGED_IN,
                     loggedIn: true,
                     checked: true,
-                    user: response.data.data,
+                    user: response.data,
                 })
                 dispatch({
                     type: LOADING,
@@ -41,7 +40,8 @@ export const authenticate = (email, pass) => {
                 })
             })
             .catch((error) => {
-                error.message = responseErrors(error)
+                console.log(error.message)
+                // error.message = responseErrors(error)
                 dispatch({
                     type: LOADING,
                     isLoading: false,

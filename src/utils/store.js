@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import app from '../modules/app.module'
 import {createForms} from "react-redux-form";
-import {InitialLogin, InitialRegister} from "../modules/forms";
+import {InitialLogin, InitialRegister} from "../modules/form.module";
 
 const analytics = () => (next) => (action) => {
   window.dataLayer = window.dataLayer || []

@@ -1,6 +1,6 @@
 import services from '../api/services'
 import {responseErrors} from '../helpers/handleErrors'
-import {validateSignUpUser} from "../helpers/validations";
+import {validateLogin, validateSignUpUser} from "../helpers/validations";
 
 // ------------------------------------
 // Constants
@@ -30,8 +30,8 @@ const initialState = {
 // TODO: check the user's login state
 export const authenticate = (email, pass) => {
     const data = {
-        email: email,
-        password: pass,
+        Email: email,
+        Password: pass,
     }
     return (dispatch) => {
         dispatch({
@@ -42,42 +42,46 @@ export const authenticate = (email, pass) => {
             type: ACTION_RESPONSE,
             actionResponse: initialActionResponse,
         })
-        services.auth.login(data)
-            .then(async (response) => {
-                dispatch({
-                    type: LOGGED_IN,
-                    loggedIn: true,
-                    checked: true,
-                    loggedUser: response.data,
-                })
-                dispatch({
-                    type: LOADING,
-                    isLoading: false,
-                })
+        const loginData = validateLogin(email,pass)
+        if (loginData) {
+            services.auth.login(loginData)
+                .then(async (response) => {
+                    dispatch({
+                        type: LOGGED_IN,
+                        loggedIn: true,
+                        checked: true,
+                        loggedUser: response.data,
+                    })
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
 
-            })
-            .catch((error) => {
-                error.message = responseErrors(error)
-                dispatch({
-                    type: LOGGED_IN,
-                    loggedIn: false,
-                    checked: false,
-                    loggedUser: null,
                 })
-                dispatch({
-                    type: LOADING,
-                    isLoading: false,
+                .catch((error) => {
+                    error.message = responseErrors(error)
+                    console.log(error.message)
+                    dispatch({
+                        type: LOGGED_IN,
+                        loggedIn: false,
+                        checked: false,
+                        loggedUser: null,
+                    })
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                    dispatch({
+                        type: ACTION_RESPONSE,
+                        actionResponse: {
+                            isError: true,
+                            title: '',
+                            message: error.message,
+                            backToHome: false,
+                        },
+                    })
                 })
-                dispatch({
-                    type: ACTION_RESPONSE,
-                    actionResponse: {
-                        isError: true,
-                        title: '',
-                        message: error.message,
-                        backToHome: false,
-                    },
-                })
-            })
+        }
     }
 }
 
@@ -86,6 +90,10 @@ export const signUp = ({newUser, isLoading = true}) => {
         dispatch({
             type: LOADING,
             isLoading: isLoading,
+        })
+        dispatch({
+            type: ACTION_RESPONSE,
+            actionResponse: initialActionResponse,
         })
         const user = validateSignUpUser(newUser)
         if (user) {
@@ -114,6 +122,15 @@ export const signUp = ({newUser, isLoading = true}) => {
                     dispatch({
                         type: LOADING,
                         isLoading: false,
+                    })
+                    dispatch({
+                        type: ACTION_RESPONSE,
+                        actionResponse: {
+                            isError: true,
+                            title: '',
+                            message: error.message,
+                            backToHome: false,
+                        },
                     })
 
                 })

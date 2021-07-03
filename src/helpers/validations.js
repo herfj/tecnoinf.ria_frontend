@@ -51,3 +51,27 @@ export const validateSignUpUser = (possibleUser) => {
         return user
     }
 }
+
+export const validateLogin = (email, pass)=>{
+    let loginData = {
+        Email: '',
+        Password: '',
+    };
+    let errorValidated = false
+
+    if (isString(email)) {
+        loginData.Email = email;
+    } else {
+        errorValidated = true
+    }
+    if (isString(pass)) {
+        loginData.Password = pass;
+    } else {
+        errorValidated = true
+    }
+    if(errorValidated){
+        return false
+    }else{
+        return loginData
+    }
+}

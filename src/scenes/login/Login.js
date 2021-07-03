@@ -12,7 +12,7 @@ const Login = ({actions, loggedUser, actionResponse}) => {
 
 useEffect(()=>{
         if (actionResponse.isError){
-            alert('hijo de tu puta madre pone las cosas bien');
+            alert('Los datos no son correctos!');
         }
 
     },[actionResponse.isError]);
@@ -24,7 +24,7 @@ useEffect(()=>{
 
     const handleSubmit = (values) => {
         console.log("Current State is: " + JSON.stringify(values));
-        actions.app.authenticate(values.email,values.pwd);
+        actions.app.authenticate(values.Email,values.Password);
         //this.props.resetFeedbackForm();
         // event.preventDefault();
         // this.props.postFeedback(

@@ -1,6 +1,6 @@
 export const InitialLogin = {
-	email: "",
-	pwd: "",
+	Email: "",
+	Password: "",
 };
 export const InitialRegister = {
 	Nombre: '',
