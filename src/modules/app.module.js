@@ -1,5 +1,6 @@
 import services from '../api/services'
 import {responseErrors} from '../helpers/handleErrors'
+import {validateSignUpUser} from "../helpers/validations";
 
 // ------------------------------------
 // Constants
@@ -10,10 +11,8 @@ const LOADING = 'LOADING'
 
 
 const initialState = {
-    checked: false,
-    loggedIn: false,
     isLoading: false,
-    user: null,
+    loggedUser: null,
 }
 
 // ------------------------------------
@@ -33,12 +32,11 @@ export const authenticate = (email, pass) => {
         })
         services.auth.login(data)
             .then(async (response) => {
-
                 dispatch({
                     type: LOGGED_IN,
                     loggedIn: true,
                     checked: true,
-                    user: response.data.data,
+                    loggedUser: response.data,
                 })
                 dispatch({
                     type: LOADING,
@@ -48,11 +46,62 @@ export const authenticate = (email, pass) => {
             .catch((error) => {
                 error.message = responseErrors(error)
                 dispatch({
+                    type: LOGGED_IN,
+                    loggedIn: false,
+                    checked: false,
+                    loggedUser: null,
+                })
+                dispatch({
                     type: LOADING,
                     isLoading: false,
                 })
 
             })
+    }
+}
+
+export const signUp = ({newUser, isLoading = true}) => {
+    return (dispatch) => {
+        dispatch({
+            type: LOADING,
+            isLoading: isLoading,
+        })
+        const user = validateSignUpUser(newUser)
+        if (user) {
+            services.auth.signUp(user)
+                .then(async (response) => {
+                    dispatch({
+                        type: LOGGED_IN,
+                        loggedIn: true,
+                        checked: true,
+                        loggedUser: response.data,
+                    })
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                })
+                .catch((error) => {
+                    // error.message = responseErrors(error)
+                    console.log('ERROR:',error)
+                    dispatch({
+                        type: LOGGED_IN,
+                        loggedIn: false,
+                        checked: false,
+                        loggedUser: null,
+                    })
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+
+                })
+        } else {
+            dispatch({
+                type: LOADING,
+                isLoading: false,
+            })
+        }
     }
 }
 
@@ -64,6 +113,7 @@ export const isLoading = (isLoading) => (dispatch) =>
 
 export const actions = {
     authenticate,
+    signUp,
     isLoading,
 }
 
@@ -72,11 +122,11 @@ export const actions = {
 // ------------------------------------
 
 const ACTION_HANDLERS = {
-    [LOGGED_IN]: (state, {loggedIn, checked, user}) => ({
+    [LOGGED_IN]: (state, {loggedIn, checked, loggedUser}) => ({
         ...state,
         loggedIn,
         checked,
-        user,
+        loggedUser,
     }),
     [LOADING]: (state, {isLoading}) => ({
         ...state,

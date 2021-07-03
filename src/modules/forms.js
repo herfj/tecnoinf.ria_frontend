@@ -3,10 +3,10 @@ export const InitialLogin = {
 	pwd: "",
 };
 export const InitialRegister = {
-	email: "",
-	pwd: "",
-	name: "",
-	surname: "",
-	date: "",
-	country: "",
+	Nombre: '',
+	Apellido: '',
+	Email: '',
+	Password: '',
+	Pais: '',
+	Fecha_nac: '',
 };

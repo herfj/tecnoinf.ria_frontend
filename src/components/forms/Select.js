@@ -49,9 +49,9 @@ const SelectCountry = ({style}) => {
     return (
             <Select
                 list={country_list}
-                model=".country"
-                id="country"
-                name="country"
+                model=".Pais"
+                id="Pais"
+                name="Pais"
                 placeholder="Pais de nacimiento"
                 style={style}
                 validators={{

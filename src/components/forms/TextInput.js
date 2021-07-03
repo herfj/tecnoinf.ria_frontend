@@ -87,9 +87,9 @@ const EmailInput = ({style}) => {
     return (
         <>
             <TextInput
-                model=".email"
-                id="email"
-                name="email"
+                model=".Email"
+                id="Email"
+                name="Email"
                 placeholder="Email"
                 className="input"
                 style={style}
@@ -103,7 +103,7 @@ const EmailInput = ({style}) => {
             />
             <Errors
                 className="text-danger"
-                model=".email"
+                model=".Email"
                 show="touched"
                 messages={{
                     validEmail: "Email invalido",
@@ -116,9 +116,9 @@ const EmailInput = ({style}) => {
 const NameInput = ({style}) => {
     return (
         <TextInput
-            model=".name"
-            id="name"
-            name="name"
+            model=".Nombre"
+            id="Nombre"
+            Name="Nombre"
             placeholder="Nombre"
             className="input"
             style={style}
@@ -135,9 +135,9 @@ const NameInput = ({style}) => {
 const SurnameInput = ({style}) => {
     return (
         <TextInput
-            model=".surname"
-            id="surname"
-            name="surname"
+            model=".Apellido"
+            id="Apellido"
+            name="Apellido"
             placeholder="Apellido"
             className="input"
             style={style}
@@ -154,9 +154,9 @@ const SurnameInput = ({style}) => {
 const PwdInput = ({style}) => {
     return (
         <TextInput
-            model=".pwd"
-            id="pwd"
-            name="pwd"
+            model=".Password"
+            id="Password"
+            name="Password"
             type="password"
             placeholder="Contraseña"
             className="input"
@@ -171,14 +171,20 @@ const PwdInput = ({style}) => {
     )
 }
 
-const DateInput = ({style}) => {
+const DateInput = ({
+                       model = ".date",
+                       id = "date",
+                       name = "date",
+                       placeholder = "Fecha",
+                       className = "input",
+                       style}) => {
     return (
         <TextInput
-            model=".date"
-            id="date"
-            name="date"
-            placeholder="Fecha de nacimiento"
-            className="input"
+            model={model}
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            className={className}
             type="date"
             style={style}
             validators={{

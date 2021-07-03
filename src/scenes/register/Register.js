@@ -5,23 +5,14 @@ import {EmailInput, PwdInput,  DateInput, NameInput, SurnameInput} from "../../c
 import {SelectCountry} from "../../components/forms/Select";
 import {Form, actions} from "react-redux-form";
 import {Link} from "react-router-dom";
+import Connector from "../../utils/connector";
 
-const Register = ({}) => {
+const Register = ({loggedUser,actions}) => {
 
     const handleSubmit = (values) => {
         console.log("Current State is: " + JSON.stringify(values));
         alert("Current State is: " + JSON.stringify(values));
-        //this.props.resetFeedbackForm();
-        // event.preventDefault();
-        // this.props.postFeedback(
-        //     values.firstname,
-        //     values.lastname,
-        //     values.telnum,
-        //     values.email,
-        //     values.agree,
-        //     values.contactType,
-        //     values.messages
-        // );
+        actions.app.signUp({newUser: values})
     }
 
     return (
@@ -55,7 +46,11 @@ const Register = ({}) => {
                             </div>
                         </div>
                         <PwdInput style={{marginTop:12}}/>
-                        <DateInput style={{marginTop:12}}/>
+                        <DateInput
+                            model={'.Fecha_nac'}
+                            id={'Fecha_nac'}
+                            name={'Fecha_nac'}
+                            style={{marginTop:12}}/>
                         <SelectCountry style={{marginTop:12}}/>
                         <Button
                             styleType={'primary'}
@@ -73,4 +68,13 @@ const Register = ({}) => {
     )
 }
 
-export default Register;
+
+export default (props) => (
+    <Connector>
+        {({ actions, state: { app } }) => {
+            return (
+                <Register actions={actions}  {...app} {...props} />
+            )
+        }}
+    </Connector>
+)
