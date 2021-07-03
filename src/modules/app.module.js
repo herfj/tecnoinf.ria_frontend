@@ -8,11 +8,19 @@ import {validateSignUpUser} from "../helpers/validations";
 
 const LOGGED_IN = 'LOGGED_IN'
 const LOADING = 'LOADING'
+const ACTION_RESPONSE = 'ACTION_RESPONSE'
 
+const initialActionResponse = {
+    isError: false,
+    title: '',
+    message: '',
+    backToHome: false,
+}
 
 const initialState = {
     isLoading: false,
     loggedUser: null,
+    actionResponse: initialActionResponse,
 }
 
 // ------------------------------------
@@ -30,6 +38,10 @@ export const authenticate = (email, pass) => {
             type: LOADING,
             isLoading: true,
         })
+        dispatch({
+            type: ACTION_RESPONSE,
+            actionResponse: initialActionResponse,
+        })
         services.auth.login(data)
             .then(async (response) => {
                 dispatch({
@@ -42,6 +54,7 @@ export const authenticate = (email, pass) => {
                     type: LOADING,
                     isLoading: false,
                 })
+
             })
             .catch((error) => {
                 error.message = responseErrors(error)
@@ -55,7 +68,15 @@ export const authenticate = (email, pass) => {
                     type: LOADING,
                     isLoading: false,
                 })
-
+                dispatch({
+                    type: ACTION_RESPONSE,
+                    actionResponse: {
+                        isError: true,
+                        title: '',
+                        message: error.message,
+                        backToHome: false,
+                    },
+                })
             })
     }
 }
@@ -131,6 +152,10 @@ const ACTION_HANDLERS = {
     [LOADING]: (state, {isLoading}) => ({
         ...state,
         isLoading,
+    }),
+    [ACTION_RESPONSE]: (state, {actionResponse}) => ({
+        ...state,
+        actionResponse,
     }),
 }
 

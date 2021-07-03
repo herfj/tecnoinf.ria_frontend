@@ -11,6 +11,7 @@ import {Message,Messages,NewMessage} from "./scenes/messages/Messages";
 import Register from "./scenes/register/Register";
 import EditUser from "./scenes/edituser/EditUser";
 import CreateProject from "./scenes/createProject/CreateProject";
+import EditPort from "./scenes/portfolio/EditPort";
 
 const home = ()=>(
     <Home/>
@@ -66,6 +67,9 @@ const register = () =>(
 const createProject = () =>(
     <CreateProject/>
 )
+const editPort = ({match})=>(
+    <EditPort id={match.params.portId}/>
+)
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -87,6 +91,7 @@ class Main extends Component {
                     <Route path="/create_project" component={createProject}/>i
                     <Route path="/register" component={register}/>i
                     <Route path="/edituser/:userId" component={editUser}/>i
+                    <Route path="/editproject/:portId" component={editPort}/>i
                     <Redirect to="/home"/>
                 </Switch>
             </div>
