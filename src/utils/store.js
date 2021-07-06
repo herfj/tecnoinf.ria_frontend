@@ -4,6 +4,7 @@ import {
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import app from '../modules/app.module'
+import messages from '../modules/message.module'
 import {createForms} from "react-redux-form";
 import {InitialLogin, InitialRegister} from "../modules/form.module";
 
@@ -21,6 +22,7 @@ const analytics = () => (next) => (action) => {
 const configureStore = (initialState = {}) => {
   const reducers = combineReducers({
     app,
+    messages,
     ...createForms({ login: InitialLogin, register: InitialRegister }),
   })
 

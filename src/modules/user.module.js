@@ -16,43 +16,8 @@ const initialState = {
 // ------------------------------------
 
 // TODO: check the user's login state
-export const authenticate = (email, pass) => {
-    const data = {
-        email: email,
-        password: pass,
-    }
-    return (dispatch) => {
-        dispatch({
-            type: LOADING,
-            isLoading: true,
-        })
-        services.auth.login(data)
-            .then(async (response) => {
-                dispatch({
-                    type: LOGGED_IN,
-                    loggedIn: true,
-                    checked: true,
-                    user: response.data,
-                })
-                dispatch({
-                    type: LOADING,
-                    isLoading: false,
-                })
-            })
-            .catch((error) => {
-                console.log(error.message)
-                // error.message = responseErrors(error)
-                dispatch({
-                    type: LOADING,
-                    isLoading: false,
-                })
-
-            })
-    }
-}
 
 export const actions = {
-    authenticate,
 }
 
 // ------------------------------------
@@ -60,12 +25,6 @@ export const actions = {
 // ------------------------------------
 
 const ACTION_HANDLERS = {
-    [LOGGED_IN]: (state, {loggedIn, checked, user}) => ({
-        ...state,
-        loggedIn,
-        checked,
-        user,
-    }),
     [LOADING]: (state, {isLoading}) => ({
         ...state,
         isLoading,

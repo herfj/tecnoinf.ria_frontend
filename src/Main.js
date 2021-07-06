@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import Connector from "./utils/connector";
 import {Switch, Route, Redirect} from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
@@ -7,7 +7,9 @@ import Explorer from "./scenes/explorer/Explorer";
 import Project from "./scenes/project/Project";
 import Profile from "./scenes/profile/Profile";
 import Login from "./scenes/login/Login";
-import {Message,Messages,NewMessage} from "./scenes/messages/Messages";
+import Messages from "./scenes/messages/Messages";
+import Message from "./scenes/message/Message";
+import NewMessage from "./scenes/newMessage/NewMessage";
 import Register from "./scenes/register/Register";
 import EditUser from "./scenes/edituser/EditUser";
 import CreateProject from "./scenes/createProject/CreateProject";
@@ -70,12 +72,12 @@ const createProject = () =>(
 const editPort = ({match})=>(
     <EditPort id={match.params.portId}/>
 )
-class Main extends Component {
-    constructor(props) {
-        super(props);
-    }
+const Main = ({actions})=>{
 
-    render() {
+    useEffect(()=>{
+       actions.app.validate()
+    },[])
+
         return (
             <div>
                 <Navbar/>
@@ -96,7 +98,7 @@ class Main extends Component {
                 </Switch>
             </div>
         );
-    }
+
 }
 
 export default (props) => (

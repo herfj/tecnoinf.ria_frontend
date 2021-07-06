@@ -1,27 +1,34 @@
-import React, {Component, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Container from "../../components/container/Container";
-import {CategoryList, ProjectList, TagList, MessList} from "../../components/list/List";
-import colors from "../../theme/colors";
-import {ButtonLink, Button} from "../../components/button/Button";
+import { MessList} from "../../components/list/List";
+import {ButtonLink, } from "../../components/button/Button";
 import './index.css'
-import {MessageItem, ShowMessage, WriteMessage} from "../../components/message/Message";
+import {MessageItem} from "../../components/message/Message";
 import {useWindowSize} from "../../helpers/useWindowSize";
+import Connector from "../../utils/connector";
 
-const Messages = ({}) => {
+const Messages = ({actions,isLoading,loggedUser,inbox,sent}) => {
     const size = useWindowSize()
-
     const [active, setActive] = useState("Recibidos")
-    const recibidos = () => (<MessList list={[
+
+    useEffect(()=>{
+        if(loggedUser!==null){
+            actions.messages.getInbox(loggedUser.Email)
+        }
+    },[loggedUser])
+
+    const handleInboxList = () => (inbox !== null ? inbox.map((msg)=>(
         <MessageItem
-            to={'/messages/1'}
-            mess={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque a egestas quam, quis consequat augue. Etiam at fringilla nulla. In hac habitasse platea dictumst. Mauris vitae augue eu eros'}
-            open={true}
-        />,
-        <MessageItem
-            to={'/messages/2'}
-            mess={'holaj asdf asdf'}
+            to={'/messages/'+msg.ID}
+            mess={msg.Cuerpo}
+            open={msg.Visto}
         />
-    ]}/>)
+    )) : [])
+    const [inboxList, setInboxList] = useState(handleInboxList())
+    useEffect(()=>{
+        setInboxList(handleInboxList())
+    },[inbox])
+
 
     const enviados = () => (<MessList list={[
         <MessageItem
@@ -71,7 +78,7 @@ const Messages = ({}) => {
 
                             <div style={{width: '50%', marginRight: 10, marginLeft: 0}}>
                                 <h2>Recibidos</h2>
-                                {recibidos()}
+                                <MessList list={inboxList}/>
                             </div>
                             <div style={{width: '50%', marginRight: 0, marginLeft: 10}}>
                                 <h2>Enviados</h2>
@@ -97,9 +104,7 @@ const Messages = ({}) => {
                             </div>
                             {
                                 active === "Recibidos" ? (
-                                    <>
-                                        {recibidos()}
-                                    </>
+                                        <MessList list={inboxList}/>
                                 ) : (
                                     <>
                                         {enviados()}
@@ -114,56 +119,12 @@ const Messages = ({}) => {
     )
 }
 
-const Message = ({id}) => {
-    return (
-        <Container
-            searchbar={false}
-        >
-            <div className={'neutral-container'}>
-
-                <ShowMessage
-                    sendByMe={false}
-                    subject={'Asunto muy importante'}
-                    date={'02/03/2021'}
-                    mess={'HOla tomi adfsdfas ddafsdfas dfsadfdfsafdas dfasdfas adfs'}
-                    backButton={(
-                        <ButtonLink
-                            to={'/messages'}
-                            style={{width: 160, height: 45}}
-                            buttonStyle={{width: 160, height: 45}}
-                            styleType={'outline'}
-                        >
-                            <span class="fas fa-chevron-left" style={{marginRight: 5}}></span>
-                            Volver al listado
-                        </ButtonLink>)}
-                />
-
-            </div>
-        </Container>
-    )
-}
-
-const NewMessage = () => {
-    return (
-        <Container
-            searchbar={false}
-        >
-            <div className={'neutral-container'}>
-                <WriteMessage
-                    backButton={(
-                        <ButtonLink
-                            to={'/messages'}
-                            style={{width: 160, height: 45}}
-                            buttonStyle={{width: 160, height: 45}}
-                            styleType={'outline'}
-                        >
-                            <span class="fas fa-chevron-left" style={{marginRight: 5}}></span>
-                            Volver al listado
-                        </ButtonLink>)}
-                />
-            </div>
-        </Container>
-    )
-}
-
-export {Message, Messages, NewMessage};
+export default (props) => (
+    <Connector>
+        {({actions, state: {app,messages}}) => {
+            return (
+                <Messages actions={actions} {...app} {...messages}   {...props} />
+            )
+        }}
+    </Connector>
+)

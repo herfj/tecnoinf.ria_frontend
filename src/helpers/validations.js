@@ -1,6 +1,47 @@
 const isString = (str) => {
     return (typeof str === 'string' || str instanceof String)
 }
+const isBoolean = (boo) => {
+    return (typeof boo === 'boolean' || boo instanceof Boolean)
+}
+
+export const validateMess = (message) =>{
+    let msg = {
+        Fecha: Date.now(),
+        Cuerpo:'',
+        Visto:'',
+        Emisor:'',
+        Remitente:'',
+    }
+    let errorValidated =false;
+    if(isString(message.Cuerpo)){
+        msg.Cuerpo = message.Cuerpo;
+    }else{
+       errorValidated = true;
+    }
+    if(isBoolean(message.Visto)){
+        msg.Visto = message.Visto;
+    }else{
+        errorValidated = true;
+    }
+    if(message.Emisor != null &&  validateSignUpUser(message.Emisor)===message.Emisor){
+        msg.Emisor = message.Emisor;
+    }else{
+        errorValidated = true;
+    }
+    if( message.Remitente != null && validateSignUpUser(message.Remitente)===message.Remitente){
+        msg.Remitente = message.Remitente;
+    }else{
+        errorValidated = true;
+    }
+    if(errorValidated){
+        return false;
+    }else{
+        return msg;
+    }
+
+
+}
 
 export const validateSignUpUser = (possibleUser) => {
     let user = {
