@@ -47,7 +47,7 @@ const Navbar = ({loggedUser}) => {
                                     {loggedUser ? (
                                         <>
                                             <ButtonLink
-                                                to={'/profile'}
+                                                to={'/profile/'+loggedUser.Email}
                                                 styleType={'secondary'}
                                                 style={{
                                                     alignSelf: 'center',
@@ -115,7 +115,7 @@ const Navbar = ({loggedUser}) => {
                                                         {loggedUser ? (
                                                             <>
                                                                 <ButtonLink
-                                                                    to={'/profile'}
+                                                                    to={'/profile/'+loggedUser.Email}
                                                                     styleType={'secondary'}
                                                                     style={{
                                                                         marginTop: 7,

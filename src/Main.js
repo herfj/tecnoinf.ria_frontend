@@ -27,8 +27,8 @@ const project = ()=>(
     <Project/>
 )
 
-const profile = ()=>(
-    <Profile/>
+const profile = ({match})=>(
+    <Profile emailUser={match.params.emailUser}/>
 )
 
 const login = ()=>(
@@ -85,15 +85,15 @@ const Main = ({actions})=>{
                     <Route path="/home" component={home}/>
                     <Route path="/explorer" component={explorer}/>
                     <Route path="/project" component={project}/>i
-                    <Route path="/profile" component={profile}/>i
+                    <Route path="/profile/:emailUser" component={profile}/>
                     <Route exact path="/messages" component={messages}/>
                     <Route path="/messages/new" component={newMessage}/>
                     <Route path="/messages/:messId" component={message}/>
-                    <Route path="/login" component={login}/>i
-                    <Route path="/create_project" component={createProject}/>i
-                    <Route path="/register" component={register}/>i
-                    <Route path="/edituser/:userId" component={editUser}/>i
-                    <Route path="/editproject/:portId" component={editPort}/>i
+                    <Route path="/login" component={login}/>
+                    <Route path="/create_project" component={createProject}/>
+                    <Route path="/register" component={register}/>
+                    <Route path="/edituser/:userId" component={editUser}/>
+                    <Route path="/editproject/:portId" component={editPort}/>
                     <Redirect to="/home"/>
                 </Switch>
             </div>

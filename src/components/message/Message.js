@@ -8,9 +8,10 @@ import {SelectCountry} from "../forms/Select";
 import {Control, LocalForm, Errors} from "react-redux-form";
 import {required} from "../../helpers/formValidator";
 import TextArea from "../forms/TextArea";
+import {getFormatDate} from "../../helpers/formatDate";
 
-const MessageItem = ({mess, open, to}) => {
-    mess = mess.length > 60 ? mess.substring(0, 65) + '...' : mess
+const MessageItem = ({msg, to}) => {
+    const cuerpo = msg.Cuerpo.length > 60 ? msg.Cuerpo.substring(0, 65) + '...' : msg.Cuerpo
 
     return (
         <Link
@@ -19,49 +20,60 @@ const MessageItem = ({mess, open, to}) => {
             <div className={'message-item'}>
                 <div className={'m-icon'}>
                     <MessIcon
-                        open={open}
+                        open={msg.Visto}
                     />
                 </div>
                 <div className={'m-mess'}>
-                    <strong style={{marginBottom: 10}}>Tomas Baute</strong>
-                    <p>{mess}</p>
+                    <strong style={{marginBottom: 10}}>{msg.Emisor}</strong>
+                    <p>{cuerpo}</p>
                 </div>
             </div>
         </Link>
     )
 }
 
-const ShowMessage = ({subject, mess, date, sendByMe = false, backButton}) => {
+const ShowMessage = ({actions, loggedUser, msg, backButton}) => {
 
-    if (sendByMe) {
+    if (loggedUser.Email === msg.Emisor) {
         return (
             <>
-                <h2 className={'sm-subject'}>{subject}</h2>
-                <p className={'sm-data'}>Enviado el dia <strong>{date}</strong></p>
+                <h2 className={'sm-subject'}>{msg.Remitente}</h2>
+                <p className={'sm-data'}>Enviado el dia <strong>{getFormatDate(msg.Fecha)}</strong></p>
                 <div className={'show-message'}>
-                    <p className={'sm-text'}>{mess}</p>
+                    <p className={'sm-text'}>{msg.Cuerpo}</p>
                 </div>
                 {backButton}
             </>
         )
     } else {
         const handleSubmit = (values) => {
-
+            const message = {
+                Cuerpo: values.Cuerpo,
+                Emisor: loggedUser.Email,
+                Remitente: msg.Emisor,
+            }
+            actions.messages.sendMessage({message: message})
         }
         return (
             <>
-                <h2 className={'sm-subject'}>{subject}</h2>
-                <p className={'sm-data'}>Enviado por <strong>Tomba</strong>, el dia <strong>{date}</strong></p>
+                <h2 className={'sm-subject'}>{msg.Remitente}</h2>
+                <p className={'sm-data'}>Enviado por <strong>{msg.Remitente}</strong>, el
+                    dia <strong>{getFormatDate(msg.Fecha)}</strong></p>
                 <div className={'show-message'}>
-                    <p className={'sm-text'}>{mess}</p>
+                    <p className={'sm-text'}>{msg.Cuerpo}</p>
                 </div>
                 <p><strong>Responder:</strong></p>
                 <LocalForm
                     onSubmit={(values) => handleSubmit(values)}
                 >
-
-                    <TextArea></TextArea>
-                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
+                    <TextArea
+                        model={".Cuerpo"}
+                        id={"Cuerpo"}
+                        name={"Curpo"}
+                        placeholder={"Escriba se respuesta aqui..."}
+                    ></TextArea>
+                    <div
+                        style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
                         {backButton}
                         <Button
                             styleType={'primary'}
@@ -113,8 +125,8 @@ const WriteMessage = ({backButton}) => {
                     required: "Mensaje Requerido",
                 }}
             />
-                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
-                    {backButton}
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
+                {backButton}
                 <Button
                     styleType={'primary'}
                     style={{

@@ -3,11 +3,11 @@ import Searchbar from '../searchbar/Searchbar'
 import './index.css'
 import Connector from "../../utils/connector";
 
-const Container =({actions,isLoading, loggedUser, auth=false, children,searchbar=true, style,...props}) => {
-    useEffect(()=>{
+const Container = ({actions, isLoading, loggedUser, auth = false, children, searchbar = true, style, ...props}) => {
+    useEffect(() => {
         actions.app.validate()
-    },[])
-    if (isLoading || loggedUser===null){
+    }, [])
+    if (isLoading) {
         return (
             <main>
                 {
@@ -17,8 +17,19 @@ const Container =({actions,isLoading, loggedUser, auth=false, children,searchbar
                     <h2>Cargando...</h2>
                 </div>
             </main>
-        )
-    }else{
+        );
+    } else if (loggedUser===null && auth) {
+        return (
+            <main>
+                {
+                    searchbar && <Searchbar/>
+                }
+                <div className='container' {...props}>
+                    <h2>Acceso no autorizado</h2>
+                </div>
+            </main>
+        );
+    } else {
         return (
             <main>
                 {
@@ -34,7 +45,7 @@ const Container =({actions,isLoading, loggedUser, auth=false, children,searchbar
 
 export default (props) => (
     <Connector>
-        {({ actions, state: { app } }) => {
+        {({actions, state: {app}}) => {
             return (
                 <Container actions={actions}  {...app} {...props} />
             )

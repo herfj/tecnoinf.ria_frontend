@@ -23,6 +23,98 @@ const initialState = {
 // ------------------------------------
 // Actions
 // ------------------------------------
+//!p el tren del olvido sonido profesional
+
+export const getMsg = (id) => {
+    return (dispatch) => {
+        dispatch({
+            type: LOADING,
+            isLoading: true,
+        })
+        dispatch({
+            type: ACTION_RESPONSE,
+            actionResponse: initialActionResponse,
+        })
+        services.messages.getMsg(id)
+            .then(async (response) => {
+                dispatch({
+                    type: FETCH_MESSAGE,
+                    message: response.data,
+                })
+                dispatch({
+                    type: LOADING,
+                    isLoading: false,
+                })
+
+            })
+            .catch((error) => {
+                error.message = responseErrors(error)
+                console.log(error.message)
+                dispatch({
+                    type: LOADING,
+                    isLoading: false,
+                })
+                dispatch({
+                    type: ACTION_RESPONSE,
+                    actionResponse: {
+                        isError: true,
+                        title: '',
+                        message: error.message,
+                        backToHome: false,
+                    },
+                })
+            })
+    }
+}
+export const clavarElVisto = (id, logEmail, remitente) => {
+    console.log(id,logEmail,remitente,logEmail === remitente);
+    return (dispatch) => {
+        if (logEmail === remitente) {
+            dispatch({
+                type: LOADING,
+                isLoading: true,
+            })
+            dispatch({
+                type: ACTION_RESPONSE,
+                actionResponse: initialActionResponse,
+            })
+            services.messages.clavarElVistoo(id)
+                .then(async (response) => {
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                })
+                .catch((error) => {
+                    error.message = responseErrors(error)
+                    console.log(error.message)
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                    dispatch({
+                        type: ACTION_RESPONSE,
+                        actionResponse: {
+                            isError: true,
+                            title: '',
+                            message: error.message,
+                            backToHome: false,
+                        },
+                    })
+                })
+        } else {
+            dispatch({
+                type: ACTION_RESPONSE,
+                actionResponse: {
+                    isError: true,
+                    title: '',
+                    message: 'No sos el remitente',
+                    backToHome: false,
+                },
+            })
+        }
+    }
+}
 export const getInbox = (email) => {
     return (dispatch) => {
         dispatch({
@@ -74,35 +166,35 @@ export const getSent = (email) => {
             type: ACTION_RESPONSE,
             actionResponse: initialActionResponse,
         })
-            services.messages.getSent(email)
-                .then(async (response) => {
-                    dispatch({
-                        type: FETCH_SENT,
-                        sent: response.data,
-                    })
-                    dispatch({
-                        type: LOADING,
-                        isLoading: false,
-                    })
+        services.messages.getSent(email)
+            .then(async (response) => {
+                dispatch({
+                    type: FETCH_SENT,
+                    sent: response.data,
+                })
+                dispatch({
+                    type: LOADING,
+                    isLoading: false,
+                })
 
+            })
+            .catch((error) => {
+                error.message = responseErrors(error)
+                console.log(error.message)
+                dispatch({
+                    type: LOADING,
+                    isLoading: false,
                 })
-                .catch((error) => {
-                    error.message = responseErrors(error)
-                    console.log(error.message)
-                    dispatch({
-                        type: LOADING,
-                        isLoading: false,
-                    })
-                    dispatch({
-                        type: ACTION_RESPONSE,
-                        actionResponse: {
-                            isError: true,
-                            title: '',
-                            message: error.message,
-                            backToHome: false,
-                        },
-                    })
+                dispatch({
+                    type: ACTION_RESPONSE,
+                    actionResponse: {
+                        isError: true,
+                        title: '',
+                        message: error.message,
+                        backToHome: false,
+                    },
                 })
+            })
     }
 }
 export const sendMessage = ({message}) => {
@@ -117,12 +209,8 @@ export const sendMessage = ({message}) => {
         })
         const messData = validateMess(message)
         if (messData) {
-            services.messages.send(messData)
+            services.messages.sendMessagee(messData)
                 .then(async (response) => {
-                    dispatch({
-                        type: FETCH_MESSAGE,
-                        message: response.data,
-                    })
                     dispatch({
                         type: LOADING,
                         isLoading: false,
@@ -147,6 +235,21 @@ export const sendMessage = ({message}) => {
                     })
                 })
         }
+        else{
+            dispatch({
+                type: LOADING,
+                isLoading: false,
+            })
+            dispatch({
+                type: ACTION_RESPONSE,
+                actionResponse: {
+                    isError: true,
+                    title: '',
+                    message: 'anda a otro lado',
+                    backToHome: false,
+                },
+            })
+        }
     }
 }
 
@@ -154,6 +257,8 @@ export const actions = {
     getInbox,
     getSent,
     sendMessage,
+    getMsg,
+    clavarElVisto,
 }
 
 // ------------------------------------

@@ -1,15 +1,12 @@
-import React, {Component, useState, useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import Container from "../../components/container/Container";
-import {Carousel} from "react-responsive-carousel";
-import {getFormatDate} from "../../helpers/formatDate";
 import './index.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import colors from "../../theme/colors";
 import {useWindowSize} from "../../helpers/useWindowSize";
 import {Button, ButtonLink} from "../../components/button/Button";
 import {TagList, List, CategoryList, ProjectList} from "../../components/list/List";
-import {Comment, WriteComment} from "../../components/comment/Comment";
 import {UserIcon} from "../../components/icon/Icon";
+import Connector from "../../utils/connector";
 
 const ProfileHeader = ({user}) => {
     const size = useWindowSize();
@@ -29,7 +26,7 @@ const ProfileHeader = ({user}) => {
                         <UserIcon
                             img={user.img}
                             name={user.name}
-                            size={size.width>1200?'90%':'100%'}
+                            size={size.width > 1200 ? '90%' : '100%'}
                             rounded={false}
                         />
                     </div>
@@ -75,63 +72,36 @@ const ProfileHeader = ({user}) => {
         </div>
     )
 }
-
-
-const ProfileComment = ({}) => {
-    const size = useWindowSize()
-    const list = [
-        <WriteComment/>,
-        <Comment/>,
-        <Comment/>,
-        <Comment/>,
-        <Comment/>,
-        <Comment/>,
-        <Comment/>,
-        <Comment/>,
-        <Comment/>,
-    ]
-    return (
-        <div
-            className={'neutral-container'}
-        >
-            <h1>
-                Cometarios
-            </h1>
-            <List
-                responsive={false}
-                list={list}
-                grid={false}
-            />
-        </div>
-    );
-}
-
-const Profile = ({}) => {
-    const user = {
-        name: 'Hernan Fabirca',
-        img: 'https://placekitten.com/1200/800',
-        ubicacion: 'Sanca',
-        desc: `What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-Why do we use it
-Where can 
-There are many variations of passages of Lorem Ipsum available, but the`,
-        link: 'https://www.google.com',
-        empresa: 'Cualit',
-        profesion: 'SD Jr',
-        likes: 200,
-        views: 1233,
-    }
+const Profile = ({actions, loggedUser, user, emailUser}) => {
+    useEffect(() => {
+        if (loggedUser !== null) {
+            actions.users.getUser(emailUser)
+        }
+    }, [loggedUser])
     return (
         <Container
             searchbar={false}
         >
-            <ProfileHeader
-                user={user}
-            />
-            <ProjectList/>
+            {user !== null &&
+            (
+                <>
+                    <ProfileHeader
+                        user={user}
+                    />
+                    <ProjectList/>
+                </>
+            )
+            }
         </Container>
     )
 }
 
-export default Profile
+export default (props) => (
+    <Connector>
+        {({actions, state: {app, users}}) => {
+            return (
+                <Profile actions={actions} {...app} {...users} {...props} />
+            )
+        }}
+    </Connector>
+)

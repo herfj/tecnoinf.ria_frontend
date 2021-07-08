@@ -1,3 +1,5 @@
+import {validEmail} from "./formValidator";
+
 const isString = (str) => {
     return (typeof str === 'string' || str instanceof String)
 }
@@ -5,38 +7,33 @@ const isBoolean = (boo) => {
     return (typeof boo === 'boolean' || boo instanceof Boolean)
 }
 
-export const validateMess = (message) =>{
+export const validateMess = (message) => {
     let msg = {
         Fecha: Date.now(),
-        Cuerpo:'',
-        Visto:'',
-        Emisor:'',
-        Remitente:'',
+        Cuerpo: '',
+        Visto: 0,
+        Emisor: '',
+        Remitente: '',
     }
-    let errorValidated =false;
-    if(isString(message.Cuerpo)){
+    let errorValidated = false;
+    if (isString(message.Cuerpo)) {
         msg.Cuerpo = message.Cuerpo;
-    }else{
-       errorValidated = true;
-    }
-    if(isBoolean(message.Visto)){
-        msg.Visto = message.Visto;
-    }else{
+    } else {
         errorValidated = true;
     }
-    if(message.Emisor != null &&  validateSignUpUser(message.Emisor)===message.Emisor){
+    if (message.Emisor != null && validEmail(message.Emisor)) {
         msg.Emisor = message.Emisor;
-    }else{
-        errorValidated = true;
+    } else {
+        console.log('Emisor')
     }
-    if( message.Remitente != null && validateSignUpUser(message.Remitente)===message.Remitente){
+    if (message.Remitente != null && validEmail(message.Remitente)) {
         msg.Remitente = message.Remitente;
-    }else{
+    } else {
         errorValidated = true;
     }
-    if(errorValidated){
+    if (errorValidated) {
         return false;
-    }else{
+    } else {
         return msg;
     }
 
@@ -65,7 +62,7 @@ export const validateSignUpUser = (possibleUser) => {
     } else {
         errorValidated = true
     }
-    if (isString(possibleUser.Email)) {
+    if (isString(possibleUser.Email) && validEmail(possibleUser.Email)) {
         user.Email = possibleUser.Email
     } else {
         errorValidated = true
@@ -86,21 +83,21 @@ export const validateSignUpUser = (possibleUser) => {
         errorValidated = true
     }
 
-    if(errorValidated){
+    if (errorValidated) {
         return false
-    }else{
+    } else {
         return user
     }
 }
 
-export const validateLogin = (email, pass)=>{
+export const validateLogin = (email, pass) => {
     let loginData = {
         Email: '',
         Password: '',
     };
     let errorValidated = false
 
-    if (isString(email)) {
+    if (isString(email) && validEmail(email)) {
         loginData.Email = email;
     } else {
         errorValidated = true
@@ -110,9 +107,9 @@ export const validateLogin = (email, pass)=>{
     } else {
         errorValidated = true
     }
-    if(errorValidated){
+    if (errorValidated) {
         return false
-    }else{
+    } else {
         return loginData
     }
 }

@@ -1,21 +1,35 @@
 import Container from "../../components/container/Container";
 import {ShowMessage} from "../../components/message/Message";
 import {ButtonLink} from "../../components/button/Button";
-import React from "react";
+import React, {useEffect} from "react";
 import Connector from "../../utils/connector";
+import {getFormatDate} from "../../helpers/formatDate";
 
-const Message = ({loggedUser,message}) => {
+const Message = ({id,actions,isLoading,loggedUser,message}) => {
+
+    useEffect(()=>{
+        if(loggedUser!==null){
+            actions.messages.getMsg(id)
+        }
+    },[loggedUser])
+    useEffect(()=>{
+        if(loggedUser!==null && message!==null && message.Visto!=1){
+            actions.messages.clavarElVisto(message.ID,loggedUser.Email,message.Remitente)
+        }
+    },[message])
+
+
     return (
         <Container
             searchbar={false}
+            auth={true}
         >
             <div className={'neutral-container'}>
-
+                { !isLoading && loggedUser !== null && message !== null && (loggedUser.Email === message.Remitente || loggedUser.Email === message.Emisor)  &&
                 <ShowMessage
-                    sendByMe={false}
-                    subject={'Asunto muy importante'}
-                    date={'02/03/2021'}
-                    mess={'HOla tomi adfsdfas ddafsdfas dfsadfdfsafdas dfasdfas adfs'}
+                    actions={actions}
+                    loggedUser={loggedUser}
+                    msg={message}
                     backButton={(
                         <ButtonLink
                             to={'/messages'}
@@ -27,7 +41,7 @@ const Message = ({loggedUser,message}) => {
                             Volver al listado
                         </ButtonLink>)}
                 />
-
+                }
             </div>
         </Container>
     )

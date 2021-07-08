@@ -27,6 +27,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actions as appActions } from '../modules/app.module'
 import { actions as messagesActions } from '../modules/message.module'
+import { actions as usersActions } from '../modules/user.module'
 
 class Connector extends Component {
   render() {
@@ -41,6 +42,7 @@ const mapDispatchToProps = (dispatch) => {
   const actionList = [
     { label: 'app', value: appActions },
     { label: 'messages', value: messagesActions },
+    { label: 'users', value: usersActions },
 
   ]
 

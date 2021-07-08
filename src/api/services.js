@@ -1,5 +1,6 @@
 import axiosHttp from 'axios'
 import {API_URL} from '../config/api_config'
+import {sendMessage} from "../modules/message.module";
 
 const headers = {
     'Content-Type': 'application/json; charset=UTF-8',
@@ -42,6 +43,16 @@ export default {
             return axios.post(API_URL + '/api/v1/auth/sign_out', data)
         },
     },
+    users:{
+        getUser(email){
+            return axios.get(API_URL + '/api/usuarios/GetUsuario', {
+                headers: headers,
+                params: {
+                    'Email': email
+                }
+            })
+        }
+    },
     messages: {
         getInbox(email) {
             return axios.get(API_URL + '/api/mensajes/BandejadeEntrada', {
@@ -51,6 +62,36 @@ export default {
                 }
             })
         },
+        getMsg(id){
+          return axios.get(API_URL + '/api/mensajes/GetMSG', {
+              headers: headers,
+              params:{
+                  'ID': id
+              }
+          })
+        },
+        clavarElVistoo(id){
+            return axios.put(API_URL + '/api/mensajes/PonerVisto', {
+                'ID': id
+            },{
+                headers: headers,
+            })
+        },
+        sendMessagee(message){
+            return axios.post(API_URL + '/api/mensajes/SendMSG', message,{
+                headers: headers
+            })
+        },
+        getSent(email){
+            return axios.get(API_URL + '/api/mensajes/BandejadeSalida', {
+                headers: headers,
+                params: {
+                    'Email': email
+                }
+            })
+        },
+
 
     }
+    
 }

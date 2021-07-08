@@ -7,21 +7,21 @@ import {MessageItem} from "../../components/message/Message";
 import {useWindowSize} from "../../helpers/useWindowSize";
 import Connector from "../../utils/connector";
 
-const Messages = ({actions,isLoading,loggedUser,inbox,sent}) => {
+const Messages = ({actions,loggedUser,inbox,sent}) => {
     const size = useWindowSize()
     const [active, setActive] = useState("Recibidos")
 
     useEffect(()=>{
         if(loggedUser!==null){
             actions.messages.getInbox(loggedUser.Email)
+            actions.messages.getSent(loggedUser.Email)
         }
     },[loggedUser])
 
     const handleInboxList = () => (inbox !== null ? inbox.map((msg)=>(
         <MessageItem
             to={'/messages/'+msg.ID}
-            mess={msg.Cuerpo}
-            open={msg.Visto}
+            msg={msg}
         />
     )) : [])
     const [inboxList, setInboxList] = useState(handleInboxList())
@@ -29,25 +29,21 @@ const Messages = ({actions,isLoading,loggedUser,inbox,sent}) => {
         setInboxList(handleInboxList())
     },[inbox])
 
-
-    const enviados = () => (<MessList list={[
+    const handleSentList = () => (sent !== null ? sent.map((msg)=>(
         <MessageItem
-            to={'/messages/1'}
-            mess={'holaj asdf asdf'}
-        />,
-        <MessageItem
-            to={'/messages/1'}
-            mess={'holaj asdf asdf'}
-        />,
-        <MessageItem
-            to={'/messages/1'}
-            mess={'holaj asdf asdf'}
+            to={'/messages/'+msg.ID}
+            msg={msg}
         />
-    ]}/>)
+    )) : [])
+    const [sentList, setSentList] = useState(handleSentList())
+    useEffect(()=>{
+        setSentList(handleSentList())
+    },[sent])
 
     return (
         <Container
             searchbar={false}
+            auth={true}
         >
             <div
                 className={'neutral-container'}
@@ -62,14 +58,14 @@ const Messages = ({actions,isLoading,loggedUser,inbox,sent}) => {
                 <h1>
                     Mensajes
                 </h1>
-                <ButtonLink
-                    style={{alignSelf: 'center', width: size.width > 1200 ? 200 : '100%', height: 40}}
-                    buttonStyle={{alignSelf: 'center', width: size.width > 1200 ? 200 : '100%', height: 40}}
-                    to={'/messages/new'}
-                    styleType={'primary'}
-                >
-                    Redactar un mensaje
-                </ButtonLink>
+                {/*<ButtonLink*/}
+                {/*    style={{alignSelf: 'center', width: size.width > 1200 ? 200 : '100%', height: 40}}*/}
+                {/*    buttonStyle={{alignSelf: 'center', width: size.width > 1200 ? 200 : '100%', height: 40}}*/}
+                {/*    to={'/messages/new'}*/}
+                {/*    styleType={'primary'}*/}
+                {/*>*/}
+                {/*    Redactar un mensaje*/}
+                {/*</ButtonLink>*/}
 
                 </div>
                 {
@@ -82,7 +78,7 @@ const Messages = ({actions,isLoading,loggedUser,inbox,sent}) => {
                             </div>
                             <div style={{width: '50%', marginRight: 0, marginLeft: 10}}>
                                 <h2>Enviados</h2>
-                                {enviados()}
+                                <MessList list={sentList}/>
                             </div>
                         </div>
 
@@ -107,7 +103,8 @@ const Messages = ({actions,isLoading,loggedUser,inbox,sent}) => {
                                         <MessList list={inboxList}/>
                                 ) : (
                                     <>
-                                        {enviados()}
+
+                                        <MessList list={sentList}/>
                                     </>
                                 )
                             }
