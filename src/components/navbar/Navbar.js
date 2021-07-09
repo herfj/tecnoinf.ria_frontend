@@ -5,18 +5,42 @@ import {useWindowSize} from "../../helpers/useWindowSize";
 import './index.css'
 import Connector from "../../utils/connector";
 
-const Routes = ({extraButtons = null, isMobil = false}) => {
+const Routes = ({loggedUser,extraButtons = null, isMobil = false}) => {
     const style = !isMobil ? {
-        width: '120px'
+        width: '120px',
+        margin: 5
     } : {}
     return (
         <div className={'routes'}>
-            <ButtonLink
-                style={style}
-                to='/explorer'
-            >
-                Explorar
-            </ButtonLink>
+            {
+                loggedUser === null ? (
+                    <>
+                        <ButtonLink
+                            style={style}
+                            to='/explorer'
+                        >
+                            Explorar
+                        </ButtonLink>
+
+                    </>
+                ) : (
+                    <>
+                        <ButtonLink
+                            style={style}
+                            to='/explorer'
+                        >
+                            Explorar
+                        </ButtonLink>
+                        <ButtonLink
+                            style={style}
+                            to='/messages'
+                        >
+                            Mensajes
+                        </ButtonLink>
+
+                    </>
+                )
+            }
             {extraButtons}
         </div>
     )
@@ -42,7 +66,9 @@ const Navbar = ({loggedUser}) => {
                 {
                     size.width > 1200 ? (
                             <>
-                                <Routes/>
+                                <Routes
+                                    loggedUser={loggedUser}
+                                />
                                 <div className={'navbar-l-btn'}>
                                     {loggedUser ? (
                                         <>
@@ -110,6 +136,7 @@ const Navbar = ({loggedUser}) => {
                                         <>
                                             <Routes
                                                 isMobil={true}
+                                                loggedUser={loggedUser}
                                                 extraButtons={(
                                                     <>
                                                         {loggedUser ? (

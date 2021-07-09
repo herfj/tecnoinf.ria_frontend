@@ -4,7 +4,6 @@ import './index.css'
 import {Link} from "react-router-dom";
 import {Button} from "../button/Button";
 import {EmailInput, TextInput} from "../forms/TextInput";
-import {SelectCountry} from "../forms/Select";
 import {Control, LocalForm, Errors} from "react-redux-form";
 import {required} from "../../helpers/formValidator";
 import TextArea from "../forms/TextArea";
@@ -33,7 +32,6 @@ const MessageItem = ({msg, to}) => {
 }
 
 const ShowMessage = ({actions, loggedUser, msg, backButton}) => {
-
     if (loggedUser.Email === msg.Emisor) {
         return (
             <>
@@ -56,8 +54,8 @@ const ShowMessage = ({actions, loggedUser, msg, backButton}) => {
         }
         return (
             <>
-                <h2 className={'sm-subject'}>{msg.Remitente}</h2>
-                <p className={'sm-data'}>Enviado por <strong>{msg.Remitente}</strong>, el
+                <h2 className={'sm-subject'}>{msg.Emisor}</h2>
+                <p className={'sm-data'}>Enviado por <Link to={'/profile/'+msg.Emisor}><strong>{msg.Emisor}</strong></Link>, el
                     dia <strong>{getFormatDate(msg.Fecha)}</strong></p>
                 <div className={'show-message'}>
                     <p className={'sm-text'}>{msg.Cuerpo}</p>
@@ -76,6 +74,7 @@ const ShowMessage = ({actions, loggedUser, msg, backButton}) => {
                         style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
                         {backButton}
                         <Button
+                            type={'submit'}
                             styleType={'primary'}
                             style={{
                                 width: 180
@@ -88,7 +87,7 @@ const ShowMessage = ({actions, loggedUser, msg, backButton}) => {
     }
 }
 
-const WriteMessage = ({backButton}) => {
+const WriteMessage = ({email,backButton}) => {
     const handleSubmit = (values) => {
 
     }
@@ -96,22 +95,7 @@ const WriteMessage = ({backButton}) => {
         <LocalForm
             onSubmit={(values) => handleSubmit(values)}
         >
-            <p><strong>Para:</strong></p>
-            {/*<SelectCountry/>*/}
-            <EmailInput/>
-            <p><strong>Asunto:</strong></p>
-            <TextInput
-                model=".subject"
-                id="subject"
-                name="subject"
-                placeholder="Asunto"
-                validators={{
-                    required,
-                }}
-                messages={{
-                    required: "Asunto Requerido",
-                }}
-            />
+            <p><strong>Para: {email}</strong></p>
             <p><strong>Mensaje:</strong></p>
             <TextArea
                 model=".message"

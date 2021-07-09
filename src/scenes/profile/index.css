@@ -22,6 +22,9 @@
 
 .profile-data-body .img {
     grid-area: img;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .profile-data-body .data {

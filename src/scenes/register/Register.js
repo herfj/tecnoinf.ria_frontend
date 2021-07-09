@@ -10,8 +10,6 @@ import Connector from "../../utils/connector";
 const Register = ({loggedUser,actions}) => {
 
     const handleSubmit = (values) => {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
         actions.app.signUp({newUser: values})
     }
 

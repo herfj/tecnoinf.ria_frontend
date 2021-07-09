@@ -1,6 +1,7 @@
 import services from '../api/services'
 import {responseErrors} from '../helpers/handleErrors'
 import {initialActionResponse} from "./app.module";
+import {validEmail} from "../helpers/formValidator";
 
 // ------------------------------------
 // Constants
@@ -19,6 +20,86 @@ const initialState = {
 // ------------------------------------
 
 // TODO: check the user's login state
+export const followUser = (emailseguidor, emailseguido) => {
+    return (dispatch) => {
+        if (validEmail(emailseguido) && validEmail(emailseguidor)) {
+            dispatch({
+                type: LOADING,
+                isLoading: true,
+            })
+            dispatch({
+                type: ACTION_RESPONSE,
+                actionResponse: initialActionResponse,
+            })
+            services.users.followUser(emailseguidor, emailseguido)
+                .then(async (response) => {
+                    dispatch({
+                        type: FETCH_USER,
+                        user: response.data,
+                    })
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+
+                })
+        } else {
+            dispatch({
+                type: LOADING,
+                isLoading: false,
+            })
+            dispatch({
+                type: ACTION_RESPONSE,
+                actionResponse: {
+                    isError: true,
+                    title: '',
+                    message: 'ashi',
+                    backToHome: false,
+                },
+            })
+        }
+    }
+}
+export const unfollowUser = (emailseguidor, emailseguido) => {
+    return (dispatch) => {
+        if (validEmail(emailseguido) && validEmail(emailseguidor)) {
+            dispatch({
+                type: LOADING,
+                isLoading: true,
+            })
+            dispatch({
+                type: ACTION_RESPONSE,
+                actionResponse: initialActionResponse,
+            })
+            services.users.unfollowUser(emailseguidor, emailseguido)
+                .then(async (response) => {
+                    dispatch({
+                        type: FETCH_USER,
+                        user: response.data,
+                    })
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+
+                })
+        } else {
+            dispatch({
+                type: LOADING,
+                isLoading: false,
+            })
+            dispatch({
+                type: ACTION_RESPONSE,
+                actionResponse: {
+                    isError: true,
+                    title: '',
+                    message: 'ashi',
+                    backToHome: false,
+                },
+            })
+        }
+    }
+}
 export const getUser = (email) => {
     return (dispatch) => {
         dispatch({
@@ -60,9 +141,11 @@ export const getUser = (email) => {
             })
     }
 }
+
 export const actions = {
     getUser,
-
+    followUser,
+    unfollowUser,
 }
 
 // ------------------------------------
@@ -86,6 +169,5 @@ const ACTION_HANDLERS = {
 
 export default function reducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type]
-
     return handler ? handler(state, action) : state
 }

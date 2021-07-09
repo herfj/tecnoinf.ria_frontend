@@ -59,8 +59,8 @@ There are many variations of passages of Lorem Ipsum available, but the`,
         views: 1233,
     }} id={match.params.userId}/>
 )
-const newMessage = ()=>(
-    <NewMessage />
+const newMessage = ({match})=>(
+<NewMessage id={match.params.email}/>
 )
 
 const register = () =>(
@@ -87,7 +87,7 @@ const Main = ({actions})=>{
                     <Route path="/project" component={project}/>i
                     <Route path="/profile/:emailUser" component={profile}/>
                     <Route exact path="/messages" component={messages}/>
-                    <Route path="/messages/new" component={newMessage}/>
+                    <Route path="/messages/new/:email" component={newMessage}/>
                     <Route path="/messages/:messId" component={message}/>
                     <Route path="/login" component={login}/>
                     <Route path="/create_project" component={createProject}/>

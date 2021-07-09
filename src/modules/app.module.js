@@ -55,7 +55,6 @@ export const validate = () => {
             type: ACTION_RESPONSE,
             actionResponse: initialActionResponse,
         })
-
         if (getUser() != null && validateSignUpUser(getUser()) != false) {
             let user = getUser();
             const loginData = validateLogin(user.Email, user.Password)
@@ -98,11 +97,19 @@ export const validate = () => {
                         })
                     })
             }
+        } else {
+            setUser(null)
+            dispatch({
+                type: LOGGED_IN,
+                loggedIn: false,
+                checked: false,
+                loggedUser: null,
+            })
+            dispatch({
+                type: LOADING,
+                isLoading: false,
+            })
         }
-        dispatch({
-            type: LOADING,
-            isLoading: false,
-        })
     }
 }
 
@@ -133,6 +140,7 @@ export const authenticate = (email, pass) => {
                     })
                 })
                 .catch((error) => {
+                    setUser(null)
                     error.message = responseErrors(error)
                     console.log(error.message)
                     dispatch({
@@ -159,6 +167,25 @@ export const authenticate = (email, pass) => {
     }
 }
 
+export const logout = () => {
+    return (dispatch) => {
+        dispatch({
+            type: LOADING,
+            isLoading: true,
+        })
+        dispatch({
+            type: LOGGED_IN,
+            loggedIn: false,
+            checked: false,
+            loggedUser: null,
+        })
+        setUser(null)
+        dispatch({
+            type: LOADING,
+            isLoading: false,
+        })
+    }
+}
 export const signUp = ({newUser, isLoading = true}) => {
     return (dispatch) => {
         dispatch({
@@ -227,6 +254,7 @@ export const actions = {
     validate,
     authenticate,
     signUp,
+    logout,
     isLoading,
 }
 

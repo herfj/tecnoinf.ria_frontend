@@ -62,7 +62,7 @@ export const validateSignUpUser = (possibleUser) => {
     } else {
         errorValidated = true
     }
-    if (isString(possibleUser.Email) && validEmail(possibleUser.Email)) {
+    if (validEmail(possibleUser.Email)) {
         user.Email = possibleUser.Email
     } else {
         errorValidated = true
@@ -97,7 +97,7 @@ export const validateLogin = (email, pass) => {
     };
     let errorValidated = false
 
-    if (isString(email) && validEmail(email)) {
+    if (validEmail(email)) {
         loginData.Email = email;
     } else {
         errorValidated = true

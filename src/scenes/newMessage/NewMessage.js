@@ -4,13 +4,22 @@ import {ButtonLink} from "../../components/button/Button";
 import React from "react";
 import Connector from "../../utils/connector";
 
-const NewMessage = () => {
+const NewMessage = ({actions,loggedUser,email}) => {
+    const handleSubmit = (values) => {
+        const message = {
+            Cuerpo: values.Cuerpo,
+            Emisor: loggedUser.Email,
+            Remitente: email,
+        }
+        actions.messages.sendMessage({message: message})
+    }
     return (
         <Container
             searchbar={false}
         >
             <div className={'neutral-container'}>
                 <WriteMessage
+                    email={email}
                     backButton={(
                         <ButtonLink
                             to={'/messages'}

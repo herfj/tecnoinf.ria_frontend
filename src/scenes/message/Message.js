@@ -3,7 +3,6 @@ import {ShowMessage} from "../../components/message/Message";
 import {ButtonLink} from "../../components/button/Button";
 import React, {useEffect} from "react";
 import Connector from "../../utils/connector";
-import {getFormatDate} from "../../helpers/formatDate";
 
 const Message = ({id,actions,isLoading,loggedUser,message}) => {
 

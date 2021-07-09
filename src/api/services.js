@@ -39,9 +39,6 @@ export default {
                 headers: headers
             })
         },
-        sign_out(data) {
-            return axios.post(API_URL + '/api/v1/auth/sign_out', data)
-        },
     },
     users:{
         getUser(email){
@@ -51,7 +48,24 @@ export default {
                     'Email': email
                 }
             })
-        }
+        },
+        followUser(emailseguidor, emailseguido){
+            return axios.put(API_URL + '/api/usuarios/Seguir', {
+                'seguidor': emailseguidor,
+                'seguido': emailseguido
+
+            },{
+                headers: headers,
+            })
+        },
+        unfollowUser(emailseguidor, emailseguido){
+            return axios.put(API_URL + '/api/usuarios/DejarDeSeguir', {
+                'seguidor': emailseguidor,
+                'seguido': emailseguido
+            },{
+                headers: headers,
+            })
+       },
     },
     messages: {
         getInbox(email) {
