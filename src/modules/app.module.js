@@ -18,6 +18,8 @@ export const initialActionResponse = {
 }
 
 const initialState = {
+    loggedIn: false,
+    checked: false,
     isLoading: false,
     loggedUser: null,
     actionResponse: initialActionResponse,
@@ -26,17 +28,17 @@ const initialState = {
 // ------------------------------------
 // Functions
 // ------------------------------------
-export const setUser = (user) => {
+export const setUser = async (user) => {
     try {
-        localStorage.setItem('user', JSON.stringify(user));
+        await localStorage.setItem('user', JSON.stringify(user));
     } catch (e) {
         return 'error';
     }
 
 }
 
-export const getUser = () => {
-    var user = JSON.parse(localStorage.getItem('user'));
+export const getUser =  async  () => {
+    var user = await JSON.parse(localStorage.getItem('user'));
     return user;
 }
 
@@ -46,7 +48,7 @@ export const getUser = () => {
 // ------------------------------------
 
 export const validate = () => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch({
             type: LOADING,
             isLoading: true,
@@ -55,17 +57,16 @@ export const validate = () => {
             type: ACTION_RESPONSE,
             actionResponse: initialActionResponse,
         })
-        if (getUser() != null && validateSignUpUser(getUser()) != false) {
-            let user = getUser();
+        let user = await getUser();
+        if (user != null && validateSignUpUser(user) != false) {
             const loginData = validateLogin(user.Email, user.Password)
             if (loginData) {
                 services.auth.login(loginData)
                     .then(async (response) => {
-                        setUser(response.data);
-                        dispatch({
+                        await setUser(response.data);
+                        await dispatch({
                             type: LOGGED_IN,
                             loggedIn: true,
-                            checked: true,
                             loggedUser: response.data,
                         })
                         dispatch({
@@ -74,12 +75,11 @@ export const validate = () => {
                         })
                     })
                     .catch((error) => {
-                        error.message = responseErrors(error)
+                        // error.message = responseErrors(error)
                         console.log(error.message)
                         dispatch({
                             type: LOGGED_IN,
                             loggedIn: false,
-                            checked: false,
                             loggedUser: null,
                         })
                         dispatch({
@@ -98,11 +98,10 @@ export const validate = () => {
                     })
             }
         } else {
-            setUser(null)
+            await setUser(null)
             dispatch({
                 type: LOGGED_IN,
                 loggedIn: false,
-                checked: false,
                 loggedUser: null,
             })
             dispatch({
@@ -131,7 +130,6 @@ export const authenticate = (email, pass) => {
                     dispatch({
                         type: LOGGED_IN,
                         loggedIn: true,
-                        checked: true,
                         loggedUser: response.data,
                     })
                     dispatch({
@@ -146,7 +144,6 @@ export const authenticate = (email, pass) => {
                     dispatch({
                         type: LOGGED_IN,
                         loggedIn: false,
-                        checked: false,
                         loggedUser: null,
                     })
                     dispatch({
@@ -168,7 +165,7 @@ export const authenticate = (email, pass) => {
 }
 
 export const logout = () => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch({
             type: LOADING,
             isLoading: true,
@@ -176,10 +173,9 @@ export const logout = () => {
         dispatch({
             type: LOGGED_IN,
             loggedIn: false,
-            checked: false,
             loggedUser: null,
         })
-        setUser(null)
+        await setUser(null)
         dispatch({
             type: LOADING,
             isLoading: false,
@@ -203,7 +199,6 @@ export const signUp = ({newUser, isLoading = true}) => {
                     dispatch({
                         type: LOGGED_IN,
                         loggedIn: true,
-                        checked: true,
                         loggedUser: response.data,
                     })
                     dispatch({
@@ -217,7 +212,6 @@ export const signUp = ({newUser, isLoading = true}) => {
                     dispatch({
                         type: LOGGED_IN,
                         loggedIn: false,
-                        checked: false,
                         loggedUser: null,
                     })
                     dispatch({
@@ -266,7 +260,6 @@ const ACTION_HANDLERS = {
     [LOGGED_IN]: (state, {loggedIn, checked, loggedUser}) => ({
         ...state,
         loggedIn,
-        checked,
         loggedUser,
     }),
     [LOADING]: (state, {isLoading}) => ({

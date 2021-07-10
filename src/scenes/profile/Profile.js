@@ -8,15 +8,38 @@ import {ProjectList} from "../../components/list/List";
 import {UserIcon} from "../../components/icon/Icon";
 import Connector from "../../utils/connector";
 
-const ProfileHeader = ({actions, user, loggedUser}) => {
+const ProfileHeader = ({actions,isLoading, user, loggedUser}) => {
     const size = useWindowSize();
     const handleVisitas = () => {
-        let ret;
-        user.Proyecto.forEach(element => ret = ret + element.Vistas);
+        let ret = 0;
+        // user.Proyecto.forEach(element => ret = ret + element.Vistas);
         return ret;
     }
-    const followStyle = size.width > 1200 ? {width: '49.5%', marginRight: '0.5%',} : {marginBottom: 5}
-    const likeStyle = size.width > 1200 ? {width: '49.5%', marginLeft: '0.5%'} : {}
+    const handleSeguirODejar = () => {
+        if(loggedUser!==null){
+            let esSeguido = false
+            user.Seguidores.forEach((seguidor)=>{
+                if(loggedUser.Email==seguidor.Email){
+                    esSeguido=true
+                }
+            })
+            return esSeguido;
+        } else {
+            return false
+        }
+    }
+
+    const [seguirODejar,setSeguirODejar] = useState(handleSeguirODejar())
+    useEffect(()=>{
+        setSeguirODejar(handleSeguirODejar())
+    },[user.Seguidores.length])
+    useEffect(()=>{
+        setSeguirODejar(handleSeguirODejar())
+    },[loggedUser])
+    useEffect(()=>{
+        setSeguirODejar(handleSeguirODejar())
+    },[isLoading])
+
     return (
         <div
             className={'neutral-container'}
@@ -53,77 +76,77 @@ const ProfileHeader = ({actions, user, loggedUser}) => {
                             <span className="far fa-thumbs-up" style={{marginLeft: 5}}></span>
                         </p>
                         <p>
-                            <strong>Seguidores:</strong> falta
+                            <strong>Seguidores:</strong> {user.Seguidores.length}
                             <span className="fas fa-user-check" style={{marginLeft: 5}}></span>
                         </p>
                     </div>
                     <div className="footer">
-                        {loggedUser !== null &&
-                        <>
-                            {
-                                loggedUser.Email === user.Email ?
 
-                                    (
-                                        <Button styleType={'secondary'} style={{height: 40, width: '100%'}}
-                                                onClick={actions.app.logout}>
-                                            Cerrar Sesion
-                                            <span className="fas fa-sign-out-alt" style={{marginLeft: 5}}></span>
-                                        </Button>
-                                    ) : (
-                                        <>
-                                            {
-                                                loggedUser.Seguidos.includes(user) ? (
-                                                    <>
-                                                        <Button styleType={'secondary'}
-                                                                onClick={()=>{
-                                                                    actions.user.unfollowUser(loggedUser.Email, user.Email)
-                                                                    actions.app.validate()
-                                                                }}
-                                                                style={{height: 40, ...followStyle}}>
-                                                            Dejar de seguir
-                                                            <span className="fas fa-user-times"
-                                                                  style={{marginLeft: 5}}></span>
-                                                        </Button>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <Button styleType={'secondary'}
-                                                                onClick={()=>{
-                                                                    //encapsulado en un BM 420 am
-                                                                    actions.user.followUser(loggedUser.Email, user.Email)
-                                                                    actions.app.validate()
-                                                                }}
-                                                                style={{height: 40, ...followStyle}}>
-                                                            Seguir
-                                                            <span className="fas fa-user-plus"
-                                                                  style={{marginLeft: 5}}></span>
-                                                        </Button>
-                                                    </>
-                                                )
-                                            }
-                                            <ButtonLink
-                                                to={'messages/new/' + user.Email}
-                                                styleType={'secondary'}
-                                                style={{height: 40, ...likeStyle}}>
-                                                buttonStyle={{height: 40, ...likeStyle}}>
-                                                Enviar mensaje
-                                                <span style={{marginLeft: 5}}
-                                                      className=" far fa-paper-plane"></span>
-                                            </ButtonLink>
-                                        </>
-                                    )}
+                    {loggedUser !== null &&
+                    <>
+                        {
+                            loggedUser.Email === user.Email ?
 
-                        </>}
+                                (
+                                    <Button styleType={'secondary'} style={{height: 40, width: '100%'}}
+                                            onClick={actions.app.logout}>
+                                        Cerrar Sesion
+                                        <span className="fas fa-sign-out-alt" style={{marginLeft: 5}}></span>
+                                    </Button>
+                                ) : (
+                                    <>
+                                        {
+                                            seguirODejar ? (
+                                                <>
+                                                    <Button styleType={'secondary'}
+                                                            onClick={()=>{
+                                                                actions.users.unfollowUser(loggedUser.Email, user.Email)
+                                                                actions.app.validate()
+                                                            }}
+                                                            style={size.width > 1200 ? {width: '49.5%', marginRight: '0.5%',height: 40} : {marginBottom: 5}}>
+                                                        Dejar de seguir
+                                                        <span className="fas fa-user-times"
+                                                              style={{marginLeft: 5}}></span>
+                                                    </Button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Button styleType={'secondary'}
+                                                            onClick={()=>{
+                                                                //encapsulado en un BM 420 am
+                                                                actions.users.followUser(loggedUser.Email, user.Email)
+                                                                actions.app.validate()
+                                                            }}
+                                                            style={size.width > 1200 ? {width: '49.5%', marginRight: '0.5%',height: 40} : {marginBottom: 5}}>
+                                                        Seguir
+                                                        <span className="fas fa-user-plus"
+                                                              style={{marginLeft: 5}}></span>
+                                                    </Button>
+                                                </>
+                                            )
+                                        }
+                                        <ButtonLink
+                                            to={'/messages/new/' + user.Email}
+                                            styleType={'secondary'}
+                                            style={size.width > 1200 ? {width: '49.5%', marginLeft: '0.5%', height: 40} : {}}
+                                            buttonStyle={size.width > 1200 ? {width: '49.5%', height: 40} : {}}
+                                            >
+                                            Enviar mensaje
+                                            <span style={{marginLeft: 5}}
+                                                  className=" far fa-paper-plane"></span>
+                                        </ButtonLink>
+                                    </>
+                                )}
+                    </>}
+
                     </div>
                 </div>
-
-
             </div>
         </div>
     )
 }
 
-const Profile = ({actions, loggedUser, user, emailUser}) => {
+const Profile = ({actions,isLoading, loggedUser, user, emailUser}) => {
     useEffect(() => {
         actions.users.getUser(emailUser)
     }, [])
@@ -135,6 +158,7 @@ const Profile = ({actions, loggedUser, user, emailUser}) => {
             (
                 <>
                     <ProfileHeader
+                        isLoading={isLoading}
                         loggedUser={loggedUser}
                         user={user}
                         actions={actions}

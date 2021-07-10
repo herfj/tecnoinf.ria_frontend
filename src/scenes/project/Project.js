@@ -21,7 +21,7 @@ const ProjectInfo = ({project}) => {
             <div className="p-data">
                 <div className="p-data-body">
                     <div className="data">
-                        <p><strong>Autor:</strong> <Link to={'/profile'}>{project.author.nombre}</Link></p>
+                        <p><strong>Autor:</strong> <Link to={'/profile/hernan@gmail.com'}>{project.author.nombre}</Link></p>
                         <p><strong>Regíon:</strong> {project.author.ubicacion}</p>
                         <p><strong>Herramientas:</strong> {project.herramientas}</p>
                         <p><strong>Fecha publicación:</strong> {project.fecha}</p>

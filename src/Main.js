@@ -60,7 +60,7 @@ There are many variations of passages of Lorem Ipsum available, but the`,
     }} id={match.params.userId}/>
 )
 const newMessage = ({match})=>(
-<NewMessage id={match.params.email}/>
+<NewMessage email={match.params.email}/>
 )
 
 const register = () =>(
@@ -75,7 +75,7 @@ const editPort = ({match})=>(
 const Main = ({actions})=>{
 
     useEffect(()=>{
-       actions.app.validate()
+       // actions.app.validate()
     },[])
 
         return (

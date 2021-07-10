@@ -42,6 +42,7 @@ export default {
     },
     users:{
         getUser(email){
+            console.log('email',email)
             return axios.get(API_URL + '/api/usuarios/GetUsuario', {
                 headers: headers,
                 params: {

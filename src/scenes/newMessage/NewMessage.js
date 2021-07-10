@@ -16,10 +16,12 @@ const NewMessage = ({actions,loggedUser,email}) => {
     return (
         <Container
             searchbar={false}
+            auth={true}
         >
             <div className={'neutral-container'}>
                 <WriteMessage
                     email={email}
+                    handleSubmit={handleSubmit}
                     backButton={(
                         <ButtonLink
                             to={'/messages'}

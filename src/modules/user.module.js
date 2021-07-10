@@ -43,6 +43,21 @@ export const followUser = (emailseguidor, emailseguido) => {
                     })
 
                 })
+                .catch((err)=>{
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                    dispatch({
+                        type: ACTION_RESPONSE,
+                        actionResponse: {
+                            isError: true,
+                            title: '',
+                            message: err.message,
+                            backToHome: false,
+                        },
+                    })
+                })
         } else {
             dispatch({
                 type: LOADING,
@@ -53,7 +68,7 @@ export const followUser = (emailseguidor, emailseguido) => {
                 actionResponse: {
                     isError: true,
                     title: '',
-                    message: 'ashi',
+                    message: 'no se pudo validar ',
                     backToHome: false,
                 },
             })
@@ -82,6 +97,21 @@ export const unfollowUser = (emailseguidor, emailseguido) => {
                         isLoading: false,
                     })
 
+                })
+                .catch((err)=>{
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                    dispatch({
+                        type: ACTION_RESPONSE,
+                        actionResponse: {
+                            isError: true,
+                            title: '',
+                            message: err.message,
+                            backToHome: false,
+                        },
+                    })
                 })
         } else {
             dispatch({
@@ -123,7 +153,7 @@ export const getUser = (email) => {
 
             })
             .catch((error) => {
-                error.message = responseErrors(error)
+                // error.message = responseErrors(error)
                 console.log(error.message)
                 dispatch({
                     type: LOADING,
@@ -141,7 +171,6 @@ export const getUser = (email) => {
             })
     }
 }
-
 export const actions = {
     getUser,
     followUser,
@@ -153,10 +182,6 @@ export const actions = {
 // ------------------------------------
 
 const ACTION_HANDLERS = {
-    [LOADING]: (state, {isLoading}) => ({
-        ...state,
-        isLoading,
-    }),
     [FETCH_USER]: (state, {user}) => ({
         ...state,
         user,

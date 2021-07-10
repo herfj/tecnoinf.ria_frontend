@@ -15,7 +15,6 @@ const analytics = () => (next) => (action) => {
     event: action.type,
     payload: action.payload,
   })
-
   return next(action)
 }
 

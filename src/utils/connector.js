@@ -32,7 +32,6 @@ import { actions as usersActions } from '../modules/user.module'
 class Connector extends Component {
   render() {
     const { state, actions, children } = this.props
-
     return children({ state, actions })
   }
 }

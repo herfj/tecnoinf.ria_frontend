@@ -87,10 +87,7 @@ const ShowMessage = ({actions, loggedUser, msg, backButton}) => {
     }
 }
 
-const WriteMessage = ({email,backButton}) => {
-    const handleSubmit = (values) => {
-
-    }
+const WriteMessage = ({email,backButton, handleSubmit}) => {
     return (
         <LocalForm
             onSubmit={(values) => handleSubmit(values)}
@@ -98,9 +95,9 @@ const WriteMessage = ({email,backButton}) => {
             <p><strong>Para: {email}</strong></p>
             <p><strong>Mensaje:</strong></p>
             <TextArea
-                model=".message"
-                id="message"
-                name="message"
+                model=".Cuerpo"
+                id="Cuerpo"
+                name="Cuerpo"
                 placeholder="Mensaje"
                 validators={{
                     required,
@@ -112,6 +109,7 @@ const WriteMessage = ({email,backButton}) => {
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 12}}>
                 {backButton}
                 <Button
+                    type={'submit'}
                     styleType={'primary'}
                     style={{
                         width: 180
