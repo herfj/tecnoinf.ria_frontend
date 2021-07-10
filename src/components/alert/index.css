@@ -1,0 +1,19 @@
+.alert {
+    border-radius: 15px;
+    width: 100%;
+}
+
+.warning {
+    border: 2px solid #E77B23;
+    background: #FFA426;
+}
+
+.success {
+    border: 2px solid #2AB3CB;
+    background: #30C5BE;
+}
+
+.danger {
+    border: 2px solid #EE2E31;
+    background: #FF3131;
+}
