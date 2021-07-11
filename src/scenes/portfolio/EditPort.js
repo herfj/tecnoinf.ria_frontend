@@ -12,6 +12,28 @@ import {UserIcon} from "../../components/icon/Icon";
 import {useWindowSize} from "../../helpers/useWindowSize";
 import Container from "../../components/container/Container";
 
+const [baseImage, setBaseImage] = useState("");
+
+const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setBaseImage(base64);
+};
+
+const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
+
+        fileReader.onerror = (error) => {
+            reject(error);
+        };
+    });
+};
 
 const EditPort = ({id}) => {
     const size = useWindowSize();
@@ -30,106 +52,52 @@ const EditPort = ({id}) => {
         //     values.message
         // );
     }
-    const portf = {
+    const page= {
         img: 'https://placekitten.com/1200/800',
         text: "este es el texto de esta paginita del portfolio amigo"
     }
 
     return (
-
         <Container searchbar={false}>
             <div className={'page-index'}>
                 <div className={"page-image"}>
-                    <img alt="" src={portf.img} className={'page-img'}/>
+                    {page.img? <FileInput/> : ''}
                 </div>
                 <div className={"page-text"}>
-                    {portf.text}
+                    {page.img? <img alt="" src={page.img} className={'page-img'}/> : <TextInput placeholder={page.text}/>}
                 </div>
                 <div className={"page-delete"}>
-                    {portf.img && <Button
+                    <Button
                         style={{marginTop: '20%'}}
                         styleType={'primary'}
-                    >Borrar imagen</Button>}
-                    {portf.text && <Button
-                        style={{marginTop: '20%'}}
-                        styleType={'primary'}
-                    >Borrar Texto</Button>}
+                    >{page.img? 'editar imagen':'editar texto'}</Button>
                     <Button
                         style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar pagina</Button>
                 </div>
             </div>
-            <div className={'page-index'}
-                 style={{marginTop: '3%'}}
-            >
+            <div className={'page-index'}>
                 <div className={"page-image"}>
-                    <img alt="" src={portf.img} className={'page-img'}/>
+                    <input
+                        type="file"
+                        onChange={(e) => {
+                            uploadImage(e);
+                        }}
+                    />
                 </div>
                 <div className={"page-text"}>
-                    {portf.text}
+                     <TextInput/>
                 </div>
                 <div className={"page-delete"}>
-                    {portf.img && <Button
-                        style={{marginTop: '20%'}}
-                        styleType={'primary'}
-                    >Borrar imagen</Button>}
-                    {portf.text && <Button
-                        style={{marginTop: '20%'}}
-                        styleType={'primary'}
-                    >Borrar Texto</Button>}
+                    //falta control para q no aparezcan los dos botonoes a la vez
                     <Button
                         style={{marginTop: '20%'}}
                         styleType={'primary'}
-                    >Borrar pagina</Button>
-                </div>
-            </div>
-            <div className={'page-index'}
-                 style={{marginTop: '3%'}}
-            >
-                <div className={"page-image"}>
-                    <img alt="" src={portf.img} className={'page-img'}/>
-                </div>
-                <div className={"page-text"}>
-                    {portf.text}
-                </div>
-                <div className={"page-delete"}>
-                    {portf.img && <Button
-                        style={{marginTop: '20%'}}
-                        styleType={'primary'}
-                    >Borrar imagen</Button>}
-                    {portf.text && <Button
-                        style={{marginTop: '20%'}}
-                        styleType={'primary'}
-                    >Borrar Texto</Button>}
-                    <Button
-                        style={{marginTop: '20%'}}
-                        styleType={'primary'}
-                    >Borrar pagina</Button>
-                </div>
-            </div>
-            <div className={'page-index'}
-                 style={{marginTop: '3%'}}
-            >
-                <div className={"page-image"}>
-                    <img alt="" src={portf.img} className={'page-img'}/>
-                </div>
-                <div className={"page-text"}>
-                    {portf.text}
-                </div>
-                <div className={"page-delete"}>
-                    {portf.img && <Button
-                        style={{marginTop: '20%'}}
-                        styleType={'primary'}
-                    >Borrar imagen</Button>}
-                    {portf.text && <Button
-                        style={{marginTop: '20%'}}
-                        styleType={'primary'}
-                    >Borrar Texto</Button>}
-                    <Button
-                        style={{marginTop: '20%'}}
-                        styleType={'primary'}
-                    >Borrar pagina</Button>
+                    >add image</Button><Button
+                    style={{marginTop: '20%'}}
+                    styleType={'primary'}
+                    >add text</Button>
                 </div>
             </div>
         </Container>
