@@ -59,16 +59,18 @@ const Checkbox = ({style, value}) =>{
     )
 }
 
-const FileInput = ({place ,style, name, value}) => {
+const FileInput = ({
+                       place,
+                       style,
+                       name, value}) => {
     return(
         <>
 
-            <Control.text
+            <Control.file
                 model={"."+name}
                 id={name}
                 name={name}
                 placeholder={place}
-                type='file'
                 className="text-input"
                 style={style}
 

@@ -41,6 +41,12 @@ export default {
         },
     },
     users:{
+        updateUser(data) {
+            console.log('user a mandar', data)
+            return axios.post(API_URL + '/api/usuarios/UpdateUsuario', data, {
+                headers: headers
+            })
+        },
         getUser(email){
             console.log('email',email)
             return axios.get(API_URL + '/api/usuarios/GetUsuario', {
@@ -107,6 +113,12 @@ export default {
         },
 
 
+    },
+    projects: {
+        fetchAll(){
+            return axios.get(API_URL + '/api/proyecto/GetAllProyect', {
+                headers: headers,
+            })
+        },
     }
-    
 }

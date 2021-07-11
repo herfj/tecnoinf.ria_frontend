@@ -3,8 +3,10 @@ import {WriteMessage} from "../../components/message/Message";
 import {ButtonLink} from "../../components/button/Button";
 import React from "react";
 import Connector from "../../utils/connector";
+import {useHistory} from "react-router-dom";
 
 const NewMessage = ({actions,loggedUser,email}) => {
+    const history = useHistory();
     const handleSubmit = (values) => {
         const message = {
             Cuerpo: values.Cuerpo,
@@ -12,6 +14,7 @@ const NewMessage = ({actions,loggedUser,email}) => {
             Remitente: email,
         }
         actions.messages.sendMessage({message: message})
+        history.push("/messages");
     }
     return (
         <Container

@@ -45,7 +45,7 @@ const ProfileHeader = ({actions,isLoading, user, loggedUser}) => {
             className={'neutral-container'}
         >
             <h1>
-                {user.Nombre}
+                {user.Nombre}{' '}{user.Apellido}
             </h1>
             <div className="profile-data">
 

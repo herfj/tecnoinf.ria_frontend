@@ -6,6 +6,7 @@ import logger from 'redux-logger'
 import app from '../modules/app.module'
 import messages from '../modules/message.module'
 import users from '../modules/user.module'
+import projects from '../modules/project.module'
 import {createForms} from "react-redux-form";
 import {InitialLogin, InitialRegister} from "../modules/form.module";
 
@@ -24,6 +25,7 @@ const configureStore = (initialState = {}) => {
     app,
     messages,
     users,
+    projects,
     ...createForms({ login: InitialLogin, register: InitialRegister }),
   })
 

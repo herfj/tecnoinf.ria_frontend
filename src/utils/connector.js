@@ -28,6 +28,7 @@ import { bindActionCreators } from 'redux'
 import { actions as appActions } from '../modules/app.module'
 import { actions as messagesActions } from '../modules/message.module'
 import { actions as usersActions } from '../modules/user.module'
+import { actions as projectsActions } from '../modules/project.module'
 
 class Connector extends Component {
   render() {
@@ -42,6 +43,7 @@ const mapDispatchToProps = (dispatch) => {
     { label: 'app', value: appActions },
     { label: 'messages', value: messagesActions },
     { label: 'users', value: usersActions },
+    { label: 'projects', value: projectsActions },
 
   ]
 

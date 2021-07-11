@@ -35,17 +35,14 @@ const List = ({list, responsive = true, style, columnStyle, grid = true}) => {
     )
 }
 
-const ProjectList = ({}) => {
+const ProjectList = ({projects}) => {
 
-    const list = [
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-        <ProjectCard/>,
-    ]
+    const handleList =()=>{
+        return projects.map((p)=>{
+            return <ProjectCard project={p}/>
+        })
+    }
+    const list = projects && projects.length>0 ? handleList() : []
 
     return (
         <List

@@ -1,13 +1,32 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import Container from "../../components/container/Container";
 import {ProjectList} from "../../components/list/List";
+import Connector from "../../utils/connector";
 
-const Home = ({}) => {
+const Home = ({actions, projects}) => {
+
+    useEffect(()=>{
+        actions.projects.getAll();
+    },[])
+
     return (
         <Container>
-            <ProjectList/>
+            {projects && projects.length> 0 ? (
+                <ProjectList projects={projects}/>
+            ):(
+                <h2>No hay proyectos para mostrar</h2>
+            )}
         </Container>
     )
 }
 
-export default Home;
+
+export default (props) => (
+    <Connector>
+        {({actions, state: {app, projects}}) => {
+            return (
+                <Home actions={actions}  {...app} {...projects} {...props} />
+            )
+        }}
+    </Connector>
+)

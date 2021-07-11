@@ -37,7 +37,24 @@ const Routes = ({loggedUser,extraButtons = null, isMobil = false}) => {
                         >
                             Mensajes
                         </ButtonLink>
-
+                        <ButtonLink
+                            style={style}
+                            to='/create_project'
+                        >
+                            Crear Proyecto
+                        </ButtonLink>
+                        <ButtonLink
+                            style={style}
+                            to={'/profile/' + loggedUser.Email}
+                        >
+                            Mis Proyectos
+                        </ButtonLink>
+                        <ButtonLink
+                            style={style}
+                            to={'/valorados'}
+                        >
+                            Likes
+                        </ButtonLink>
                     </>
                 )
             }
@@ -70,7 +87,7 @@ const Navbar = ({loggedUser}) => {
                                     loggedUser={loggedUser}
                                 />
                                 <div className={'navbar-l-btn'}>
-                                    {loggedUser ? (
+                                    {loggedUser!==null ? (
                                         <>
                                             <ButtonLink
                                                 to={'/profile/'+loggedUser.Email}

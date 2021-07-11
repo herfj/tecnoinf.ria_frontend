@@ -6,8 +6,15 @@ import {SelectCountry} from "../../components/forms/Select";
 import {Form, actions} from "react-redux-form";
 import {Link} from "react-router-dom";
 import Connector from "../../utils/connector";
+import {useHistory} from "react-router-dom";
 
 const Register = ({loggedUser,actions}) => {
+    const history = useHistory();
+    useEffect(() => {
+        if (loggedUser !== null) {
+            history.push("/home");
+        }
+    }, [loggedUser])
 
     const handleSubmit = (values) => {
         actions.app.signUp({newUser: values})
@@ -32,24 +39,24 @@ const Register = ({loggedUser,actions}) => {
                     <Form
                         model="register"
                         onSubmit={(values) => handleSubmit(values)}
-                        >
+                    >
                         <EmailInput/>
                         <div className={"register-content"}>
                             <div className={"content-left"}>
                                 <NameInput/>
                             </div>
                             <div className={"content-der"}
-                                 style={{marginLeft:"4%"}}>
+                                 style={{marginLeft: "4%"}}>
                                 <SurnameInput/>
                             </div>
                         </div>
-                        <PwdInput style={{marginTop:12}}/>
+                        <PwdInput style={{marginTop: 12}}/>
                         <DateInput
                             model={'.Fecha_nac'}
                             id={'Fecha_nac'}
                             name={'Fecha_nac'}
-                            style={{marginTop:12}}/>
-                        <SelectCountry style={{marginTop:12}}/>
+                            style={{marginTop: 12}}/>
+                        <SelectCountry style={{marginTop: 12}}/>
                         <Button
                             styleType={'primary'}
                             type="submit"

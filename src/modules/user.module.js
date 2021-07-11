@@ -2,12 +2,14 @@ import services from '../api/services'
 import {responseErrors} from '../helpers/handleErrors'
 import {initialActionResponse} from "./app.module";
 import {validEmail} from "../helpers/formValidator";
+import {validateForUpdateUser, validateSignUpUser} from "../helpers/validations";
 
 // ------------------------------------
 // Constants
 // ------------------------------------
 
 const LOADING = 'LOADING'
+const LOGGED_IN = 'LOGGED_IN'
 const FETCH_USER = 'FETCH_USER'
 const ACTION_RESPONSE = 'ACTION_RESPONSE'
 
@@ -171,10 +173,66 @@ export const getUser = (email) => {
             })
     }
 }
+export const updateUser = ({newUser, isLoading = true}) => {
+    return (dispatch) => {
+        dispatch({
+            type: LOADING,
+            isLoading: isLoading,
+        })
+        dispatch({
+            type: ACTION_RESPONSE,
+            actionResponse: initialActionResponse,
+        })
+        const user = validateForUpdateUser(newUser)
+        if (user) {
+            services.users.updateUser(user)
+                .then(async (response) => {
+                    dispatch({
+                        type: LOGGED_IN,
+                        loggedIn: true,
+                        loggedUser: response.data,
+                    })
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                })
+                .catch((error) => {
+                    // error.message = responseErrors(error)
+                    console.log('ERROR:', error)
+                    dispatch({
+                        type: LOGGED_IN,
+                        loggedIn: false,
+                        loggedUser: null,
+                    })
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                    dispatch({
+                        type: ACTION_RESPONSE,
+                        actionResponse: {
+                            isError: true,
+                            title: '',
+                            message: error.message,
+                            backToHome: false,
+                        },
+                    })
+
+                })
+        } else {
+            dispatch({
+                type: LOADING,
+                isLoading: false,
+            })
+        }
+    }
+}
 export const actions = {
     getUser,
     followUser,
     unfollowUser,
+    updateUser
 }
 
 // ------------------------------------

@@ -36,9 +36,8 @@ export const validateMess = (message) => {
     } else {
         return msg;
     }
-
-
 }
+
 
 export const validateSignUpUser = (possibleUser) => {
     let user = {
@@ -87,6 +86,35 @@ export const validateSignUpUser = (possibleUser) => {
         return false
     } else {
         return user
+    }
+}
+export const validateForUpdateUser = (possibleUser) => {
+
+    let errorValidated = false
+
+    if (!isString(possibleUser.Nombre)) {
+        errorValidated = true
+    }
+    if (!isString(possibleUser.Apellido)) {
+        errorValidated = true
+    }
+    if (!validEmail(possibleUser.Email)) {
+        errorValidated = true
+    }
+    if (!isString(possibleUser.Password)) {
+        errorValidated = true
+    }
+    if (!isString(possibleUser.Pais)) {
+        errorValidated = true
+    }
+    if (!isString(possibleUser.Fecha_nac)) {
+        errorValidated = true
+    }
+
+    if (errorValidated) {
+        return false
+    } else {
+        return possibleUser
     }
 }
 

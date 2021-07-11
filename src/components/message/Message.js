@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {MessIcon} from "../icon/Icon";
 import './index.css'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {Button} from "../button/Button";
 import {EmailInput, TextInput} from "../forms/TextInput";
 import {Control, LocalForm, Errors} from "react-redux-form";
@@ -32,6 +32,7 @@ const MessageItem = ({msg, to}) => {
 }
 
 const ShowMessage = ({actions, loggedUser, msg, backButton}) => {
+    const history = useHistory()
     if (loggedUser.Email === msg.Emisor) {
         return (
             <>
@@ -51,6 +52,7 @@ const ShowMessage = ({actions, loggedUser, msg, backButton}) => {
                 Remitente: msg.Emisor,
             }
             actions.messages.sendMessage({message: message})
+            history.push("/messages");
         }
         return (
             <>

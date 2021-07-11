@@ -1,19 +1,43 @@
 .alert {
     border-radius: 15px;
     width: 100%;
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .warning {
     border: 2px solid #E77B23;
-    background: #FFA426;
+    background: #ffb556;
+}
+
+.warning  h1,.warning  p {
+    color: #db6a00;
+    margin-bottom: 0px;
 }
 
 .success {
-    border: 2px solid #2AB3CB;
-    background: #30C5BE;
+    border: 2px solid #30C5BE;
+    background: #64d4ce;
+}
+
+.success h3 , .success p {
+    color: #068972;
+    margin-bottom: 0px;
 }
 
 .danger {
     border: 2px solid #EE2E31;
-    background: #FF3131;
+    background: #f66a6a;
+}
+.danger h1, .danger p {
+    color: #800909;
+    margin-bottom: 0px;
+}
+
+a, a:hover{
+    font-width: bold;
+    color: #04619c;
 }

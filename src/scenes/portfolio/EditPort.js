@@ -30,41 +30,15 @@ const EditPort = ({id}) => {
         //     values.message
         // );
     }
-const portf = {
-    img: 'https://placekitten.com/1200/800',
-    text: "este es el texto de esta paginita del portfolio amigo"
-}
+    const portf = {
+        img: 'https://placekitten.com/1200/800',
+        text: "este es el texto de esta paginita del portfolio amigo"
+    }
 
     return (
 
-        <Container  searchbar={
-            false
-        }>
-        <div className={'page-index'}>
-            <div className={"page-image"}>
-                <img alt="" src={portf.img} className={'page-img'}/>
-            </div>
-            <div className={"page-text"}>
-                {portf.text}
-            </div>
-            <div className={"page-delete"}>
-                { portf.img && <Button
-                    style={{marginTop:'20%'}}
-                    styleType={'primary'}
-                >Borrar imagen</Button>}
-                { portf.text && <Button
-                    style={{marginTop:'20%'}}
-                    styleType={'primary'}
-                >Borrar Texto</Button>}
-                <Button
-                    style={{marginTop:'20%'}}
-                    styleType={'primary'}
-                >Borrar pagina</Button>
-            </div>
-        </div>
-            <div className={'page-index'}
-                 style={{marginTop:'3%'}}
-            >
+        <Container searchbar={false}>
+            <div className={'page-index'}>
                 <div className={"page-image"}>
                     <img alt="" src={portf.img} className={'page-img'}/>
                 </div>
@@ -72,22 +46,22 @@ const portf = {
                     {portf.text}
                 </div>
                 <div className={"page-delete"}>
-                    { portf.img && <Button
-                        style={{marginTop:'20%'}}
+                    {portf.img && <Button
+                        style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar imagen</Button>}
-                    { portf.text && <Button
-                        style={{marginTop:'20%'}}
+                    {portf.text && <Button
+                        style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar Texto</Button>}
                     <Button
-                        style={{marginTop:'20%'}}
+                        style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar pagina</Button>
                 </div>
             </div>
             <div className={'page-index'}
-                 style={{marginTop:'3%'}}
+                 style={{marginTop: '3%'}}
             >
                 <div className={"page-image"}>
                     <img alt="" src={portf.img} className={'page-img'}/>
@@ -96,22 +70,22 @@ const portf = {
                     {portf.text}
                 </div>
                 <div className={"page-delete"}>
-                    { portf.img && <Button
-                        style={{marginTop:'20%'}}
+                    {portf.img && <Button
+                        style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar imagen</Button>}
-                    { portf.text && <Button
-                        style={{marginTop:'20%'}}
+                    {portf.text && <Button
+                        style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar Texto</Button>}
                     <Button
-                        style={{marginTop:'20%'}}
+                        style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar pagina</Button>
                 </div>
             </div>
             <div className={'page-index'}
-                 style={{marginTop:'3%'}}
+                 style={{marginTop: '3%'}}
             >
                 <div className={"page-image"}>
                     <img alt="" src={portf.img} className={'page-img'}/>
@@ -120,16 +94,40 @@ const portf = {
                     {portf.text}
                 </div>
                 <div className={"page-delete"}>
-                    { portf.img && <Button
-                        style={{marginTop:'20%'}}
+                    {portf.img && <Button
+                        style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar imagen</Button>}
-                    { portf.text && <Button
-                        style={{marginTop:'20%'}}
+                    {portf.text && <Button
+                        style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar Texto</Button>}
                     <Button
-                        style={{marginTop:'20%'}}
+                        style={{marginTop: '20%'}}
+                        styleType={'primary'}
+                    >Borrar pagina</Button>
+                </div>
+            </div>
+            <div className={'page-index'}
+                 style={{marginTop: '3%'}}
+            >
+                <div className={"page-image"}>
+                    <img alt="" src={portf.img} className={'page-img'}/>
+                </div>
+                <div className={"page-text"}>
+                    {portf.text}
+                </div>
+                <div className={"page-delete"}>
+                    {portf.img && <Button
+                        style={{marginTop: '20%'}}
+                        styleType={'primary'}
+                    >Borrar imagen</Button>}
+                    {portf.text && <Button
+                        style={{marginTop: '20%'}}
+                        styleType={'primary'}
+                    >Borrar Texto</Button>}
+                    <Button
+                        style={{marginTop: '20%'}}
                         styleType={'primary'}
                     >Borrar pagina</Button>
                 </div>
