@@ -1,79 +1,58 @@
 import React, {useEffect, useState} from "react";
 import './index.css'
 import {Button, ButtonLink} from "../../components/button/Button";
-
 import {EmailInput, PwdInput, DateInput, NameInput, SurnameInput, FileInput} from "../../components/forms/TextInput";
-import {Form, actions} from "react-redux-form";
+import {LocalForm} from "react-redux-form";
 import {SelectCountry} from "../../components/forms/Select";
 import {TextInput} from "../../components/forms/TextInput";
 import {UserIcon} from "../../components/icon/Icon";
-import {useWindowSize} from "../../helpers/useWindowSize";
 import Container from "../../components/container/Container";
+import Connector from "../../utils/connector";
+import TextArea from "../../components/forms/TextArea";
+import {convertBase64} from "../../helpers/handleBase64";
 
 
 const EditUser = ({loggedUser, actions}) => {
-    const user={
-        name: 'Hernan Fabirca',
-            img: 'https://placekitten.com/1200/800',
-            ubicacion: 'Sanca',
-            desc: `What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-Why do we use it
-Where can 
-There are many variations of passages of Lorem Ipsum available, but the`,
-            link: 'https://www.google.com',
-            empresa: 'Cualit',
-            profesion: 'SD Jr',
-            likes: 200,
-            views: 1233,
-            imagen:''
-    }
-    const size = useWindowSize();
+    const [baseImage, setBaseImage] = useState(loggedUser ? loggedUser.imagen : null);
     const handleSubmit = (values) => {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
-        //this.props.resetFeedbackForm();
-        // event.preventDefault();
-        // this.props.postFeedback(
-        //     values.firstname,
-        //     values.lastname,
-        //     values.telnum,
-        //     values.email,
-        //     values.agree,
-        //     values.contactType,
-        //     values.message
-        // );
+        let user = {
+            Nombre:values.Nombre,
+            Apellido: values.Apellido,
+            Email: loggedUser.Email,
+            Password: loggedUser.Password,
+            Pais: values.Pais,
+            Fecha_nac: loggedUser.Fecha_nac,
+            Descripcion: values.Descripcion,
+            Profesion: values.Profesion,
+            Empresa: values.Empresa,
+            Ciudad: values.Ciudad,
+            URL: values.URL,
+            imagen: baseImage,
+        };
+        console.log('handleSubmit USER',user)
+        actions.users.updateUser({
+            updateUser: user
+        })
     }
-    const [baseImage, setBaseImage] = useState("");
 
-    const uploadImage = async (e) => {
-        const file = e.target.files[0];
+
+    const uploadImage = async (event) => {
+        const file = event.target.files[0];
         const base64 = await convertBase64(file);
         setBaseImage(base64);
+        console.log('base64',baseImage);
     };
-    const convertBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
 
-            fileReader.onload = () => {
-                resolve(fileReader.result);
-            };
 
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        });
-    };
 
     return (
 
-            <Container  searchbar={
-                false
-            }>
-
-                <Form
-                    model="edituser"
+            <Container
+                searchbar={false}
+                auth={true}
+            >
+                {loggedUser!==null &&
+                <LocalForm
                     onSubmit={(values) => handleSubmit(values)}
                 >
                     <div className={'edit-wrapper'}>
@@ -82,8 +61,9 @@ There are many variations of passages of Lorem Ipsum available, but the`,
                             <div style={{display:"flex", flexDirection: 'column', alignSelf: 'center'}}>
                                 <div style={{ display:"flex",justifyContent:"center"}}>
                                     <UserIcon
-                                        img={user.img}
-                                        name={user.name}
+                                        // img={'https://placekitten.com/1200/800'}
+                                        img={baseImage}
+                                        name={loggedUser.Nombre}
                                         size={'70%'}
                                         height={'auto'}
                                         rounded={true}
@@ -100,45 +80,52 @@ There are many variations of passages of Lorem Ipsum available, but the`,
                         </div>
 
                         <div className={"others-edit"}>
-
                             <div className={"register-content"}>
                                 <div className={"content-left"}>
-                                    <NameInput/>
+                                    <NameInput
+                                        defaultValue={loggedUser.Nombre}
+                                    />
                                 </div>
                                 <div className={"content-der"}
                                      style={{marginLeft: "4%"}}>
-                                    <SurnameInput/>
+                                    <SurnameInput
+                                        defaultValue={loggedUser.Apellido}
+                                    />
                                 </div>
                             </div>
                             <TextInput
-                                model=".prof"
-                                id="prof"
-                                name="prof"
+                                model=".Profesion"
+                                id="Profesion"
+                                name="Profesion"
                                 style={{marginTop: 12}}
                                 placeholder="Profesion"
+                                defaultValue={loggedUser.Profesion ? loggedUser.Profesion : '' }
                                 validators={{}}
                                 messages={{}}
                             />
+
                             <TextInput
-                                model=".empresa"
-                                id="empresa"
-                                name="esmpresa"
+                                model=".Empresa"
+                                id="Empresa"
+                                name="Empresa"
                                 style={{marginTop: 12}}
                                 placeholder="Empresa"
+                                defaultValue={loggedUser.Empresa ? loggedUser.Empresa : '' }
                                 validators={{}}
                                 messages={{}}
                             />
 
                             <div className={"register-content"}>
                                 <div className={"content-left"}>
-                                    <SelectCountry value={"Uruguay"}/>
+                                    <SelectCountry defaultValue={loggedUser.Pais ? loggedUser.Pais : "Uruguay"}/>
                                 </div>
                                 <div className={"content-der"}
                                      style={{marginLeft: "4%"}}>
                                     <TextInput
-                                        model=".city"
-                                        id="city"
-                                        name="city"
+                                        defaultValue={loggedUser.Ciudad ? loggedUser.Ciudad : '' }
+                                        model=".Ciudad"
+                                        id="Ciudad"
+                                        name="Ciudad"
                                         placeholder="Ciudad"
                                         validators={{}}
                                         messages={{}}
@@ -146,11 +133,22 @@ There are many variations of passages of Lorem Ipsum available, but the`,
                                 </div>
                             </div>
                             <TextInput
-                                model=".url"
-                                id="url"
-                                name="url"
+                                defaultValue={loggedUser.URL ? loggedUser.URL : '' }
+                                model=".URL"
+                                id="URL"
+                                name="URL"
                                 style={{marginTop: 12}}
                                 placeholder="URL"
+                                validators={{}}
+                                messages={{}}
+                            />
+                            <TextArea
+                                model=".Descripcion"
+                                id="Descripcion"
+                                name="Descripcion"
+                                style={{marginTop: 12}}
+                                placeholder="Descripcion"
+                                defaultValue={loggedUser.Descripcion ? loggedUser.Descripcion : '' }
                                 validators={{}}
                                 messages={{}}
                             />
@@ -162,15 +160,19 @@ There are many variations of passages of Lorem Ipsum available, but the`,
                                 Editar perfil
                             </Button>
                         </div>
-
-
                     </div>
-                </Form>
-
+                </LocalForm>
+                }
             </Container>
-
-
     )
 }
 
-export default EditUser;
+export default (props) => (
+    <Connector>
+        {({ actions, state: { app } }) => {
+            return (
+                <EditUser actions={actions}  {...app} {...props} />
+            )
+        }}
+    </Connector>
+)

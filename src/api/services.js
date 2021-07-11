@@ -34,7 +34,6 @@ export default {
             })
         },
         signUp(data) {
-            console.log('coso a mandar', data)
             return axios.post(API_URL + '/api/usuarios/CreateUsuario', data, {
                 headers: headers
             })
@@ -43,7 +42,7 @@ export default {
     users:{
         updateUser(data) {
             console.log('user a mandar', data)
-            return axios.post(API_URL + '/api/usuarios/UpdateUsuario', data, {
+            return axios.put(API_URL + '/api/usuarios/UpdateUsuario', data, {
                 headers: headers
             })
         },
@@ -120,5 +119,18 @@ export default {
                 headers: headers,
             })
         },
+        fetchProject(projectTitle){
+            return axios.get(API_URL + '/api/proyecto/GetProyect', {
+                headers: headers,
+                params: {
+                    'titulo': projectTitle
+                }
+            })
+        },
+        postProject(project){
+            return axios.post(API_URL + '/api/proyecto/CreateProyecto', project,{
+                headers: headers,
+            })
+        }
     }
 }

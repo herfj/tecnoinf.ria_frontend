@@ -111,7 +111,6 @@ export const validate = () => {
         }
     }
 }
-
 export const authenticate = (email, pass) => {
     return (dispatch) => {
         dispatch({
@@ -163,7 +162,6 @@ export const authenticate = (email, pass) => {
         }
     }
 }
-
 export const logout = () => {
     return async (dispatch) => {
         dispatch({
@@ -237,7 +235,6 @@ export const signUp = ({newUser, isLoading = true}) => {
         }
     }
 }
-
 export const isLoading = (isLoading) => (dispatch) =>
     dispatch({
         type: LOADING,

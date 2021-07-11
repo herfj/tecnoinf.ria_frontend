@@ -1,24 +1,24 @@
 import React from "react";
-import {Control,  Errors} from "react-redux-form";
+import {Control, Errors} from "react-redux-form";
 import "./index.css";
 
 import {required, minLength, maxLength, validEmail} from "../../helpers/formValidator";
 
 const TextInput = ({
-                   style,
-                   model = ".text",
-                   id = "text",
-                   name = "text",
-                   placeholder = "",
-                   className = "input",
-                   validators = {
-                       required,
-                   },
-                   messages = {
-                       required: "Campo Requerido",
-                   },
-                   ...props
-               }) => {
+                       style,
+                       model = ".text",
+                       id = "text",
+                       name = "text",
+                       placeholder = "",
+                       className = "input",
+                       validators = {
+                           required,
+                       },
+                       messages = {
+                           required: "Campo Requerido",
+                       },
+                       ...props
+                   }) => {
     return (
         <>
             <Control.text
@@ -41,20 +41,19 @@ const TextInput = ({
         </>
     )
 }
-const Checkbox = ({style, value}) =>{
+
+const Checkbox = ({style, model, id,name, ...props}) => {
     return (
         <>
-            <Control.text
-                model={"."+value}
-                id={'category'+value}
-                name={'category'+value}
-                value={value}
+            <Control.checkbox
+                model={"." + model}
+                id={id}
+                name={name}
                 type='checkbox'
                 className="text-input"
-
-
+                {...props}
             />
-            <label style={style} htmlFor={value}>{value}</label>
+            <label style={style} htmlFor={id}>{name}</label>
         </>
     )
 }
@@ -62,22 +61,23 @@ const Checkbox = ({style, value}) =>{
 const FileInput = ({
                        place,
                        style,
-                       name, value}) => {
-    return(
+                       name,
+                       ...props
+                   }) => {
+    return (
         <>
-
             <Control.file
-                model={"."+name}
+                model={"." + name}
                 id={name}
                 name={name}
                 placeholder={place}
                 className="text-input"
                 style={style}
-
+                {...props}
             />
             <Errors
                 className="text-danger"
-                model={"."+name}
+                model={"." + name}
                 show="touched"
             />
 
@@ -85,7 +85,7 @@ const FileInput = ({
     )
 }
 
-const EmailInput = ({style}) => {
+const EmailInput = ({style, ...props}) => {
     return (
         <>
             <TextInput
@@ -102,6 +102,7 @@ const EmailInput = ({style}) => {
                 messages={{
                     required: "Email requerido",
                 }}
+                {...props}
             />
             <Errors
                 className="text-danger"
@@ -115,7 +116,7 @@ const EmailInput = ({style}) => {
     )
 }
 
-const NameInput = ({style}) => {
+const NameInput = ({style, ...props}) => {
     return (
         <TextInput
             model=".Nombre"
@@ -130,11 +131,12 @@ const NameInput = ({style}) => {
             messages={{
                 required: "Campo Requerido",
             }}
+            {...props}
         />
     )
 }
 
-const SurnameInput = ({style}) => {
+const SurnameInput = ({style, ...props}) => {
     return (
         <TextInput
             model=".Apellido"
@@ -149,11 +151,12 @@ const SurnameInput = ({style}) => {
             messages={{
                 required: "Campo Requerido",
             }}
+            {...props}
         />
     )
 }
 
-const PwdInput = ({style}) => {
+const PwdInput = ({style, ...props}) => {
     return (
         <TextInput
             model=".Password"
@@ -179,7 +182,9 @@ const DateInput = ({
                        name = "date",
                        placeholder = "Fecha",
                        className = "input",
-                       style}) => {
+                       style,
+                       ...props
+                   }) => {
     return (
         <TextInput
             model={model}
@@ -196,8 +201,9 @@ const DateInput = ({
                 required: "Requerido",
 
             }}
+            {...props}
         />
     )
 }
 
-export {EmailInput,Checkbox, PwdInput, TextInput, DateInput, NameInput, SurnameInput, FileInput}
+export {EmailInput, Checkbox, PwdInput, TextInput, DateInput, NameInput, SurnameInput, FileInput}

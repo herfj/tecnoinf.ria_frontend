@@ -1,137 +1,145 @@
 import React, {useEffect, useState} from "react";
 import '../project/index.css'
 import {Button, ButtonLink} from "../../components/button/Button";
-
-import {EmailInput, PwdInput, DateInput, NameInput, SurnameInput ,Checkbox, FileInput} from "../../components/forms/TextInput";
-import {Form, actions} from "react-redux-form";
-import {SelectCountry} from "../../components/forms/Select";
-import {Link} from "react-router-dom";
+import {
+    EmailInput,
+    PwdInput,
+    DateInput,
+    NameInput,
+    SurnameInput,
+    Checkbox,
+    FileInput
+} from "../../components/forms/TextInput";
+import {LocalForm} from "react-redux-form";
 import {required} from "../../helpers/formValidator";
 import {TextInput} from "../../components/forms/TextInput";
-import {UserIcon} from "../../components/icon/Icon";
 import {useWindowSize} from "../../helpers/useWindowSize";
 import Container from "../../components/container/Container";
+import {catgoriesOptions} from "../../helpers/consts";
+import {convertBase64} from "../../helpers/handleBase64";
+import Connector from "../../utils/connector";
+import {validateCreateProject} from "../../helpers/validations";
 
+const CreateProject = ({loggerUser}) => {
+    const [baseImage, setBaseImage] = useState('');
 
-const CreateProject = ({user}) => {
     const size = useWindowSize();
+
     const handleSubmit = (values) => {
         console.log("Current State is: " + JSON.stringify(values));
         alert("Current State is: " + JSON.stringify(values));
-        //this.props.resetFeedbackForm();
-        // event.preventDefault();
-        // this.props.postFeedback(
-        //     values.firstname,
-        //     values.lastname,
-        //     values.telnum,
-        //     values.email,
-        //     values.agree,
-        //     values.contactType,
-        //     values.message
-        // );
+        validateCreateProject(values)
     }
 
+    const uploadImage = async (event) => {
+        const file = event.target.files[0];
+        const base64 = await convertBase64(file);
+        setBaseImage(base64);
+        console.log('base64', baseImage);
+    };
+
     return (
-
-        <Container  searchbar={
-            false
-        }>
-
-            <Form
-                model="edituser"
+        <Container
+            searchbar={false}
+            auth={true}
+        >
+            <LocalForm
                 onSubmit={(values) => handleSubmit(values)}
             >
                 <div className={'edit-wrapper'}>
-
-                    <div style={{display:"flex",justifyContent:"center",alignContent:"center"}} className={'image-edit'}>
-                        <div style={{display:"block"}}>
-                            <div style={{ display:"flex",justifyContent:"center"}}>
-                              <h3>Portada del proyecto</h3>
+                    <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}
+                         className={'image-edit'}>
+                        <div style={{display: "block"}}>
+                            <div style={{display: "flex", justifyContent: "center",}}>
+                                <h3>Portada del proyecto</h3>
                             </div>
-                            <div style={{marginTop:'10%', display:"flex",justifyContent:"center"}}>
-                                <FileInput/>
+                            {baseImage !== '' &&
+                            <div style={{display: "flex", justifyContent: "center", flexDirection: "row"}}>
+                                <div className={'card-img'} style={{
+                                    backgroundImage: `url("${baseImage}")`,
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundSize: 'cover',
+                                }}/>
+                            </div>
+                            }
+                            <div style={{marginTop: '10%', display: "flex", justifyContent: "center"}}>
+                                <FileInput
+                                    name={'Imagen'}
+                                    place={'Imagen'}
+                                    onChange={uploadImage}
+                                />
                             </div>
 
                         </div>
                     </div>
 
                     <div className={"others-edit"}>
-
                         <TextInput
-                            model=".title"
-                            id="title"
-                            name="title"
+                            model=".Titulo"
+                            id="Titulo"
+                            name="Titulo"
                             style={{marginTop: 16}}
                             placeholder="Titulo del proyecto"
                             validators={{
                                 required,
                             }}
                             messages={{
-                                required:'Se debe ingresar un titulo'
+                                required: 'Se debe ingresar un titulo'
                             }}
                         />
                         <TextInput
-                            model=".tags"
-                            id="tags"
-                            name="tags"
+                            model=".Etiquetas"
+                            id="Etiquetas"
+                            name="Etiquetas"
                             style={{marginTop: 16}}
-                            placeholder="Etiquetas (Ingresar cada etiqueta entre '' '' si son mas de una)"
-                            validators={{required
-                            }}
-                            messages={{
-                                required:'Se debe ingresar al menos una etiqueta'
-                            }}
-                        />
-
-                        <TextInput
-                            model=".tools"
-                            id="tools"
-                            name="tools"
-                            style={{marginTop: 16}}
-                            placeholder="Herramientas utilizadas"
+                            placeholder="Etiquetas (Separe cada etiqueta con '';'' si son mas de una)"
                             validators={{
                                 required
                             }}
                             messages={{
-                                required:'Se debe ingresar al menos una herramienta'
+                                required: 'Se debe ingresar al menos una etiqueta'
                             }}
                         />
+
+                        <TextInput
+                            model=".Herramientas"
+                            id="Herramientas"
+                            name="Herramientas"
+                            style={{marginTop: 16}}
+                            placeholder="Herramientas utilizadas (Separe cada herramientas con '';'' si son mas de una)"
+                            validators={{
+                                required
+                            }}
+                            messages={{
+                                required: 'Se debe ingresar al menos una herramienta'
+                            }}
+                        />
+
+                        <label style={{marginTop: 5,marginLeft: 5, display: 'block'}}>Para separar las etiquestas y/o herramientas ingrese un ";" despues de la misma </label>
                         <h4>Categorias:</h4>
                         <div>
-                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-                            <Checkbox style={{marginRight:'3%'}} value={"insta"} />
-
+                            {catgoriesOptions.map((cat) => (<Checkbox style={{marginRight: '3%'}} model={cat.value} name={cat.key} id={cat.value}/>))}
                         </div>
-
 
 
                         <ButtonLink
                             styleType={'outline'}
                             type="button"
                             to={'/home'}
-                            buttonStyle={{width: '45%',height:45,marginTop: 20, marginRight:'10%'}}
+                            buttonStyle={{width: '45%', height: 45, marginTop: 20, marginRight: '10%'}}
                         >
                             Volver
                         </ButtonLink>
                         <Button
                             styleType={'primary'}
                             type="submit"
-                            style={{width: '45%',marginTop: 20}}
+                            style={{width: '45%', marginTop: 20}}
                         >
-                           Crear Proyecto
+                            Crear Proyecto
                         </Button>
                     </div>
-
-
                 </div>
-            </Form>
+            </LocalForm>
 
         </Container>
 
@@ -139,4 +147,13 @@ const CreateProject = ({user}) => {
     )
 }
 
-export default CreateProject;
+
+export default (props) => (
+    <Connector>
+        {({actions, state: {app}}) => {
+            return (
+                <CreateProject actions={actions}  {...app} {...props} />
+            )
+        }}
+    </Connector>
+)

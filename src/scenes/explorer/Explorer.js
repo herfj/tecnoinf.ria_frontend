@@ -4,7 +4,8 @@ import {ProjectList} from "../../components/list/List";
 import './index.css'
 import Searchbar from "../../components/searchbar/Searchbar";
 import {useWindowSize} from "../../helpers/useWindowSize";
-import {Button, SelectButton} from '../../components/button/Button'
+import {ButtonLink, SelectButton} from '../../components/button/Button'
+import {catgoriesOptions} from "../../helpers/consts";
 
 const SlideBar = ({header, list, selectedItem, callback}) => {
     const size = useWindowSize()
@@ -22,15 +23,19 @@ const SlideBar = ({header, list, selectedItem, callback}) => {
                 {
                     list.map((o) => {
                         return (
-                            <Button
+                            <ButtonLink
                                 styleType={(0 === selectedItem) ? 'primary' : ''}
+                                buttonStyle={{
+                                    marginTop: 5
+                                }}
                                 style={{
                                     marginTop: 5
                                 }}
+                                to={'/explorer/'+o.value}
                                 onPress={()=>callback(o)}
                             >
-                                {o}
-                            </Button>
+                                {o.key}
+                            </ButtonLink>
                         )
                     })
                 }
@@ -40,17 +45,6 @@ const SlideBar = ({header, list, selectedItem, callback}) => {
 }
 const Explorer = ({}) => {
     const size = useWindowSize()
-
-    const catgoriesOptions = [
-        'Diseño Grafico',
-        'Fotografía',
-        'Literatura',
-        'Plastica',
-        'Sonido',
-        'Escultura',
-        '3D',
-        'Arquitctura',
-    ]
 
     const orderByOptions = [
         'Recomendado',

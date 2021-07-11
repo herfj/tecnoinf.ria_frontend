@@ -173,7 +173,7 @@ export const getUser = (email) => {
             })
     }
 }
-export const updateUser = ({newUser, isLoading = true}) => {
+export const updateUser = ({updateUser, isLoading = true}) => {
     return (dispatch) => {
         dispatch({
             type: LOADING,
@@ -183,8 +183,10 @@ export const updateUser = ({newUser, isLoading = true}) => {
             type: ACTION_RESPONSE,
             actionResponse: initialActionResponse,
         })
-        const user = validateForUpdateUser(newUser)
+        const user = validateForUpdateUser(updateUser)
+        console.log('primer check',user)
         if (user) {
+            console.log('paso primer check',user)
             services.users.updateUser(user)
                 .then(async (response) => {
                     dispatch({

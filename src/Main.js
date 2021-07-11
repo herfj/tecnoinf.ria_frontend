@@ -68,23 +68,17 @@ const FileUploadPage = ()=>{
     const [isSelected,setIsSelected]=useState(false)
 
     const changeHandler = (event) => {
-
         setSelectedFile(event.target.files[0]);
-
         setIsSelected(true);
-
     };
 
 
     const handleSubmission = () => {
-
     };
 
 
     return(
-
         <div>
-
             <input type="file" name="file" onChange={changeHandler} />
 
             {isSelected ? (
@@ -124,6 +118,7 @@ const FileUploadPage = ()=>{
     )
 
 }
+
 const Main = ({actions})=>{
 
     useEffect(()=>{

@@ -1,7 +1,6 @@
 import services from '../api/services'
-import {responseErrors} from '../helpers/handleErrors'
-import {validateLogin, validateSignUpUser} from "../helpers/validations";
 import {initialActionResponse} from "./app.module";
+import {validateCreateProject} from "../helpers/validations";
 
 // ------------------------------------
 // Constants
@@ -62,8 +61,101 @@ export const getAll = () => {
     }
 }
 
+export const getProject = (projectTitle) => {
+    return async (dispatch) => {
+        dispatch({
+            type: LOADING,
+            isLoading: true,
+        })
+        dispatch({
+            type: ACTION_RESPONSE,
+            actionResponse: initialActionResponse,
+        })
+        services.projects.fetchProject(projectTitle)
+            .then(async (response) => {
+                await dispatch({
+                    type: FETCH_PROJECT,
+                    project: response.data,
+                })
+                dispatch({
+                    type: LOADING,
+                    isLoading: false,
+                })
+            })
+            .catch((error) => {
+                // error.message = responseErrors(error)
+                console.log(error.message)
+                dispatch({
+                    type: LOADING,
+                    isLoading: false,
+                })
+                dispatch({
+                    type: ACTION_RESPONSE,
+                    actionResponse: {
+                        isError: true,
+                        title: '',
+                        message: error.message,
+                        backToHome: false,
+                    },
+                })
+            })
+    }
+}
+
+export const createProject=(newProject)=>{
+    return (dispatch) =>{
+        return (dispatch) => {
+            dispatch({
+                type: LOADING,
+                isLoading: true,
+            })
+            dispatch({
+                type: ACTION_RESPONSE,
+                actionResponse: initialActionResponse,
+            })
+            const project = validateCreateProject(newProject)
+            if (project) {
+                services.projects.postProject(project)
+                    .then(async (response) => {
+                        dispatch({
+                            type: FETCH_PROJECT,
+                            project: response.data,
+                        })
+                        dispatch({
+                            type: LOADING,
+                            isLoading: false,
+                        })
+                    })
+                    .catch((error) => {
+                        // error.message = responseErrors(error)
+                        console.log('ERROR:', error)
+                        dispatch({
+                            type: LOADING,
+                            isLoading: false,
+                        })
+                        dispatch({
+                            type: ACTION_RESPONSE,
+                            actionResponse: {
+                                isError: true,
+                                title: '',
+                                message: error.message,
+                                backToHome: false,
+                            },
+                        })
+
+                    })
+            } else {
+                dispatch({
+                    type: LOADING,
+                    isLoading: false,
+                })
+            }
+        }
+    }
+}
 
 export const actions = {
+    getProject,
     getAll,
 }
 
@@ -75,6 +167,10 @@ const ACTION_HANDLERS = {
     [FETCH_PROJECTS]: (state, {projects}) => ({
         ...state,
         projects,
+    }),
+    [FETCH_PROJECT]: (state, {project}) => ({
+        ...state,
+        project,
     }),
 }
 

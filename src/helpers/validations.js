@@ -1,4 +1,5 @@
 import {validEmail} from "./formValidator";
+import {catgoriesOptions} from "./consts";
 
 const isString = (str) => {
     return (typeof str === 'string' || str instanceof String)
@@ -7,38 +8,29 @@ const isBoolean = (boo) => {
     return (typeof boo === 'boolean' || boo instanceof Boolean)
 }
 
-export const validateMess = (message) => {
-    let msg = {
-        Fecha: Date.now(),
-        Cuerpo: '',
-        Visto: 0,
-        Emisor: '',
-        Remitente: '',
-    }
-    let errorValidated = false;
-    if (isString(message.Cuerpo)) {
-        msg.Cuerpo = message.Cuerpo;
+export const validateLogin = (email, pass) => {
+    let loginData = {
+        Email: '',
+        Password: '',
+    };
+    let errorValidated = false
+
+    if (validEmail(email)) {
+        loginData.Email = email;
     } else {
-        errorValidated = true;
+        errorValidated = true
     }
-    if (message.Emisor != null && validEmail(message.Emisor)) {
-        msg.Emisor = message.Emisor;
+    if (isString(pass)) {
+        loginData.Password = pass;
     } else {
-        console.log('Emisor')
-    }
-    if (message.Remitente != null && validEmail(message.Remitente)) {
-        msg.Remitente = message.Remitente;
-    } else {
-        errorValidated = true;
+        errorValidated = true
     }
     if (errorValidated) {
-        return false;
+        return false
     } else {
-        return msg;
+        return loginData
     }
 }
-
-
 export const validateSignUpUser = (possibleUser) => {
     let user = {
         Nombre: '',
@@ -47,7 +39,6 @@ export const validateSignUpUser = (possibleUser) => {
         Password: '',
         Pais: '',
         Fecha_nac: '',
-        Descripcion: "",
     };
     let errorValidated = false
 
@@ -89,55 +80,116 @@ export const validateSignUpUser = (possibleUser) => {
     }
 }
 export const validateForUpdateUser = (possibleUser) => {
-
-    let errorValidated = false
-
-    if (!isString(possibleUser.Nombre)) {
-        errorValidated = true
-    }
-    if (!isString(possibleUser.Apellido)) {
-        errorValidated = true
-    }
-    if (!validEmail(possibleUser.Email)) {
-        errorValidated = true
-    }
-    if (!isString(possibleUser.Password)) {
-        errorValidated = true
-    }
-    if (!isString(possibleUser.Pais)) {
-        errorValidated = true
-    }
-    if (!isString(possibleUser.Fecha_nac)) {
-        errorValidated = true
-    }
-
-    if (errorValidated) {
-        return false
+    let possibleU = validateSignUpUser(possibleUser)
+    if (possibleU) {
+        const user = {
+            ...possibleU,
+            Profesion: possibleUser.Profesion ? possibleUser.Profesion : '',
+            Empresa: possibleUser.Empresa ? possibleUser.Empresa : '',
+            Pais: possibleUser.Pais ? possibleUser.Pais : '',
+            Descripcion: possibleUser.Descripcion ? possibleUser.Descripcion : '',
+            Ciudad: possibleUser.Ciudad ? possibleUser.Ciudad : '',
+            URL: possibleUser.URL ? possibleUser.URL : '',
+            imagen: possibleUser.imagen ? possibleUser.imagen : '',
+        }
+        return user;
     } else {
-        return possibleUser
+        return false
     }
 }
 
-export const validateLogin = (email, pass) => {
-    let loginData = {
-        Email: '',
-        Password: '',
-    };
-    let errorValidated = false
-
-    if (validEmail(email)) {
-        loginData.Email = email;
-    } else {
-        errorValidated = true
+export const validateMess = (message) => {
+    let msg = {
+        Fecha: Date.now(),
+        Cuerpo: '',
+        Visto: 0,
+        Emisor: '',
+        Remitente: '',
     }
-    if (isString(pass)) {
-        loginData.Password = pass;
+    let errorValidated = false;
+    if (isString(message.Cuerpo)) {
+        msg.Cuerpo = message.Cuerpo;
     } else {
-        errorValidated = true
+        errorValidated = true;
+    }
+    if (message.Emisor != null && validEmail(message.Emisor)) {
+        msg.Emisor = message.Emisor;
+    } else {
+        console.log('Emisor')
+    }
+    if (message.Remitente != null && validEmail(message.Remitente)) {
+        msg.Remitente = message.Remitente;
+    } else {
+        errorValidated = true;
     }
     if (errorValidated) {
-        return false
+        return false;
     } else {
-        return loginData
+        return msg;
+    }
+}
+
+export const validateCreateProject = (possibleProject) => {
+    const project = {
+        Titulo: '',
+        P: '',
+        Vistas: 0,
+        Autor: "",
+        Fecha_publicada: new Date().toISOString(),
+        Herramientas: [],
+        Proyecto_categorias: [],
+        Etiquetas: [],
+    }
+    let errorValidated = false;
+    const categorias = [
+        {disenio_grafico: possibleProject.disenio_grafico ? true : false},
+        {fotografia: possibleProject.fotografia ? true : false},
+        {literatura: possibleProject.literatura ? true : false},
+        {plastica: possibleProject.plastica ? true : false},
+        {sonido: possibleProject.sonido ? true : false},
+        {escultura: possibleProject.escultura ? true : false},
+        {disenio: possibleProject.disenio ? true : false},
+        {tres_d: possibleProject.tres_d ? true : false},
+        {arquitectura: possibleProject.arquitectura ? true : false},
+    ]
+    project.Proyecto_categorias = categorias.filter((cat, index) => {
+        const key = Object.keys(cat)
+        if (categorias[index][key]) {
+            return {Categoria: key}
+        }
+    })
+    project.Proyecto_categorias=project.Proyecto_categorias.map((o)=>{return {Categoria: Object.keys(o)[0]}})
+    console.log(project.Proyecto_categorias)
+
+    if (isString(possibleProject.Etiquetas)) {
+        const tags = possibleProject.Etiquetas.split(";");
+
+        project.Etiquetas = tags.map((tag) => {
+            return {Etiquetas1: tag.trim()}
+        })
+
+    }
+    console.log(project.Etiquetas)
+    if (isString(possibleProject.Herramientas)) {
+        const herr = possibleProject.Herramientas.split(";");
+        project.Herramientas = herr.map((tag) => {
+            return {Herramienta: tag.trim()}
+        })
+    }
+    console.log(project.Herramientas)
+    if (isString(possibleProject.Titulo)) {
+        project.Titulo = possibleProject.Titulo;
+    } else {
+        errorValidated = true;
+    }
+    if (isString(possibleProject.P)) {
+        project.P = possibleProject.P;
+    } else {
+        errorValidated = true;
+    }
+    if (isString(possibleProject.Autor)) {
+        project.Autor = possibleProject.Autor;
+    } else {
+        errorValidated = true;
     }
 }

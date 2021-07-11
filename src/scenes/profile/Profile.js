@@ -8,7 +8,7 @@ import {ProjectList} from "../../components/list/List";
 import {UserIcon} from "../../components/icon/Icon";
 import Connector from "../../utils/connector";
 
-const ProfileHeader = ({actions,isLoading, user, loggedUser}) => {
+const ProfileHeader = ({actions, isLoading, user, loggedUser}) => {
     const size = useWindowSize();
     const handleVisitas = () => {
         let ret = 0;
@@ -16,11 +16,11 @@ const ProfileHeader = ({actions,isLoading, user, loggedUser}) => {
         return ret;
     }
     const handleSeguirODejar = () => {
-        if(loggedUser!==null){
+        if (loggedUser !== null) {
             let esSeguido = false
-            user.Seguidores.forEach((seguidor)=>{
-                if(loggedUser.Email==seguidor.Email){
-                    esSeguido=true
+            user.Seguidores.forEach((seguidor) => {
+                if (loggedUser.Email == seguidor.Email) {
+                    esSeguido = true
                 }
             })
             return esSeguido;
@@ -29,16 +29,16 @@ const ProfileHeader = ({actions,isLoading, user, loggedUser}) => {
         }
     }
 
-    const [seguirODejar,setSeguirODejar] = useState(handleSeguirODejar())
-    useEffect(()=>{
+    const [seguirODejar, setSeguirODejar] = useState(handleSeguirODejar())
+    useEffect(() => {
         setSeguirODejar(handleSeguirODejar())
-    },[user.Seguidores.length])
-    useEffect(()=>{
+    }, [user.Seguidores.length])
+    useEffect(() => {
         setSeguirODejar(handleSeguirODejar())
-    },[loggedUser])
-    useEffect(()=>{
+    }, [loggedUser])
+    useEffect(() => {
         setSeguirODejar(handleSeguirODejar())
-    },[isLoading])
+    }, [isLoading])
 
     return (
         <div
@@ -52,7 +52,7 @@ const ProfileHeader = ({actions,isLoading, user, loggedUser}) => {
                 <div className="profile-data-body">
                     <div className="img">
                         <UserIcon
-                            img={user.Img ? user.Img : 'https://placekitten.com/700/700'}
+                            img={user.imagen}
                             name={user.Nombre}
                             size={size.width > 1200 ? 180 : 200}
                             rounded={false}
@@ -82,62 +82,98 @@ const ProfileHeader = ({actions,isLoading, user, loggedUser}) => {
                     </div>
                     <div className="footer">
 
-                    {loggedUser !== null &&
-                    <>
-                        {
-                            loggedUser.Email === user.Email ?
+                        {loggedUser !== null &&
+                        <>
+                            {
+                                loggedUser.Email === user.Email ?
 
-                                (
-                                    <Button styleType={'secondary'} style={{height: 40, width: '100%'}}
-                                            onClick={actions.app.logout}>
-                                        Cerrar Sesion
-                                        <span className="fas fa-sign-out-alt" style={{marginLeft: 5}}></span>
-                                    </Button>
-                                ) : (
-                                    <>
-                                        {
-                                            seguirODejar ? (
-                                                <>
-                                                    <Button styleType={'secondary'}
-                                                            onClick={()=>{
-                                                                actions.users.unfollowUser(loggedUser.Email, user.Email)
-                                                                actions.app.validate()
-                                                            }}
-                                                            style={size.width > 1200 ? {width: '49.5%', marginRight: '0.5%',height: 40} : {marginBottom: 5}}>
-                                                        Dejar de seguir
-                                                        <span className="fas fa-user-times"
-                                                              style={{marginLeft: 5}}></span>
-                                                    </Button>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <Button styleType={'secondary'}
-                                                            onClick={()=>{
-                                                                //encapsulado en un BM 420 am
-                                                                actions.users.followUser(loggedUser.Email, user.Email)
-                                                                actions.app.validate()
-                                                            }}
-                                                            style={size.width > 1200 ? {width: '49.5%', marginRight: '0.5%',height: 40} : {marginBottom: 5}}>
-                                                        Seguir
-                                                        <span className="fas fa-user-plus"
-                                                              style={{marginLeft: 5}}></span>
-                                                    </Button>
-                                                </>
-                                            )
-                                        }
-                                        <ButtonLink
-                                            to={'/messages/new/' + user.Email}
-                                            styleType={'secondary'}
-                                            style={size.width > 1200 ? {width: '49.5%', marginLeft: '0.5%', height: 40} : {}}
-                                            buttonStyle={size.width > 1200 ? {width: '49.5%', height: 40} : {}}
+                                    (
+                                        <>
+                                            <ButtonLink styleType={'secondary'}
+                                                        to={'/edit_user'}
+                                                    style={size.width > 1200 ? {
+                                                        width: '49.5%',
+                                                        marginRight: '0.5%',
+                                                        height: 40
+                                                    } : {marginBottom: 5}}
+                                                        buttonStyle={size.width > 1200 ? {width: '49.5%', height: 40} : {marginBottom: 5}}
                                             >
-                                            Enviar mensaje
-                                            <span style={{marginLeft: 5}}
-                                                  className=" far fa-paper-plane"></span>
-                                        </ButtonLink>
-                                    </>
-                                )}
-                    </>}
+                                                Editar Perfil
+                                                <span className="fas fa-user-times"
+                                                      style={{marginLeft: 5}}></span>
+                                            </ButtonLink>
+                                            <Button
+                                                onClick={actions.app.logout}
+                                                styleType={'secondary'}
+                                                style={size.width > 1200 ? {
+                                                    width: '49.5%',
+                                                    marginLeft: '0.5%',
+                                                    height: 40
+                                                } : {}}
+                                                buttonStyle={size.width > 1200 ? {width: '49.5%', height: 40} : {}}
+                                            >
+                                                Cerrar Sesion
+                                                <span className="fas fa-sign-out-alt" style={{marginLeft: 5}}></span>
+                                            </Button>
+
+                                        </>
+                                    ) : (
+                                        <>
+                                            {
+                                                seguirODejar ? (
+                                                    <>
+                                                        <Button styleType={'secondary'}
+                                                                onClick={() => {
+                                                                    actions.users.unfollowUser(loggedUser.Email, user.Email)
+                                                                    actions.app.validate()
+                                                                }}
+                                                                style={size.width > 1200 ? {
+                                                                    width: '49.5%',
+                                                                    marginRight: '0.5%',
+                                                                    height: 40
+                                                                } : {marginBottom: 5}}>
+                                                            Dejar de seguir
+                                                            <span className="fas fa-user-times"
+                                                                  style={{marginLeft: 5}}></span>
+                                                        </Button>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Button styleType={'secondary'}
+                                                                onClick={() => {
+                                                                    //encapsulado en un BM 420 am
+                                                                    actions.users.followUser(loggedUser.Email, user.Email)
+                                                                    actions.app.validate()
+                                                                }}
+                                                                style={size.width > 1200 ? {
+                                                                    width: '49.5%',
+                                                                    marginRight: '0.5%',
+                                                                    height: 40
+                                                                } : {marginBottom: 5}}>
+                                                            Seguir
+                                                            <span className="fas fa-user-plus"
+                                                                  style={{marginLeft: 5}}></span>
+                                                        </Button>
+                                                    </>
+                                                )
+                                            }
+                                            <ButtonLink
+                                                to={'/messages/new/' + user.Email}
+                                                styleType={'secondary'}
+                                                style={size.width > 1200 ? {
+                                                    width: '49.5%',
+                                                    marginLeft: '0.5%',
+                                                    height: 40
+                                                } : {}}
+                                                buttonStyle={size.width > 1200 ? {width: '49.5%', height: 40} : {}}
+                                            >
+                                                Enviar mensaje
+                                                <span style={{marginLeft: 5}}
+                                                      className=" far fa-paper-plane"></span>
+                                            </ButtonLink>
+                                        </>
+                                    )}
+                        </>}
 
                     </div>
                 </div>
@@ -146,7 +182,7 @@ const ProfileHeader = ({actions,isLoading, user, loggedUser}) => {
     )
 }
 
-const Profile = ({actions,isLoading, loggedUser, user, emailUser}) => {
+const Profile = ({actions, isLoading, loggedUser, user, emailUser}) => {
     useEffect(() => {
         actions.users.getUser(emailUser)
     }, [])
@@ -163,7 +199,7 @@ const Profile = ({actions,isLoading, loggedUser, user, emailUser}) => {
                         user={user}
                         actions={actions}
                     />
-                    <ProjectList/>
+                    <ProjectList projects={[]}/>
                 </>
             )
             }

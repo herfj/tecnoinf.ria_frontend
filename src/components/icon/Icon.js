@@ -28,7 +28,7 @@ const UserIcon = ({ height='auto', name = '', img = null, size = 50, rounded = t
     } else {
         return (
             <img className={'user-img'} src={img} alt={name} style={{
-                height: height,
+                height: size,
                 width: size,
             }}/>
         )

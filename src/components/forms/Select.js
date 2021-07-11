@@ -45,7 +45,7 @@ const Select = ({
     )
 }
 
-const SelectCountry = ({style}) => {
+const SelectCountry = ({style,...props}) => {
     return (
             <Select
                 list={country_list}
@@ -60,6 +60,7 @@ const SelectCountry = ({style}) => {
                 messages={{
                     required: "Debe seleccionar una opción",
                 }}
+                {...props}
             />
     )
 }
