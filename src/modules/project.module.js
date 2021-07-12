@@ -1,6 +1,6 @@
 import services from '../api/services'
 import {initialActionResponse} from "./app.module";
-import {validateCreateProject} from "../helpers/validations";
+import {validateCreateProject, validatePage} from "../helpers/validations";
 
 // ------------------------------------
 // Constants
@@ -35,6 +35,47 @@ export const getAll = () => {
                 await dispatch({
                     type: FETCH_PROJECTS,
                     projects: response.data,
+                })
+                dispatch({
+                    type: LOADING,
+                    isLoading: false,
+                })
+            })
+            .catch((error) => {
+                // error.message = responseErrors(error)
+                console.log(error.message)
+                dispatch({
+                    type: LOADING,
+                    isLoading: false,
+                })
+                dispatch({
+                    type: ACTION_RESPONSE,
+                    actionResponse: {
+                        isError: true,
+                        title: '',
+                        message: error.message,
+                        backToHome: false,
+                    },
+                })
+            })
+    }
+}
+export const createPage = (Page) => {
+    return async (dispatch) => {
+        dispatch({
+            type: LOADING,
+            isLoading: true,
+        })
+        dispatch({
+            type: ACTION_RESPONSE,
+            actionResponse: initialActionResponse,
+        })
+        let finalPage = validatePage(Page);
+        services.projects.createPage(finalPage)
+            .then(async (response) => {
+                await dispatch({
+                    type: FETCH_PROJECT,
+                    project: response.data,
                 })
                 dispatch({
                     type: LOADING,
@@ -158,6 +199,7 @@ export const actions = {
     getProject,
     getAll,
     createProject,
+    createPage
 }
 
 // ------------------------------------

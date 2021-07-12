@@ -128,7 +128,29 @@ export const validateMess = (message) => {
         return msg;
     }
 }
+export const validatePage = (possiblePage) =>{
+    if(possiblePage.text !== null)
+    {
 
+        const page = {
+            Texto: possiblePage.image,
+            ID_Portfolio: possiblePage.ID_Portfolio,
+            Titulo:possiblePage.Titulo,
+        }
+        return page
+    }
+    if(possiblePage.image !== null)
+    {
+
+        const page = {
+            Imagen:possiblePage.image,
+            ID_Portfolio: possiblePage.ID_Portfolio,
+            Titulo:possiblePage.Titulo,
+        }
+        return page
+    }
+   return false;
+}
 export const validateCreateProject = (possibleProject) => {
     const project = {
         Titulo: '',

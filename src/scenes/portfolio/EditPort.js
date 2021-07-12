@@ -13,7 +13,7 @@ import {useWindowSize} from "../../helpers/useWindowSize";
 import Container from "../../components/container/Container";
 
 
-const EditPort = ({id}) => {
+const EditPort = ({port}) => {
     const size = useWindowSize();
     const [baseImage, setBaseImage] = useState("");
 
@@ -41,17 +41,8 @@ const EditPort = ({id}) => {
     const handleSubmit = (values) => {
         console.log("Current State is: " + JSON.stringify(values));
         alert("Current State is: " + JSON.stringify(values));
-        //this.props.resetFeedbackForm();
-        // event.preventDefault();
-        // this.props.postFeedback(
-        //     values.firstname,
-        //     values.lastname,
-        //     values.telnum,
-        //     values.email,
-        //     values.agree,
-        //     values.contactType,
-        //     values.message
-        // );
+
+
     }
     const page= {
         img: 'https://placekitten.com/1200/800',
@@ -82,6 +73,9 @@ const EditPort = ({id}) => {
                 <div className={"page-image"}>
                     <input
                         type="file"
+                        model = ".image"
+                        id = "image"
+                        name = "image"
                         onChange={(e) => {
                             uploadImage(e);
                         }}
@@ -95,10 +89,8 @@ const EditPort = ({id}) => {
                     <Button
                         style={{marginTop: '20%'}}
                         styleType={'primary'}
-                    >add image</Button><Button
-                    style={{marginTop: '20%'}}
-                    styleType={'primary'}
-                    >add text</Button>
+
+                    >Agregar</Button>
                 </div>
             </div>
         </Container>

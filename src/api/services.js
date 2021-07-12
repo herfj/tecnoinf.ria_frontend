@@ -119,6 +119,12 @@ export default {
                 headers: headers,
             })
         },
+        createPage(page){
+
+            return axios.post(API_URL + '/api/proyecto/CrearPage', page,{
+                headers: headers,
+            })
+        },
         fetchProject(projectTitle){
             return axios.get(API_URL + '/api/proyecto/GetProyect', {
                 headers: headers,
@@ -131,6 +137,41 @@ export default {
             return axios.post(API_URL + '/api/proyecto/CreateProyect', project,{
                 headers: headers,
             })
-        }
+        },
+        EditPage(id,cadenita,textito,title){
+            return axios.put(API_URL + '/api/proyecto/EditarPage', {
+                'ID': id,
+                'cadena': cadenita,
+                'texto': textito,
+                'Titulo': title
+            },{
+                headers: headers,
+            })
+        },
+        DeletePage(id,title){
+            return axios.delete(API_URL + '/api/proyecto/BorrarPage', {
+                'ID': id,
+                'Titulo': title
+            },{
+                headers: headers,
+            })
+        },
+
+
+    },
+    comments: {
+        Comment(cmt){
+            return axios.post(API_URL + '/api/comentarios/Comment',cmt,{
+                headers: headers,
+            })
+        },
+        GetComentariosProyect(projectTitle){
+            return axios.get(API_URL + '/api/comentarios/GetComentariosFromPJ',{
+                headers: headers,
+                params: {
+                    'Titulo': projectTitle
+                }
+            })
+        },
     }
 }
