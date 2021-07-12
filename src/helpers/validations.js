@@ -134,7 +134,7 @@ export const validateCreateProject = (possibleProject) => {
         Titulo: '',
         P: '',
         Vistas: 0,
-        Autor: "",
+        Autor: '',
         Fecha_publicada: new Date().toISOString(),
         Herramientas: [],
         Proyecto_categorias: [],
@@ -159,7 +159,6 @@ export const validateCreateProject = (possibleProject) => {
         }
     })
     project.Proyecto_categorias=project.Proyecto_categorias.map((o)=>{return {Categoria: Object.keys(o)[0]}})
-    console.log(project.Proyecto_categorias)
 
     if (isString(possibleProject.Etiquetas)) {
         const tags = possibleProject.Etiquetas.split(";");
@@ -169,14 +168,12 @@ export const validateCreateProject = (possibleProject) => {
         })
 
     }
-    console.log(project.Etiquetas)
     if (isString(possibleProject.Herramientas)) {
         const herr = possibleProject.Herramientas.split(";");
         project.Herramientas = herr.map((tag) => {
             return {Herramienta: tag.trim()}
         })
     }
-    console.log(project.Herramientas)
     if (isString(possibleProject.Titulo)) {
         project.Titulo = possibleProject.Titulo;
     } else {
@@ -192,4 +189,10 @@ export const validateCreateProject = (possibleProject) => {
     } else {
         errorValidated = true;
     }
+    if (errorValidated) {
+        return false;
+    } else {
+        return project;
+    }
+
 }

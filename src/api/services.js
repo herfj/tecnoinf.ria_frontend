@@ -128,7 +128,7 @@ export default {
             })
         },
         postProject(project){
-            return axios.post(API_URL + '/api/proyecto/CreateProyecto', project,{
+            return axios.post(API_URL + '/api/proyecto/CreateProyect', project,{
                 headers: headers,
             })
         }

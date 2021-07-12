@@ -23,8 +23,8 @@ const explorer = ()=>(
     <Explorer/>
 )
 
-const project = ()=>(
-    <Project/>
+const project = ({match})=>(
+    <Project projectTitle={match.params.projectTitle}/>
 )
 
 const profile = ({match})=>(
@@ -59,70 +59,9 @@ const editPort = ({match})=>(
     <EditPort id={match.params.portId}/>
 )
 
-const FileUploadPage = ()=>{
-
-    const [selectedFile, setSelectedFile] = useState();
-
-    const [isFilePicked, setIsFilePicked] = useState(false);
-
-    const [isSelected,setIsSelected]=useState(false)
-
-    const changeHandler = (event) => {
-        setSelectedFile(event.target.files[0]);
-        setIsSelected(true);
-    };
-
-
-    const handleSubmission = () => {
-    };
-
-
-    return(
-        <div>
-            <input type="file" name="file" onChange={changeHandler} />
-
-            {isSelected ? (
-
-                <div>
-
-                    <p>Filename: {selectedFile.name}</p>
-
-                    <p>Filetype: {selectedFile.type}</p>
-
-                    <p>Size in bytes: {selectedFile.size}</p>
-
-                    <p>
-
-                        lastModifiedDate:{' '}
-
-                        {/*{selectedFile.lastModifiedDate.toLocaleDateString()}*/}
-
-                    </p>
-
-                </div>
-
-            ) : (
-
-                <p>Select a file to show details</p>
-
-            )}
-
-            <div>
-
-                <button onClick={handleSubmission}>Submit</button>
-
-            </div>
-
-        </div>
-
-    )
-
-}
-
-const Main = ({actions})=>{
+const Main = ({})=>{
 
     useEffect(()=>{
-       // actions.app.validate()
     },[])
 
         return (
@@ -131,7 +70,7 @@ const Main = ({actions})=>{
                 <Switch>
                     <Route path="/home" component={home}/>
                     <Route path="/explorer" component={explorer}/>
-                    <Route path="/project" component={project}/>i
+                    <Route path="/project/:projectTitle" component={project}/>
                     <Route path="/profile/:emailUser" component={profile}/>
                     <Route exact path="/messages" component={messages}/>
                     <Route path="/messages/new/:email" component={newMessage}/>
@@ -141,7 +80,6 @@ const Main = ({actions})=>{
                     <Route path="/register" component={register}/>
                     <Route path="/edit_user" component={editUser}/>
                     <Route path="/edit_project/:portId" component={editPort}/>
-                    <Route path={'/test'} component={FileUploadPage}/>
                     <Redirect to="/home"/>
                 </Switch>
             </div>

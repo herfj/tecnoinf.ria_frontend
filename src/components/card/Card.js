@@ -37,7 +37,7 @@ const ProjectCard = ({project}) => {
                 className={'card-footer'}
             >
                 <ButtonLink
-                    to={'/project'}
+                    to={'/project/'+project.Titulo}
                     styleType={'primary'}
                 >
                     VER MAS

@@ -102,54 +102,54 @@ export const getProject = (projectTitle) => {
     }
 }
 
-export const createProject=(newProject)=>{
-    return (dispatch) =>{
-        return (dispatch) => {
+export const createProject = (newProject) => {
+    return (dispatch) => {
+        dispatch({
+            type: LOADING,
+            isLoading: true,
+        })
+        dispatch({
+            type: ACTION_RESPONSE,
+            actionResponse: initialActionResponse,
+        })
+        console.log('antes de check', newProject)
+        const project = validateCreateProject(newProject)
+        console.log("post check", project)
+        if (project) {
+            services.projects.postProject(project)
+                .then(async (response) => {
+                    dispatch({
+                        type: FETCH_PROJECT,
+                        project: response.data,
+                    })
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                })
+                .catch((error) => {
+                    // error.message = responseErrors(error)
+                    console.log('ERROR:', error)
+                    dispatch({
+                        type: LOADING,
+                        isLoading: false,
+                    })
+                    dispatch({
+                        type: ACTION_RESPONSE,
+                        actionResponse: {
+                            isError: true,
+                            title: '',
+                            message: error.message,
+                            backToHome: false,
+                        },
+                    })
+
+                })
+        } else {
             dispatch({
                 type: LOADING,
-                isLoading: true,
+                isLoading: false,
             })
-            dispatch({
-                type: ACTION_RESPONSE,
-                actionResponse: initialActionResponse,
-            })
-            const project = validateCreateProject(newProject)
-            if (project) {
-                services.projects.postProject(project)
-                    .then(async (response) => {
-                        dispatch({
-                            type: FETCH_PROJECT,
-                            project: response.data,
-                        })
-                        dispatch({
-                            type: LOADING,
-                            isLoading: false,
-                        })
-                    })
-                    .catch((error) => {
-                        // error.message = responseErrors(error)
-                        console.log('ERROR:', error)
-                        dispatch({
-                            type: LOADING,
-                            isLoading: false,
-                        })
-                        dispatch({
-                            type: ACTION_RESPONSE,
-                            actionResponse: {
-                                isError: true,
-                                title: '',
-                                message: error.message,
-                                backToHome: false,
-                            },
-                        })
-
-                    })
-            } else {
-                dispatch({
-                    type: LOADING,
-                    isLoading: false,
-                })
-            }
         }
     }
 }
@@ -157,6 +157,7 @@ export const createProject=(newProject)=>{
 export const actions = {
     getProject,
     getAll,
+    createProject,
 }
 
 // ------------------------------------

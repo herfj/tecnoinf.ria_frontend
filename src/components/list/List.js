@@ -53,30 +53,22 @@ const ProjectList = ({projects}) => {
     )
 }
 
-const CategoryList = ({style, columnStyle}) => {
-
-    const list = [
-        'cat 1',
-        'cat 2',
-        'cat 3',
-        'cat 4',
-        'cat 5',
-    ]
+const CategoryList = ({categories,style, columnStyle}) => {
 
     return (
         <List
             responsive={false}
             style={style}
             columnStyle={columnStyle}
-            list={list.map((o) => (
+            list={categories.map((o) => (
                 <ButtonLink
-                    to={'/home'}
+                    to={'/explorer/'}
                     styleType={'outline'}
-                    children={o}
+                    children={o.Categoria}
                     style={{
                         marginBottom: 5
                     }}
-                    buttonStyle={{marginBottom:5}}
+                    buttonStyle={{marginBottom:5,textTransform: 'capitalize'}}
                 />
             ))}
         />

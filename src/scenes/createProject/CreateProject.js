@@ -19,16 +19,20 @@ import {catgoriesOptions} from "../../helpers/consts";
 import {convertBase64} from "../../helpers/handleBase64";
 import Connector from "../../utils/connector";
 import {validateCreateProject} from "../../helpers/validations";
+import {createProject} from "../../modules/project.module";
 
-const CreateProject = ({loggerUser}) => {
+const CreateProject = ({actions, loggedUser}) => {
     const [baseImage, setBaseImage] = useState('');
 
     const size = useWindowSize();
 
     const handleSubmit = (values) => {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
-        validateCreateProject(values)
+        const project = {
+            ...values,
+            P: baseImage,
+            Autor: loggedUser.Email
+        }
+        actions.projects.createProject(project)
     }
 
     const uploadImage = async (event) => {
@@ -43,6 +47,7 @@ const CreateProject = ({loggerUser}) => {
             searchbar={false}
             auth={true}
         >
+            {loggedUser !== null &&
             <LocalForm
                 onSubmit={(values) => handleSubmit(values)}
             >
@@ -115,10 +120,13 @@ const CreateProject = ({loggerUser}) => {
                             }}
                         />
 
-                        <label style={{marginTop: 5,marginLeft: 5, display: 'block'}}>Para separar las etiquestas y/o herramientas ingrese un ";" despues de la misma </label>
+                        <label style={{marginTop: 5, marginLeft: 5, display: 'block'}}>Para separar las etiquestas y/o
+                            herramientas ingrese un ";" despues de la misma </label>
                         <h4>Categorias:</h4>
                         <div>
-                            {catgoriesOptions.map((cat) => (<Checkbox style={{marginRight: '3%'}} model={cat.value} name={cat.key} id={cat.value}/>))}
+                            {catgoriesOptions.map((cat) => (
+                                <Checkbox style={{marginRight: '3%'}} model={cat.value} name={cat.key}
+                                          id={cat.value}/>))}
                         </div>
 
 
@@ -140,7 +148,7 @@ const CreateProject = ({loggerUser}) => {
                     </div>
                 </div>
             </LocalForm>
-
+            }
         </Container>
 
 
