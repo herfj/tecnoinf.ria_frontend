@@ -14,6 +14,9 @@ import {convertBase64} from "../../helpers/handleBase64";
 
 const EditUser = ({loggedUser, actions}) => {
     const [baseImage, setBaseImage] = useState(loggedUser ? loggedUser.imagen : null);
+    useEffect(()=>{
+        setBaseImage(loggedUser ? loggedUser.imagen : null)
+    },[loggedUser])
     const handleSubmit = (values) => {
         let user = {
             Nombre:values.Nombre,

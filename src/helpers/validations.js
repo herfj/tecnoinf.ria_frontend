@@ -129,27 +129,31 @@ export const validateMess = (message) => {
     }
 }
 export const validatePage = (possiblePage) =>{
-    if(possiblePage.text !== null)
+    if(possiblePage.Texto)
     {
-
         const page = {
-            Texto: possiblePage.image,
+            Texto: possiblePage.Texto,
             ID_Portfolio: possiblePage.ID_Portfolio,
             Titulo:possiblePage.Titulo,
         }
         return page
     }
-    if(possiblePage.image !== null)
+    if(possiblePage.Imagen)
     {
-
         const page = {
-            Imagen:possiblePage.image,
+            Imagen:possiblePage.Imagen,
             ID_Portfolio: possiblePage.ID_Portfolio,
             Titulo:possiblePage.Titulo,
         }
         return page
     }
    return false;
+}
+export const validateCategoria =(categoria)=>{
+    if(isString(categoria)){
+        return true
+    }
+    return false;
 }
 export const validateCreateProject = (possibleProject) => {
     const project = {
@@ -217,4 +221,37 @@ export const validateCreateProject = (possibleProject) => {
         return project;
     }
 
+}
+
+export const validateComment = (ctm)=>{
+    let errorValidated = false;
+    if(!isString(ctm.Cuerpo)){
+        errorValidated = true
+    }
+    if(!isString(ctm.Proyecto)){
+        errorValidated = true
+    }
+    if(!validEmail(ctm.Usuario)) {
+        errorValidated = true
+    }
+    if(errorValidated){
+        return false
+    }else{
+        return ctm
+    }
+}
+
+export const validateLike = (like)=>{
+    let errorValidated = false;
+    if(!isString(like.Titulo)){
+        errorValidated = true
+    }
+    if(!validEmail(like.Email)) {
+        errorValidated = true
+    }
+    if(errorValidated){
+        return false
+    }else{
+        return like
+    }
 }

@@ -34,6 +34,7 @@ export default {
             })
         },
         signUp(data) {
+            console.log('post',data)
             return axios.post(API_URL + '/api/usuarios/CreateUsuario', data, {
                 headers: headers
             })
@@ -59,7 +60,6 @@ export default {
             return axios.put(API_URL + '/api/usuarios/Seguir', {
                 'seguidor': emailseguidor,
                 'seguido': emailseguido
-
             },{
                 headers: headers,
             })
@@ -71,7 +71,32 @@ export default {
             },{
                 headers: headers,
             })
-       },
+        },
+        likeProject(like){
+            return axios.put(API_URL + '/api/usuarios/LikearProyecto',{
+                'Email': like.Email,
+                'Titulo': like.Titulo,
+            },{
+                headers: headers,
+            })
+        },
+        dioLike(Email,Titulo){
+            return axios.get(API_URL + '/api/usuarios/EsteLeDioLikeONo',{
+                headers: headers,
+                params: {
+                    'Titulo': Titulo,
+                    'Email': Email,
+                }
+            })
+        },
+        dislikeProject(dislike){
+            return axios.put(API_URL + '/api/usuarios/DislikeProyecto',{
+                'Email': dislike.Email,
+                'Titulo': dislike.Titulo,
+            },{
+                headers: headers,
+            })
+        },
     },
     messages: {
         getInbox(email) {
@@ -110,8 +135,6 @@ export default {
                 }
             })
         },
-
-
     },
     projects: {
         fetchAll(){
@@ -120,7 +143,7 @@ export default {
             })
         },
         createPage(page){
-
+            console.log('pagina', page);
             return axios.post(API_URL + '/api/proyecto/CrearPage', page,{
                 headers: headers,
             })
@@ -138,7 +161,12 @@ export default {
                 headers: headers,
             })
         },
-        EditPage(id,cadenita,textito,title){
+        visto(projectTitle){
+            return axios.put(API_URL + '/api/proyecto/SumarProyect', {
+                'Titulo': projectTitle,
+            },{headers: headers})
+        },
+        editPage(id,cadenita,textito,title){
             return axios.put(API_URL + '/api/proyecto/EditarPage', {
                 'ID': id,
                 'cadena': cadenita,
@@ -148,7 +176,7 @@ export default {
                 headers: headers,
             })
         },
-        DeletePage(id,title){
+        deletePage(id,title){
             return axios.delete(API_URL + '/api/proyecto/BorrarPage', {
                 'ID': id,
                 'Titulo': title
@@ -156,16 +184,48 @@ export default {
                 headers: headers,
             })
         },
+        getValorados(email){
+            return axios.get(API_URL + '/api/proyecto/FilterByLikes',{
+                params: {
+                    'Email': email
+                },
+                headers: headers,
+            })
+        },
+        getMyPJ(email){
+            return axios.get(API_URL + '/api/proyecto/FilterByMine',{
+                params: {
+                    'Email': email
+                },
+                headers: headers,
+            })
+        },
+        getPJByCat(category){
+            return axios.get(API_URL + '/api/proyecto/FilterByCategory', {
+                params: {
+                    'cat': category
+                },
+                headers: headers,
+            })
+        },
+        Busqueda(palabraBuscar){
+            return axios.get(API_URL +'/api/proyecto/SearchBy',{
+                params: {
+                    'busqueda': palabraBuscar
+                 },
+                headers: headers,
+            })
+        },
 
 
     },
     comments: {
-        Comment(cmt){
+        postComment(cmt){
             return axios.post(API_URL + '/api/comentarios/Comment',cmt,{
                 headers: headers,
             })
         },
-        GetComentariosProyect(projectTitle){
+        getComentariosProyect(projectTitle){
             return axios.get(API_URL + '/api/comentarios/GetComentariosFromPJ',{
                 headers: headers,
                 params: {

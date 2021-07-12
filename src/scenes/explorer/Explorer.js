@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 import Container from "../../components/container/Container";
 import {ProjectList} from "../../components/list/List";
 import './index.css'
@@ -6,8 +6,10 @@ import Searchbar from "../../components/searchbar/Searchbar";
 import {useWindowSize} from "../../helpers/useWindowSize";
 import {ButtonLink, SelectButton} from '../../components/button/Button'
 import {catgoriesOptions} from "../../helpers/consts";
+import Connector from "../../utils/connector";
+import {getByCats} from "../../modules/project.module";
 
-const SlideBar = ({header, list, selectedItem, callback}) => {
+const SlideBar = ({header, list, selected, setSelected}) => {
     const size = useWindowSize()
     return (
         <div className={'explorer-slide'}>
@@ -16,7 +18,6 @@ const SlideBar = ({header, list, selectedItem, callback}) => {
                 {
                     size.width <= 1200 &&
                     <div style={{marginBottom: 10}}>
-
                         <Searchbar/>
                     </div>
                 }
@@ -24,15 +25,14 @@ const SlideBar = ({header, list, selectedItem, callback}) => {
                     list.map((o) => {
                         return (
                             <ButtonLink
-                                styleType={(0 === selectedItem) ? 'primary' : ''}
+                                styleType={(o.value === selected) ? 'primary' : ''}
                                 buttonStyle={{
                                     marginTop: 5
                                 }}
                                 style={{
                                     marginTop: 5
                                 }}
-                                to={'/explorer/'+o.value}
-                                onPress={()=>callback(o)}
+                                onClick={()=>{setSelected(o.value)}}
                             >
                                 {o.key}
                             </ButtonLink>
@@ -43,8 +43,18 @@ const SlideBar = ({header, list, selectedItem, callback}) => {
         </div>
     )
 }
-const Explorer = ({}) => {
+const Explorer = ({actions,projects}) => {
     const size = useWindowSize()
+    const [selected,setSelected] = useState('')
+
+    useEffect(()=>{
+            actions.projects.getAll()
+    },[])
+
+    useEffect(()=>{
+        if(selected!=='')
+        actions.projects.getByCats(selected)
+    },[selected])
 
     const orderByOptions = [
         'Recomendado',
@@ -52,7 +62,6 @@ const Explorer = ({}) => {
     ]
 
     const [orderBy, setOrderBy] = useState(orderByOptions[0])
-    const [category, setCategory] = useState(undefined)
 
     return (
         <div className={'explorer-wrapper'}>
@@ -60,11 +69,9 @@ const Explorer = ({}) => {
                 header={<h2>
                     Categorias
                 </h2>}
+                selected={selected}
+                setSelected={setSelected}
                 list={catgoriesOptions}
-                selectedItem={category}
-                callback={(op) => {
-                    setCategory(op)
-                }}
             />
 
             <div className={'explorer-main'}>
@@ -76,26 +83,22 @@ const Explorer = ({}) => {
                             Explorar
                         </h1>
 
-                        <SelectButton
-                            list={orderByOptions}
-                            callback={(op) => {
-                                setOrderBy(op)
-                            }}
-                            styleType={'primary'}
-                            style={{
-                                alignSelf: 'center',
-                                width: 120,
-                                marginRight: 15
-                            }}
-                        >
-                            Ordenar por
-                        </SelectButton>
+
                     </div>
-                    <ProjectList/>
+                    <ProjectList projects={projects ? projects : []}/>
                 </Container>
             </div>
         </div>
     )
 }
 
-export default Explorer;
+export default (props) => (
+    <Connector>
+        {({actions, state: {app, projects}}) => {
+            return (
+                <Explorer actions={actions}  {...app} {...projects} {...props} />
+            )
+        }}
+    </Connector>
+)
+

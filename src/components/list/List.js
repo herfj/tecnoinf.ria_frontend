@@ -8,7 +8,6 @@ import {Message as Mess, Message} from "../message/Message";
 
 const List = ({list, responsive = true, style, columnStyle, grid = true}) => {
     const listChunkified = chunkify(list, 3, true);
-    const size = useWindowSize()
     return (
         <>
             {
@@ -62,42 +61,40 @@ const CategoryList = ({categories,style, columnStyle}) => {
             columnStyle={columnStyle}
             list={categories.map((o) => (
                 <ButtonLink
-                    to={'/explorer/'}
+                    to={'/explorer'}
                     styleType={'outline'}
                     children={o.Categoria}
                     style={{
                         marginBottom: 5
                     }}
-                    buttonStyle={{marginBottom:5,textTransform: 'capitalize'}}
+                    buttonStyle={{marginBottom: 5, textTransform: 'capitalize'}}
                 />
             ))}
         />
     )
 }
 
-const TagList = ({style, columnStyle}) => {
-
-    const list = [
-        'tag 1',
-        'tag 2',
-        'tag 3',
-        'tag 4',
-        'tag 5',
-        'tag 6',
-        'tag 7',
-    ]
-
+const TagList = ({tags,style, columnStyle}) => {
     return (
         <div style={{display: 'flex', flexDirection: 'row'}}>
-            {list.map((o) => (
+            {tags.map((o) => {
+                if(o.Etiquetas1){
+                    return (
                 <Button
-                    disabled
-                    styleType={'outline'}
-                    children={o}
-                    style={{
-                        marginRight: 5
-                    }}/>
-            ))}
+                disabled
+                styleType={'outline'}
+                children={o.Etiquetas1}
+                style={{
+                    marginTop: 0,
+                    marginRight: 5,
+                    width: 'auto',
+                }}/>
+                )
+            } else {
+                    return (<></>)
+                }
+
+            })}
         </div>
     )
 }

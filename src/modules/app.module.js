@@ -192,7 +192,9 @@ export const signUp = ({newUser, isLoading = true}) => {
         })
         const user = validateSignUpUser(newUser)
         if (user) {
-            services.auth.signUp(user)
+            services.auth.signUp({...user,
+                Descripcion: '',
+            })
                 .then(async (response) => {
                     dispatch({
                         type: LOGGED_IN,

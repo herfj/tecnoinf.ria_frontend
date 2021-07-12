@@ -14,6 +14,7 @@ import Register from "./scenes/register/Register";
 import EditUser from "./scenes/edituser/EditUser";
 import CreateProject from "./scenes/createProject/CreateProject";
 import EditPort from "./scenes/portfolio/EditPort";
+import Likes from "./scenes/likes/Likes";
 
 const home = ()=>(
     <Home/>
@@ -56,7 +57,11 @@ const createProject = () =>(
     <CreateProject/>
 )
 const editPort = ({match})=>(
-    <EditPort id={match.params.portId}/>
+    <EditPort projectTitle={match.params.projectTitle}/>
+)
+
+const likes = ()=>(
+    <Likes/>
 )
 
 const Main = ({})=>{
@@ -78,8 +83,9 @@ const Main = ({})=>{
                     <Route path="/login" component={login}/>
                     <Route path="/create_project" component={createProject}/>
                     <Route path="/register" component={register}/>
-                    <Route path="/edit_user" component={editUser}/>
-                    <Route path="/edit_project/:portId" component={editPort}/>
+                    <Route path="/valorados" component={likes}/>
+                    <Route path="/edit_user/" component={editUser}/>
+                    <Route path="/edit_project/:projectTitle" component={editPort}/>
                     <Redirect to="/home"/>
                 </Switch>
             </div>

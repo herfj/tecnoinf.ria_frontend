@@ -1,45 +1,26 @@
-.page-index {
+.page-index{
     background: whitesmoke;
     align-self: center;
     display: grid;
     width: 100%;
     box-sizing: border-box;
-    padding: 20px;
     grid-template-areas: "img texto delete";
-    grid-template-columns: 20% 70% 10%;
+    grid-template-columns: 25% 67% 5%;
     border-radius: 10px;
 }
-
-.page-image {
+.page-image{
     grid-area: img;
 }
-
-.page-text {
+.page-text{
     margin-left: 2%;
     grid-area: texto;
 }
-
-.page-delete {
-    margin-left: 10px;
+.page-delete{
     grid-area: delete;
 }
-
-.page-img {
+.page-img{
     width: 100%;
     border: 1px solid #FF8585;
     box-sizing: border-box;
     border-radius: 10px;
-}
-
-@media only screen and (max-width: 1000px) {
-    .page-index {
-        grid-template-areas:
-                "img"
-        "texto"
-        "delete";
-
-        grid-template-columns: 1fr;
-    }
-
-
 }

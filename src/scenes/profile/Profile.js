@@ -7,6 +7,7 @@ import {Button, ButtonLink} from "../../components/button/Button";
 import {ProjectList} from "../../components/list/List";
 import {UserIcon} from "../../components/icon/Icon";
 import Connector from "../../utils/connector";
+import {getMine} from "../../modules/project.module";
 
 const ProfileHeader = ({actions, isLoading, user, loggedUser}) => {
     const size = useWindowSize();
@@ -70,10 +71,6 @@ const ProfileHeader = ({actions, isLoading, user, loggedUser}) => {
                         <p>
                             <strong>Total de visitas:</strong> {handleVisitas()}
                             <span className="far fa-eye" style={{marginLeft: 5}}></span>
-                        </p>
-                        <p>
-                            <strong>Total de likes:</strong> falta
-                            <span className="far fa-thumbs-up" style={{marginLeft: 5}}></span>
                         </p>
                         <p>
                             <strong>Seguidores:</strong> {user.Seguidores.length}
@@ -182,9 +179,10 @@ const ProfileHeader = ({actions, isLoading, user, loggedUser}) => {
     )
 }
 
-const Profile = ({actions, isLoading, loggedUser, user, emailUser}) => {
+const Profile = ({actions, isLoading, loggedUser, user, emailUser,projects}) => {
     useEffect(() => {
         actions.users.getUser(emailUser)
+        actions.projects.getMine(emailUser)
     }, [])
     return (
         <Container
@@ -199,7 +197,7 @@ const Profile = ({actions, isLoading, loggedUser, user, emailUser}) => {
                         user={user}
                         actions={actions}
                     />
-                    <ProjectList projects={[]}/>
+                    <ProjectList projects={projects ? projects : []}/>
                 </>
             )
             }
@@ -209,9 +207,9 @@ const Profile = ({actions, isLoading, loggedUser, user, emailUser}) => {
 
 export default (props) => (
     <Connector>
-        {({actions, state: {app, users}}) => {
+        {({actions, state: {app, users, projects}}) => {
             return (
-                <Profile actions={actions} {...app} {...users} {...props} />
+                <Profile actions={actions} {...app} {...users} {...projects} {...props} />
             )
         }}
     </Connector>

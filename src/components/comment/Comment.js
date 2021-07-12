@@ -3,56 +3,65 @@ import './index.css'
 import {UserIcon} from "../icon/Icon";
 import {Button} from "../button/Button";
 import TextArea from "../forms/TextArea";
+import {LocalForm} from "react-redux-form";
+import {getFormatDate} from "../../helpers/formatDate";
 
-const Comment = ({}) => {
+const Comment = ({comment}) => {
     return (
         <div className={'comment'}>
             <div className={'c-icon'}>
-
                 <UserIcon/>
             </div>
             <div className={'c-mess'}>
-                <strong style={{marginBottom: 10}}>Hace 2 horas</strong>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque a egestas quam, quis consequat
-                    augue. Etiam at fringilla nulla. In hac habitasse platea dictumst. Mauris vitae augue eu eros
-                    lobortis facilisis. Nulla sit amet tortor a elit fringilla sodales. Praesent venenatis hendrerit
-                    tortor et feugiat. Proin vitae sagittis magna. Etiam feugiat ligula in semper bibendum.
-
-                    Integer tempor diam in sapien elementum malesuada. Quisque nunc purus, condimentum ac erat at,
-                    ullamcorper eleifend turpis. Sed eu euismod tortor, ut convallis lacus. Nulla facilisi. Phasellus
-                    eget venenatis magna. Nulla maximus purus orci, quis dignissim nibh placerat vitae. Nunc at congue
-                    odio. Morbi quis nisi pellentesque, sodales diam in, sodales est. Suspendisse eu magna tristique,
-                    elementum est nec, scelerisque urna. Nam efficitur dictum laoreet.</p>
+                <strong style={{marginBottom: 10}}><span style={{textTransform: 'uppercase'}}>{comment.Usuario}</span>{' - '}{getFormatDate(comment.Fecha)}</strong>
+                <p>{comment.Cuerpo}</p>
             </div>
         </div>
     )
 }
 
-const WriteComment = ({}) => {
+const WriteComment = ({actions, loggedUser, projectTitle}) => {
+    const handleSubmit = (values) => {
+        actions.projects.postComment(projectTitle, loggedUser.Email, values.Cuerpo)
+    }
     return (
-        <div className={'comment'}>
-            <div className={'c-icon'}>
+        <>
+            {loggedUser &&
+            <div className={'comment'}>
+                <div className={'c-icon'}>
 
-                <UserIcon/>
-            </div>
-            <div className={'c-mess'}>
-                <strong style={{marginBottom: 10}}>Comentario: </strong>
-
-                <TextArea></TextArea>
-                <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button
-                        type={'primary'}
-                        style={{
-                            alignSelf: 'flex-end',
-                            width: 120,
-                            height: 40,
-                        }}
+                    <UserIcon/>
+                </div>
+                <div className={'c-mess'}>
+                    <LocalForm
+                        onSubmit={(values) => handleSubmit(values)}
                     >
-                        Publicar
-                    </Button>
+
+                        <strong style={{marginBottom: 10}}>Comentario: </strong>
+                        <TextArea
+                            model={".Cuerpo"}
+                            id={"Cuerpo"}
+                            name={"Cuerpo"}
+                            placeholder={"Comentario..."}
+                        ></TextArea>
+                        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            <Button
+                                styleType={'primary'}
+                                type={'submit'}
+                                style={{
+                                    alignSelf: 'flex-end',
+                                    width: 120,
+                                    height: 40,
+                                }}
+                            >
+                                Publicar
+                            </Button>
+                        </div>
+                    </LocalForm>
                 </div>
             </div>
-        </div>
+            }
+        </>
     )
 }
 
