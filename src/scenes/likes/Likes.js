@@ -1,10 +1,10 @@
-import React, {Component, useEffect} from "react";
+import React, {Component, useEffect, useState} from "react";
 import Container from "../../components/container/Container";
 import {ProjectList} from "../../components/list/List";
 import Connector from "../../utils/connector";
 import {getMyLikes} from "../../modules/project.module";
 
-const Likes = ({actions, projects, loggedUser}) => {
+const Likes = ({actions, likes, loggedUser}) => {
     useEffect(()=>{
         if(loggedUser){
             actions.projects.getMyLikes(loggedUser.Email);
@@ -12,15 +12,15 @@ const Likes = ({actions, projects, loggedUser}) => {
     },[])
     useEffect(()=>{
         if(loggedUser){
-
-        actions.projects.getMyLikes(loggedUser.Email);
+            actions.projects.getMyLikes(loggedUser.Email);
         }
     },[loggedUser])
 
+
     return (
         <Container>
-            {projects && projects.length> 0 ? (
-                <ProjectList projects={projects}/>
+            {likes && likes.length> 0 ? (
+                <ProjectList projects={likes}/>
             ):(
                 <h2>No hay proyectos para mostrar</h2>
             )}

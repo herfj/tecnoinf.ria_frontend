@@ -3,7 +3,7 @@ import Container from "../../components/container/Container";
 import {ProjectList} from "../../components/list/List";
 import Connector from "../../utils/connector";
 
-const Home = ({actions, projects}) => {
+const Home = ({actions, projects, search}) => {
 
     useEffect(()=>{
         actions.projects.getAll();

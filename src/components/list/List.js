@@ -41,12 +41,11 @@ const ProjectList = ({projects}) => {
             return <ProjectCard project={p}/>
         })
     }
-    const list = projects && projects.length>0 ? handleList() : []
 
     return (
         <List
             listType={'project'}
-            list={list}
+            list={ projects && projects.length>0 ? handleList() : []}
         />
 
     )

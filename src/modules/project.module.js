@@ -15,12 +15,14 @@ import {resolveToLocation} from "react-router-dom/modules/utils/locationUtils";
 
 const LOADING = 'LOADING'
 const FETCH_PROJECTS = 'FETCH_PROJECTS'
+const FETCH_LIKES = 'FETCH_LIKES'
 const FETCH_PROJECT = 'FETCH_PROJECT'
 const ACTION_RESPONSE = 'ACTION_RESPONSE'
 const FETCH_COMMENTS = 'FETCH_COMMENTS'
 
 const initialState = {
     projects: null,
+    likes: null,
     project: null,
     comments: null,
 }
@@ -403,9 +405,10 @@ export const getMyLikes = (email) => {
         if(validEmail(email)){
         services.projects.getValorados(email)
             .then(async (response) => {
+                console.log("resp",response.data)
                 await dispatch({
-                    type: FETCH_PROJECTS,
-                    projects: response.data,
+                    type: FETCH_LIKES,
+                    likes: response.data,
                 })
                 dispatch({
                     type: LOADING,
@@ -603,6 +606,10 @@ const ACTION_HANDLERS = {
     [FETCH_PROJECTS]: (state, {projects}) => ({
         ...state,
         projects,
+    }),
+    [FETCH_LIKES]: (state, {likes}) => ({
+        ...state,
+        likes,
     }),
     [FETCH_PROJECT]: (state, {project}) => ({
         ...state,
