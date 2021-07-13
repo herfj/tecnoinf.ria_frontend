@@ -16,12 +16,6 @@ const SlideBar = ({header, list, selected, setSelected}) => {
             <div className={'slide-wrapper'}>
                 {header}
                 {
-                    size.width <= 1200 &&
-                    <div style={{marginBottom: 10}}>
-                        <Searchbar/>
-                    </div>
-                }
-                {
                     list.map((o) => {
                         return (
                             <ButtonLink
@@ -76,7 +70,8 @@ const Explorer = ({actions,projects}) => {
 
             <div className={'explorer-main'}>
                 <Container
-                    searchbar={size.width > 1200}
+                    searchbar={false}
+                    // searchbar={size.width > 1200}
                 >
                     <div className={'explorer-header'}>
                         <h1>

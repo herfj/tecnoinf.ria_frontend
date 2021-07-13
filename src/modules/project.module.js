@@ -545,7 +545,9 @@ export const search = (palabra_a_buscar) => {
                 .then(async (response) => {
                     await dispatch({
                         type: FETCH_PROJECTS,
-                        projects: response.data,
+                        projects: response.data.filter((item,index)=>{
+                            return response.data.indexOf(item) === index;
+                        }),
                     })
                     dispatch({
                         type: LOADING,
